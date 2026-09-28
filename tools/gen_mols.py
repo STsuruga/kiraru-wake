@@ -23,10 +23,10 @@ MOLS = {
  'sulfoxide':dict(cat='center', smi='C[S@@](=O)c1c[c:9]c(C)cc1'),
  'pamp':     dict(cat='center', smi='C[P@](c1cc[c:9]cc1)c1ccccc1OC'),
  'allene':   dict(cat='axial',  smi='[CH3:3][CH:1]=[C:9]=[CH:2][CH3:4]'),
- 'binol':    dict(cat='axial',  smi='O[c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4](O)ccc2cc[c:8]cc12'),
- 'binap':    dict(cat='axial',  smi='[PH2][c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4]([PH2])ccc2cc[c:8]cc12'),
- 'diphenic': dict(cat='axial',  smi='OC(=O)c1c[c:9]c[c:3]([N+](=O)[O-])[c:1]1-[c:2]1[c:4]([N+](=O)[O-])cccc1C(=O)O'),
- 'helicene': dict(cat='helix',  smi=None, rot=[([1, 0, 0], -38)]),
+ 'binol':    dict(cat='axial',  smi='O[c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4](O)ccc2ccccc12', phi=18),
+ 'binap':    dict(cat='axial',  smi='[PH2][c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4]([PH2])ccc2ccccc12', phi=18),
+ 'diphenic': dict(cat='axial',  smi='OC(=O)c1c[c:9]c[c:3]([N+](=O)[O-])[c:1]1-[c:2]1[c:4]([N+](=O)[O-])cccc1C(=O)O', phi=18),
+ 'helicene': dict(cat='helix',  smi=None, rot=[([1, 0, 0], 12)]),
  'pcp':      dict(cat='planar', smi='Br[c:6]1[cH:7][c:9]2cc[c:5]1[CH2:10]Cc1ccc(cc1)CC2'),
  'tartaric': dict(cat='meso',   smi='O=C(O)[C@@H:9](O)[C@@H:8](O)C(=O)O', syn=('O','O')),
  'dibromobutane': dict(cat='meso', smi='C[C@@H:9](Br)[C@@H:8](Br)C', syn=('Br','Br')),
@@ -328,14 +328,16 @@ def build_mol(key, spec, m):
         bridge = [n for n in rA if any(nb.GetSymbol() == 'C' and not nb.GetIsAromatic() for nb in m.GetAtomWithIdx(n).GetNeighbors())]
         xdir = P[bridge[1]] - P[bridge[0]]
         R = frame(xdir, up)
-        R = rot([1, 0, 0], spec.get('tilt', -76)) @ R
+        R = rot([0, 1, 0], 180) @ R  # 環の面内で半回転して Br を手前の縁へ
+        R = rot([1, 0, 0], spec.get('tilt', 48)) @ R
+        R = rot([0, 1, 0], spec.get('yaw', 0)) @ R  # 少し斜めから見て Br が外に出るように
     elif cat == 'meso':
         c2, c3 = mapidx(m, 9), mapidx(m, 8)
         xdir = P[c3] - P[c2]
         s1 = [n.GetIdx() for n in m.GetAtomWithIdx(c2).GetNeighbors() if n.GetSymbol() == spec['syn'][0]][0]
         mid = (P[c2] + P[c3]) / 2
         R = frame(xdir, P[s1] - P[c2])
-        R = rot([1, 0, 0], -25) @ R
+        R = rot([1, 0, 0], -8) @ R
         cen = mid
     else:
         heavy = [a.GetIdx() for a in m.GetAtoms() if a.GetSymbol() != 'H']
@@ -398,7 +400,8 @@ def build_mol(key, spec, m):
             bt = b.GetBondType()
             o = 2 if bt == Chem.BondType.DOUBLE else 3 if bt == Chem.BondType.TRIPLE else 1
             bonds.append([newi[i], newi[j], o])
-    rings = [[newi[i] for i in r] for r in m.GetRingInfo().AtomRings() if all(i in newi for i in r)]
+    # 塗る・顔を置くのは普通の環(6員環以下)だけ。橋を回る大環状の「環」は除く
+    rings = [[newi[i] for i in r] for r in m.GetRingInfo().AtomRings() if len(r) <= 6 and all(i in newi for i in r)]
     faces = []
     for mp in (9, 8):
         ai = mapidx(m, mp)
@@ -408,6 +411,9 @@ def build_mol(key, spec, m):
             faces.append({'ring': min(rr_, key=lambda k: len(rings[k]))})
         else:
             faces.append({'atom': newi[ai]})
+    if key == 'helicene':  # 顔は手前側の末端の環に
+        term = [k for k, r in enumerate(rings) if sum(1 for r2 in rings if r2 is not r and len(set(r) & set(r2)) == 2) == 1]
+        faces = [{'ring': max(term, key=lambda k: np.mean([Q[keep[i]][2] for i in rings[k]]))}]
     out = {'a': atoms, 'b': bonds, 'r': rings, 'f': faces}
     # やさしいモード用の優先順位
     if cat == 'center':

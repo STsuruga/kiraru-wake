@@ -216,7 +216,7 @@ const TYPES=[
    desc:'cis-2-ブテンを OsO₄ でシン-ジヒドロキシ化するとできるメソ体。'},
 ];
 // 3D 座標(RDKit で生成・キラリティー検算済み)。右の箱側(R/Ra/Rp/P)の座標で、左側は x を反転して描く
-const MOL={"chbrclf":{"a":[["F","F",2.1,11.8,4.2],["C","",0.5,0.9,-0.9],["Cl","Cl",11.9,-9.1,3.7],["Br","Br",-15.2,-5.5,3.6],["H","H",0.6,1.8,-10.7]],"b":[[0,1,1],[1,2,1],[1,3,1],[1,4,1]],"r":[],"f":[{"atom":1}],"st":[1,[3,2,0,4]],"e":16.2},"lactic":{"a":[["C","",9.1,-7.7,3.8],["C","",3.5,1.7,-4.4],["O","OH",10.3,12.6,-3.2],["C","",-9.7,3.6,-1.2],["O","O",-13.9,12.7,3.4],["O","OH",-16.8,-5.8,-3.8],["H","H",4.1,-1.0,-13.8]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,2],[3,5,1],[1,6,1]],"r":[],"f":[{"atom":1}],"st":[1,[2,3,0,6]],"e":18.8},"alanine":{"a":[["C","",7.3,-8.5,4.9],["C","",2.0,0.3,-4.2],["N","NH₂",9.0,11.6,-4.4],["C","",-11.1,2.9,-1.0],["O","O",-14.8,11.2,5.2],["O","OH",-18.8,-5.4,-5.3],["H","H",2.3,-3.5,-13.3]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,2],[3,5,1],[1,6,1]],"r":[],"f":[{"atom":1}],"st":[1,[2,3,0,6]],"e":19.6},"glyceraldehyde":{"a":[["O","O",-20.6,-3.8,5.4],["C","",-11.8,-5.9,-1.0],["C","",-2.2,3.5,-3.4],["O","OH",-2.6,12.9,5.4],["C","",10.3,-2.2,-3.3],["O","OH",13.3,-6.1,8.6],["H","H",-4.0,7.4,-12.3]],"b":[[0,1,2],[1,2,1],[2,3,1],[2,4,1],[4,5,1],[2,6,1]],"r":[],"f":[{"atom":2}],"st":[2,[3,1,4,6]],"e":20.9},"butanol":{"a":[["C","",-17.7,2.0,-1.5],["C","",-6.0,-4.2,2.0],["C","",5.1,2.1,-3.4],["C","",16.6,-4.5,-0.2],["O","OH",5.9,14.1,0.9],["H","H",4.2,2.5,-13.2]],"b":[[0,1,1],[1,2,1],[2,3,1],[2,4,1],[2,5,1]],"r":[],"f":[{"atom":2}],"st":[2,[4,1,3,5]],"e":17.8},"ibuprofen":{"a":[["C","",19.4,16.0,-3.7],["C","",25.3,6.5,4.4],["C","",32.6,-2.4,-3.1],["C","",16.2,0.3,12.9],["C","",6.4,-7.0,6.9],["C","",8.0,-19.3,4.6],["C","",-1.0,-26.0,-0.9],["C","",-11.8,-20.5,-4.1],["C","",-13.7,-8.2,-2.0],["C","",-4.5,-1.6,3.7],["C","",-25.5,-2.4,-5.5],["C","",-23.8,8.0,-14.4],["C","",-32.9,1.2,5.4],["O","O",-39.7,-5.4,11.0],["O","OH",-31.2,12.6,9.1],["H","H",-31.1,-9.1,-10.3]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[4,5,1],[5,6,2],[6,7,1],[7,8,2],[8,9,1],[8,10,1],[10,11,1],[10,12,1],[12,13,2],[12,14,1],[9,4,2],[10,15,1]],"r":[[4,9,8,7,6,5]],"f":[{"ring":0}],"st":[10,[12,8,11,15]],"e":40.1},"thalidomide":{"a":[["O","O",-46.6,-3.6,4.1],["C","",-35.9,-1.4,2.1],["C","",-30.8,-1.0,-10.5],["C","",-17.5,-4.3,-10.6],["C","",-10.7,4.1,-2.2],["N","N",2.2,2.0,-1.8],["C","",10.4,11.2,-1.4],["O","O",8.7,22.0,-2.4],["C","",22.2,5.7,0.5],["C","",33.5,10.8,1.3],["C","",43.2,3.0,3.2],["C","",41.4,-9.5,4.2],["C","",29.9,-14.4,3.4],["C","",20.4,-6.6,1.5],["C","",7.5,-8.9,0.3],["O","O",3.0,-18.8,1.3],["C","",-15.9,3.2,10.6],["O","O",-9.9,4.7,19.8],["N","NH",-28.1,1.3,11.3],["H","H",-12.2,13.4,-5.1]],"b":[[0,1,2],[1,2,1],[2,3,1],[3,4,1],[4,5,1],[5,6,1],[6,7,2],[6,8,1],[8,9,2],[9,10,1],[10,11,2],[11,12,1],[12,13,2],[13,14,1],[14,15,2],[4,16,1],[16,17,2],[16,18,1],[18,1,1],[14,5,1],[13,8,1],[4,19,1]],"r":[[1,18,16,4,3,2],[6,5,14,13,8],[9,10,11,12,13,8]],"f":[{"ring":2}],"st":[4,[5,16,3,19]],"e":46.7},"sulfoxide":{"a":[["C","",-27.3,-6.8,-8.0],["S","S",-24.1,0.8,6.1],["O","O",-28.7,13.5,5.0],["C","",-7.9,1.8,4.2],["C","",-2.4,12.6,0.9],["C","",10.0,13.1,-0.5],["C","",17.2,3.0,1.5],["C","",30.5,3.7,-0.3],["C","",11.6,-7.9,4.8],["C","",-0.8,-8.4,6.2]],"b":[[0,1,1],[1,2,2],[1,3,1],[3,4,2],[4,5,1],[5,6,2],[6,7,1],[6,8,1],[8,9,2],[9,3,1]],"r":[[3,9,8,6,5,4]],"f":[{"ring":0}],"st":[1,[2,3,0]],"e":31.7},"pamp":{"a":[["C","",-2.6,21.3,-2.2],["P","P",-4.9,9.4,9.0],["C","",-19.1,3.0,3.5],["C","",-28.8,2.2,11.5],["C","",-39.8,-2.5,7.7],["C","",-41.3,-6.5,-4.1],["C","",-31.7,-5.7,-12.1],["C","",-20.7,-1.0,-8.4],["C","",6.2,-2.3,4.8],["C","",2.9,-14.5,6.4],["C","",10.7,-23.9,3.6],["C","",22.1,-21.4,-0.7],["C","",25.8,-9.4,-2.1],["C","",18.0,0.1,0.8],["O","O",21.4,12.0,-0.0],["C","",33.8,14.6,-1.8]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[1,8,1],[8,9,2],[9,10,1],[10,11,2],[11,12,1],[12,13,2],[13,14,1],[14,15,1],[7,2,1],[13,8,1]],"r":[[3,4,5,6,7,2],[9,10,11,12,13,8]],"f":[{"ring":0}],"st":[1,[8,2,0]],"e":41.8},"allene":{"a":[["C","",-18.7,-8.3,3.1],["C","",-9.4,0.0,8.3],["C","",1.6,0.0,3.9],["C","",12.5,0.0,-0.6],["C","",15.7,8.3,-10.8],["H","H",-11.7,6.0,15.7],["H","H",19.3,-6.0,3.2]],"b":[[0,1,1],[1,2,2],[2,3,2],[3,4,1],[1,5,1],[3,6,1]],"r":[],"f":[{"atom":2}],"st":[null,[0,5,4,6]],"e":20.5},"binol":{"a":[["O","OH",15.3,-13.7,-16.3],["C","",7.8,-16.8,-7.0],["C","",8.1,-28.5,-2.6],["C","",0.5,-31.7,6.9],["C","",-7.4,-23.4,12.0],["C","",-14.9,-26.8,21.6],["C","",-22.8,-18.6,26.9],["C","",-23.3,-6.9,22.6],["C","",-15.9,-3.3,13.2],["C","",-7.8,-11.4,7.6],["C","",-0.0,-8.1,-2.1],["C","",-0.0,4.3,-7.1],["C","",-8.0,7.3,-16.6],["O","OH",-15.6,-1.4,-21.0],["C","",-8.2,18.8,-21.6],["C","",-0.6,27.6,-17.1],["C","",7.4,25.1,-7.7],["C","",15.1,34.2,-3.3],["C","",23.1,31.9,6.1],["C","",23.6,20.6,11.2],["C","",16.1,11.4,6.9],["C","",7.8,13.4,-2.6]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[7,8,1],[8,9,2],[9,10,1],[10,11,1],[11,12,2],[12,13,1],[12,14,1],[14,15,2],[15,16,1],[16,17,2],[17,18,1],[18,19,2],[19,20,1],[20,21,2],[10,1,2],[21,11,1],[9,4,1],[21,16,1]],"r":[[1,10,9,4,3,2],[5,6,7,8,9,4],[12,14,15,16,21,11],[17,18,19,20,21,16]],"f":[{"ring":1},{"ring":3}],"st":[null,[1,9,12,21]],"e":39.4},"binap":{"a":[["P","PPh₂",19.1,-14.1,-18.2],["C","",8.4,-16.7,-5.9],["C","",8.2,-28.3,-1.0],["C","",0.5,-31.2,8.5],["C","",-7.2,-22.5,13.4],["C","",-14.9,-25.6,22.9],["C","",-22.6,-17.2,28.0],["C","",-22.8,-5.5,23.6],["C","",-15.2,-2.3,14.1],["C","",-7.2,-10.7,8.7],["C","",0.7,-7.7,-1.1],["C","",0.7,4.8,-6.2],["C","",-7.1,7.9,-15.8],["P","PPh₂",-17.6,-2.7,-23.0],["C","",-7.0,19.6,-20.4],["C","",0.7,28.3,-15.5],["C","",8.4,25.5,-6.0],["C","",16.0,34.4,-1.3],["C","",23.8,31.9,8.2],["C","",24.1,20.4,13.1],["C","",16.6,11.5,8.5],["C","",8.5,13.7,-1.2]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[7,8,1],[8,9,2],[9,10,1],[10,11,1],[11,12,2],[12,13,1],[12,14,1],[14,15,2],[15,16,1],[16,17,2],[17,18,1],[18,19,2],[19,20,1],[20,21,2],[10,1,2],[21,11,1],[9,4,1],[21,16,1]],"r":[[1,10,9,4,3,2],[5,6,7,8,9,4],[12,14,15,16,21,11],[17,18,19,20,21,16]],"f":[{"ring":1},{"ring":3}],"st":[null,[1,9,12,21]],"e":39.8},"diphenic":{"a":[["O","OH",-21.0,-6.2,26.6],["C","",-16.1,-2.2,16.3],["O","O",-18.7,7.7,12.4],["C","",-7.6,-11.0,10.8],["C","",-7.5,-22.9,15.3],["C","",0.2,-31.6,10.5],["C","",7.9,-28.6,1.2],["C","",7.9,-16.8,-3.4],["N","NO₂",16.3,-14.3,-13.2],["C","",0.2,-7.7,1.2],["C","",0.2,4.7,-3.8],["C","",-6.5,7.7,-14.2],["N","NO₂",-13.8,-1.3,-20.5],["C","",-6.6,19.4,-19.2],["C","",-0.0,28.5,-13.7],["C","",6.6,25.9,-3.4],["C","",6.8,14.2,1.6],["C","",14.4,13.1,12.7],["O","O",18.1,21.6,18.6],["O","OH",17.3,1.8,15.8]],"b":[[0,1,1],[1,2,2],[1,3,1],[3,4,2],[4,5,1],[5,6,2],[6,7,1],[7,8,1],[7,9,2],[9,10,1],[10,11,1],[11,12,1],[11,13,2],[13,14,1],[14,15,2],[15,16,1],[16,17,1],[17,18,2],[17,19,1],[9,3,1],[16,10,2]],"r":[[3,9,7,6,5,4],[11,13,14,15,16,10]],"f":[{"ring":0}],"st":[null,[7,3,11,16]],"e":31.6},"helicene":{"a":[["C","",24.4,-20.7,-12.1],["C","",23.9,-9.8,-5.5],["C","",13.7,-7.2,1.4],["C","",5.2,-17.4,4.1],["C","",5.2,-27.3,-3.6],["C","",14.8,-29.0,-11.7],["C","",33.0,9.3,0.7],["C","",22.2,12.9,6.3],["C","",12.0,5.6,5.5],["C","",33.6,-1.6,-5.8],["C","",10.8,27.4,18.5],["C","",-0.0,21.0,16.4],["C","",-0.0,11.1,8.7],["C","",21.6,23.7,12.9],["C","",-21.6,18.3,19.9],["C","",-22.2,9.3,11.0],["C","",-12.0,6.6,4.1],["C","",-10.8,24.5,22.1],["C","",-33.6,-6.0,-0.2],["C","",-23.9,-7.7,-8.2],["C","",-13.7,-0.4,-7.3],["C","",-33.0,2.9,8.9],["C","",-14.8,-18.3,-25.3],["C","",-5.2,-10.1,-25.6],["C","",-5.2,-0.2,-17.8],["C","",-24.4,-16.7,-17.1]],"b":[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[0,5,1],[6,7,1],[7,8,2],[2,8,1],[1,9,1],[6,9,2],[10,11,1],[11,12,2],[8,12,1],[7,13,1],[10,13,2],[14,15,1],[15,16,2],[12,16,1],[11,17,1],[14,17,2],[18,19,1],[19,20,1],[16,20,1],[15,21,1],[18,21,2],[22,23,2],[23,24,1],[20,24,2],[19,25,2],[22,25,1]],"r":[[0,5,4,3,2,1],[6,9,1,2,8,7],[10,13,7,8,12,11],[14,17,11,12,16,15],[18,21,15,16,20,19],[22,25,19,20,24,23]],"f":[{"ring":5}],"e":34.3},"pcp":{"a":[["C","",12.2,-3.5,-12.0],["C","",6.0,6.7,-16.0],["C","",-6.5,6.7,-16.0],["C","",-12.8,-3.5,-12.0],["C","",-6.5,-14.3,-10.8],["C","",6.0,-14.3,-10.8],["C","",12.2,2.6,12.3],["C","",6.0,13.4,11.0],["C","",-6.5,13.4,11.0],["C","",-12.8,2.6,12.3],["C","",-6.5,-7.6,16.3],["C","",6.0,-7.6,16.3],["C","",24.5,-2.1,-6.7],["C","",24.5,1.2,6.9],["C","",-25.0,-2.1,-6.7],["C","",-25.0,1.2,6.9],["Br","Br",14.5,21.1,-19.6]],"b":[[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[5,0,2],[6,7,1],[7,8,2],[8,9,1],[9,10,2],[10,11,1],[11,6,2],[0,12,1],[12,13,1],[13,6,1],[3,14,1],[14,15,1],[15,9,1],[1,16,1]],"r":[[1,2,3,4,5,0],[7,8,9,10,11,6],[12,13,6,7,8,9,15,14,3,2,1,0],[1,2,3,14,15,9,10,11,6,13,12,0],[4,5,0,12,13,6,7,8,9,15,14,3],[4,5,0,12,13,6,11,10,9,15,14,3]],"f":[{"ring":0}],"e":25.6},"tartaric":{"a":[["O","O",-20.0,-3.7,17.2],["C","",-12.1,2.4,12.4],["O","OH",-7.9,12.4,17.8],["C","",-6.9,0.0,-0.0],["O","OH",-11.2,-11.0,-5.1],["C","",6.9,0.0,-0.0],["O","OH",11.0,-11.1,-5.2],["C","",11.8,1.4,12.7],["O","O",17.3,-6.1,18.5],["O","OH",9.9,12.4,17.5],["H","H",-10.2,7.2,-5.9],["H","H",10.6,7.2,-5.6]],"b":[[0,1,2],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[5,6,1],[5,7,1],[7,8,2],[7,9,1],[3,10,1],[5,11,1]],"r":[],"f":[{"atom":3},{"atom":5}],"st":[3,[]],"e":20.3},"dibromobutane":{"a":[["C","",-12.6,0.8,12.5],["C","",-6.9,0.0,0.0],["Br","Br",-12.9,-15.2,-7.1],["C","",6.9,0.0,-0.0],["Br","Br",12.9,-15.2,-7.1],["C","",12.6,0.8,12.5],["H","H",-10.5,7.1,-5.8],["H","H",10.5,7.1,-5.8]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[1,6,1],[3,7,1]],"r":[],"f":[{"atom":1},{"atom":3}],"st":[1,[]],"e":19.9},"butanediol":{"a":[["C","",-12.2,1.3,12.6],["C","",-6.9,0.0,0.0],["O","OH",-11.5,-10.9,-5.1],["C","",6.9,0.0,-0.0],["O","OH",11.1,-11.1,-5.2],["C","",12.5,1.4,12.5],["H","H",-10.1,7.4,-5.7],["H","H",10.2,7.2,-5.9]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[1,6,1],[3,7,1]],"r":[],"f":[{"atom":1},{"atom":3}],"st":[1,[]],"e":15.8}};
+const MOL={"chbrclf":{"a":[["F","F",2.1,7.3,10.2],["C","",0.5,1.2,-0.2],["Cl","Cl",11.9,-9.6,-2.1],["Br","Br",-15.2,-6.5,-0.2],["H","H",0.6,7.6,-7.7]],"b":[[0,1,1],[1,2,1],[1,3,1],[1,4,1]],"r":[],"f":[{"atom":1}],"st":[1,[3,2,0,4]],"e":16.5},"lactic":{"a":[["C","",9.1,-7.5,-4.2],["C","",3.5,4.6,-1.1],["O","OH",10.3,9.8,8.5],["C","",-9.7,3.1,2.3],["O","O",-13.9,4.6,12.4],["O","OH",-16.8,-0.2,-7.0],["H","H",4.1,10.8,-8.7]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,2],[3,5,1],[1,6,1]],"r":[],"f":[{"atom":1}],"st":[1,[2,3,0,6]],"e":16.8},"alanine":{"a":[["C","",7.3,-8.0,-5.6],["C","",2.0,4.0,-1.5],["N","NH₂",9.0,8.9,8.7],["C","",-11.1,2.1,2.2],["O","O",-14.8,0.1,12.4],["O","OH",-18.8,2.5,-7.2],["H","H",2.3,10.5,-8.8]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,2],[3,5,1],[1,6,1]],"r":[],"f":[{"atom":1}],"st":[1,[2,3,0,6]],"e":19.0},"glyceraldehyde":{"a":[["O","O",-20.6,-5.1,4.2],["C","",-11.8,-5.5,-2.5],["C","",-2.2,4.3,-2.4],["O","OH",-2.6,11.1,8.5],["C","",10.3,-1.2,-3.7],["O","OH",13.3,-8.1,6.7],["H","H",-4.0,10.3,-10.0]],"b":[[0,1,2],[1,2,1],[2,3,1],[2,4,1],[4,5,1],[2,6,1]],"r":[],"f":[{"atom":2}],"st":[2,[3,1,4,6]],"e":21.2},"butanol":{"a":[["C","",-17.7,2.5,0.1],["C","",-6.0,-4.5,-1.1],["C","",5.1,3.8,-1.3],["C","",16.6,-3.3,-3.1],["O","OH",5.9,10.2,9.8],["H","H",4.2,10.4,-8.5]],"b":[[0,1,1],[1,2,1],[2,3,1],[2,4,1],[2,5,1]],"r":[],"f":[{"atom":2}],"st":[2,[4,1,3,5]],"e":17.9},"ibuprofen":{"a":[["C","",19.4,7.7,14.4],["C","",25.3,-2.6,7.4],["C","",32.6,2.4,-3.1],["C","",16.2,-12.4,3.6],["C","",6.4,-8.5,-5.0],["C","",8.0,-9.4,-17.4],["C","",-1.0,-5.9,-25.3],["C","",-11.8,-1.3,-20.9],["C","",-13.7,-0.2,-8.5],["C","",-4.5,-4.0,-0.6],["C","",-25.5,4.7,-3.8],["C","",-23.8,16.0,4.0],["C","",-32.9,-4.9,2.5],["O","O",-39.7,-12.0,-2.4],["O","OH",-31.2,-5.6,14.5],["H","H",-31.1,7.6,-11.5]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[4,5,1],[5,6,2],[6,7,1],[7,8,2],[8,9,1],[8,10,1],[10,11,1],[10,12,1],[12,13,2],[12,14,1],[9,4,2],[10,15,1]],"r":[[4,9,8,7,6,5]],"f":[{"ring":0}],"st":[10,[12,8,11,15]],"e":41.5},"thalidomide":{"a":[["O","O",-46.6,-3.6,4.1],["C","",-35.9,-1.4,2.1],["C","",-30.8,-1.0,-10.5],["C","",-17.5,-4.3,-10.6],["C","",-10.7,4.1,-2.2],["N","N",2.2,2.0,-1.8],["C","",10.4,11.2,-1.4],["O","O",8.7,22.0,-2.4],["C","",22.2,5.7,0.5],["C","",33.5,10.8,1.3],["C","",43.2,3.0,3.2],["C","",41.4,-9.5,4.2],["C","",29.9,-14.4,3.4],["C","",20.4,-6.6,1.5],["C","",7.5,-8.9,0.3],["O","O",3.0,-18.8,1.3],["C","",-15.9,3.2,10.6],["O","O",-9.9,4.7,19.8],["N","NH",-28.1,1.3,11.3],["H","H",-12.2,13.4,-5.1]],"b":[[0,1,2],[1,2,1],[2,3,1],[3,4,1],[4,5,1],[5,6,1],[6,7,2],[6,8,1],[8,9,2],[9,10,1],[10,11,2],[11,12,1],[12,13,2],[13,14,1],[14,15,2],[4,16,1],[16,17,2],[16,18,1],[18,1,1],[14,5,1],[13,8,1],[4,19,1]],"r":[[1,18,16,4,3,2],[6,5,14,13,8],[9,10,11,12,13,8]],"f":[{"ring":2}],"st":[4,[5,16,3,19]],"e":46.7},"sulfoxide":{"a":[["C","",-27.3,-6.8,-8.0],["S","S",-24.1,0.8,6.1],["O","O",-28.7,13.5,5.0],["C","",-7.9,1.8,4.2],["C","",-2.4,12.6,0.9],["C","",10.0,13.1,-0.5],["C","",17.2,3.0,1.5],["C","",30.5,3.7,-0.3],["C","",11.6,-7.9,4.8],["C","",-0.8,-8.4,6.2]],"b":[[0,1,1],[1,2,2],[1,3,1],[3,4,2],[4,5,1],[5,6,2],[6,7,1],[6,8,1],[8,9,2],[9,3,1]],"r":[[3,9,8,6,5,4]],"f":[{"ring":0}],"st":[1,[2,3,0]],"e":31.7},"pamp":{"a":[["C","",-2.6,21.3,-2.2],["P","P",-4.9,9.4,9.0],["C","",-19.1,3.0,3.5],["C","",-28.8,2.2,11.5],["C","",-39.8,-2.5,7.7],["C","",-41.3,-6.5,-4.1],["C","",-31.7,-5.7,-12.1],["C","",-20.7,-1.0,-8.4],["C","",6.2,-2.3,4.8],["C","",2.9,-14.5,6.4],["C","",10.7,-23.9,3.6],["C","",22.1,-21.4,-0.7],["C","",25.8,-9.4,-2.1],["C","",18.0,0.1,0.8],["O","O",21.4,12.0,-0.0],["C","",33.8,14.6,-1.8]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[1,8,1],[8,9,2],[9,10,1],[10,11,2],[11,12,1],[12,13,2],[13,14,1],[14,15,1],[7,2,1],[13,8,1]],"r":[[3,4,5,6,7,2],[9,10,11,12,13,8]],"f":[{"ring":0}],"st":[1,[8,2,0]],"e":41.8},"allene":{"a":[["C","",-18.7,-8.3,3.1],["C","",-9.4,0.0,8.3],["C","",1.6,0.0,3.9],["C","",12.5,0.0,-0.6],["C","",15.7,8.3,-10.8],["H","H",-11.7,6.0,15.7],["H","H",19.3,-6.0,3.2]],"b":[[0,1,1],[1,2,2],[2,3,2],[3,4,1],[1,5,1],[3,6,1]],"r":[],"f":[{"atom":2}],"st":[null,[0,5,4,6]],"e":20.5},"binol":{"a":[["O","OH",23.0,-12.3,-8.6],["C","",12.5,-16.1,-3.2],["C","",12.9,-27.7,1.6],["C","",2.7,-32.4,7.2],["C","",-7.9,-25.6,8.1],["C","",-18.0,-30.5,13.9],["C","",-28.6,-24.0,14.9],["C","",-29.2,-12.4,10.2],["C","",-19.3,-7.4,4.5],["C","",-8.3,-13.8,3.3],["C","",2.1,-8.9,-2.5],["C","",2.1,3.5,-7.5],["C","",-1.1,5.3,-19.6],["O","OH",-4.1,-4.4,-26.6],["C","",-1.2,16.8,-24.7],["C","",1.9,26.6,-17.7],["C","",5.2,25.2,-5.6],["C","",8.4,35.3,1.3],["C","",11.7,34.2,13.4],["C","",12.0,22.8,18.7],["C","",8.8,12.7,11.9],["C","",5.4,13.6,-0.3]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[7,8,1],[8,9,2],[9,10,1],[10,11,1],[11,12,2],[12,13,1],[12,14,1],[14,15,2],[15,16,1],[16,17,2],[17,18,1],[18,19,2],[19,20,1],[20,21,2],[10,1,2],[21,11,1],[9,4,1],[21,16,1]],"r":[[1,10,9,4,3,2],[5,6,7,8,9,4],[12,14,15,16,21,11],[17,18,19,20,21,16]],"f":[{"ring":1}],"st":[null,[1,9,12,21]],"e":37.3},"binap":{"a":[["P","PPh₂",26.7,-10.5,-8.7],["C","",12.4,-15.4,-2.0],["C","",12.2,-27.0,2.8],["C","",1.8,-31.5,8.3],["C","",-8.6,-24.5,9.1],["C","",-18.9,-29.3,14.7],["C","",-29.4,-22.5,15.7],["C","",-29.7,-10.8,11.2],["C","",-19.5,-6.0,5.6],["C","",-8.7,-12.7,4.4],["C","",2.0,-8.1,-1.3],["C","",2.0,4.4,-6.3],["C","",-1.4,6.5,-18.5],["P","PPh₂",-5.9,-5.4,-29.0],["C","",-1.3,18.3,-23.0],["C","",1.9,28.0,-15.7],["C","",5.3,26.2,-3.7],["C","",8.5,36.1,3.5],["C","",11.9,34.6,15.5],["C","",12.0,23.1,20.5],["C","",8.8,13.2,13.4],["C","",5.3,14.4,1.2]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[7,8,1],[8,9,2],[9,10,1],[10,11,1],[11,12,2],[12,13,1],[12,14,1],[14,15,2],[15,16,1],[16,17,2],[17,18,1],[18,19,2],[19,20,1],[20,21,2],[10,1,2],[21,11,1],[9,4,1],[21,16,1]],"r":[[1,10,9,4,3,2],[5,6,7,8,9,4],[12,14,15,16,21,11],[17,18,19,20,21,16]],"f":[{"ring":1}],"st":[null,[1,9,12,21]],"e":37.1},"diphenic":{"a":[["O","OH",-28.8,-10.7,15.5],["C","",-20.8,-5.5,8.0],["O","O",-23.2,3.9,3.1],["C","",-9.4,-12.6,7.1],["C","",-9.2,-24.4,11.6],["C","",1.1,-31.5,10.8],["C","",11.4,-26.9,5.4],["C","",11.3,-15.1,0.9],["N","NO₂",22.5,-10.9,-4.5],["C","",1.0,-7.6,1.5],["C","",1.0,4.8,-3.5],["C","",-1.1,7.0,-15.9],["N","NO₂",-3.5,-2.8,-24.3],["C","",-1.1,18.7,-20.9],["C","",0.9,28.5,-13.5],["C","",2.9,26.8,-1.3],["C","",3.0,15.1,3.8],["C","",5.2,14.9,17.1],["O","O",4.6,23.6,23.7],["O","OH",8.4,4.1,21.5]],"b":[[0,1,1],[1,2,2],[1,3,1],[3,4,2],[4,5,1],[5,6,2],[6,7,1],[7,8,1],[7,9,2],[9,10,1],[10,11,1],[11,12,1],[11,13,2],[13,14,1],[14,15,2],[15,16,1],[16,17,1],[17,18,2],[17,19,1],[9,3,1],[16,10,2]],"r":[[3,9,7,6,5,4],[11,13,14,15,16,10]],"f":[{"ring":0}],"st":[null,[7,3,11,16]],"e":31.5},"helicene":{"a":[["C","",24.4,-22.6,8.1],["C","",23.9,-10.5,4.0],["C","",13.7,-3.6,6.4],["C","",5.2,-8.0,15.9],["C","",5.2,-20.3,18.6],["C","",14.8,-27.6,14.7],["C","",33.0,6.5,-6.7],["C","",22.2,13.1,-5.8],["C","",12.0,7.8,-0.8],["C","",33.6,-5.5,-2.5],["C","",10.8,31.8,-9.1],["C","",-0.0,26.1,-5.5],["C","",-0.0,13.7,-2.9],["C","",21.6,25.2,-9.8],["C","",-21.6,27.0,-1.2],["C","",-22.2,14.4,-0.1],["C","",-12.0,7.4,-2.5],["C","",-10.8,32.7,-4.6],["C","",-33.6,-4.0,4.5],["C","",-23.9,-11.3,0.6],["C","",-13.7,-5.9,-4.4],["C","",-33.0,8.7,3.5],["C","",-14.8,-31.2,-2.2],["C","",-5.2,-26.1,-8.7],["C","",-5.2,-13.8,-11.3],["C","",-24.4,-23.9,1.8]],"b":[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[0,5,1],[6,7,1],[7,8,2],[2,8,1],[1,9,1],[6,9,2],[10,11,1],[11,12,2],[8,12,1],[7,13,1],[10,13,2],[14,15,1],[15,16,2],[12,16,1],[11,17,1],[14,17,2],[18,19,1],[19,20,1],[16,20,1],[15,21,1],[18,21,2],[22,23,2],[23,24,1],[20,24,2],[19,25,2],[22,25,1]],"r":[[0,5,4,3,2,1],[6,9,1,2,8,7],[10,13,7,8,12,11],[14,17,11,12,16,15],[18,21,15,16,20,19],[22,25,19,20,24,23]],"f":[{"ring":0}],"e":34.6},"pcp":{"a":[["C","",-12.2,-8.7,9.0],["C","",-6.0,-1.6,17.3],["C","",6.5,-1.6,17.3],["C","",12.8,-8.7,9.0],["C","",6.5,-17.7,2.8],["C","",-6.0,-17.7,2.8],["C","",-12.2,8.0,-9.6],["C","",-6.0,17.0,-3.4],["C","",6.5,17.0,-3.4],["C","",12.8,8.0,-9.6],["C","",6.5,0.9,-17.9],["C","",-6.0,0.9,-17.9],["C","",-24.5,-5.0,4.9],["C","",-24.5,4.4,-5.5],["C","",25.0,-5.0,4.9],["C","",25.0,4.4,-5.5],["Br","Br",-14.5,9.4,27.2]],"b":[[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[5,0,2],[6,7,1],[7,8,2],[8,9,1],[9,10,2],[10,11,1],[11,6,2],[0,12,1],[12,13,1],[13,6,1],[3,14,1],[14,15,1],[15,9,1],[1,16,1]],"r":[[1,2,3,4,5,0],[7,8,9,10,11,6]],"f":[{"ring":0}],"e":25.5},"tartaric":{"a":[["O","O",-20.0,1.5,17.5],["C","",-12.1,5.9,11.2],["O","OH",-7.9,17.0,13.4],["C","",-6.9,-0.0,-0.0],["O","OH",-11.2,-12.0,-1.7],["C","",6.9,0.0,-0.0],["O","OH",11.0,-12.1,-1.7],["C","",11.8,5.1,11.8],["O","O",17.3,-0.4,19.5],["O","OH",9.9,17.0,13.1],["H","H",-10.2,5.1,-7.8],["H","H",10.6,5.3,-7.4]],"b":[[0,1,2],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[5,6,1],[5,7,1],[7,8,2],[7,9,1],[3,10,1],[5,11,1]],"r":[],"f":[{"atom":3},{"atom":5}],"st":[3,[]],"e":20.1},"dibromobutane":{"a":[["C","",-12.6,4.4,11.7],["C","",-6.9,0.0,-0.0],["Br","Br",-12.9,-16.6,-2.3],["C","",6.9,0.0,-0.0],["Br","Br",12.9,-16.6,-2.3],["C","",12.6,4.4,11.7],["H","H",-10.5,5.1,-7.6],["H","H",10.5,5.1,-7.6]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[1,6,1],[3,7,1]],"r":[],"f":[{"atom":1},{"atom":3}],"st":[1,[]],"e":21.0},"butanediol":{"a":[["C","",-12.2,4.9,11.6],["C","",-6.9,0.0,0.0],["O","OH",-11.5,-11.9,-1.7],["C","",6.9,0.0,-0.0],["O","OH",11.1,-12.1,-1.7],["C","",12.5,5.0,11.5],["H","H",-10.1,5.4,-7.6],["H","H",10.2,5.2,-7.7]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[1,6,1],[3,7,1]],"r":[],"f":[{"atom":1},{"atom":3}],"st":[1,[]],"e":16.5}};
 const SUBC={'Br':'#a8483a','Cl':'#2f9e50','F':'#86ad1f','OH':'#e2475a','O':'#e2475a','NH₂':'#3b6fe0','N':'#3b6fe0','NO₂':'#3b6fe0','COOH':'#cf4a3c','C=O':'#cf4a3c',
   'CH₃':'#7d8596','CH₂':'#7d8596','H':'#9aa0b0','CHO':'#e7801c','CH₂OH':'#cf5696','C₂H₅':'#5d6475','Ar':'#6d6aa0','Tol':'#6d6aa0','Ph':'#6d7a8f','An':'#b0648a','PPh₂':'#e0942a','環':'#8a7fb0'};
 const WAVES=[{cat:'axial',msg:'軸性キラリティー 登場!'},{cat:'helix',msg:'らせんキラリティー 登場!'},{cat:'planar',msg:'面性キラリティー 登場!'}];
@@ -330,38 +330,43 @@ function pickType(kind,cats){
 }
 function makeMol(kind,x,y,cats=ALLCATS,type){
   const ty=type!=null?type:pickType(kind,cats),cat=TYPES[ty].cat;
-  return{kind,type:ty,alt:cat==='meso'?0:irand(2),x,y,hd:rand(0,Math.PI*2),turn:rand(.6,2),idle:0,phase:rand(0,6),
+  return{kind,type:ty,alt:0,x,y,hd:rand(0,Math.PI*2),turn:rand(.6,2),idle:0,phase:rand(0,6),
     life:0,state:'field',pen:null,flip:-1,eye:rand(1,4),pop:0,alpha:1,moving:true,warn:false,blinkPh:0,penAge:0};
 }
 function descOf(m){const t=TYPES[m.type];return t.cat==='meso'?'meso':DESC[t.cat][m.kind==='R'?0:1]}
 
 // ================= 分子の描画 =================
 const wcache={};
-// ---- 分子キャラの個性(目・口・小物) ----
+// ---- 分子キャラの個性(Lv2:目・口・汗など。小物なし) ----
 const PERSONA={
-  chbrclf:{eyes:'wide',mouth:'o',acc:'leaf'},
-  lactic:{eyes:'sleepy',mouth:'w',acc:'towel'},
-  alanine:{eyes:'determined',mouth:'grin',acc:'cap'},
-  glyceraldehyde:{eyes:'sparkle',mouth:'smile',acc:'ribbon'},
-  butanol:{eyes:'cool',mouth:'grin',acc:'none',blush:2},
-  ibuprofen:{eyes:'dot',mouth:'smile',acc:'capsule'},
-  thalidomide:{eyes:'serious',mouth:'flat',acc:'glasses'},
-  sulfoxide:{eyes:'wide',mouth:'o',acc:'goggles'},
-  pamp:{eyes:'determined',mouth:'grin',acc:'medal'},
-  allene:{eyes:'dot',mouth:'w',acc:'propeller'},
-  binol:{eyes:'wink',mouth:'smile',acc:'star'},
-  binap:{eyes:'cool',mouth:'smile',acc:'crown'},
-  diphenic:{eyes:'dot',mouth:'flat',acc:'monocle'},
-  helicene:{eyes:'dizzy',mouth:'o',acc:'none'},
-  pcp:{eyes:'happy',mouth:'grin',acc:'none'},
-  tartaric:{eyes:'sparkle',mouth:'w',acc:'none'},
-  dibromobutane:{eyes:'dot',mouth:'o',acc:'none'},
-  butanediol:{eyes:'happy',mouth:'smile',acc:'none'},
+  chbrclf:{eyes:'wide',mouth:'o'},
+  lactic:{eyes:'tired',mouth:'pant',sweat:1},
+  alanine:{eyes:'fire',mouth:'shout'},
+  glyceraldehyde:{eyes:'sparkle',mouth:'smile'},
+  butanol:{eyes:'cool',mouth:'grin',blush:2},
+  ibuprofen:{eyes:'happy',mouth:'smile'},
+  thalidomide:{eyes:'serious',mouth:'flat'},
+  sulfoxide:{eyes:'wide',mouth:'o'},
+  pamp:{eyes:'determined',mouth:'grin'},
+  allene:{eyes:'dot',mouth:'w'},
+  binol:{eyes:'wide',mouth:'smirk'},
+  binap:{eyes:'smug',mouth:'smirk'},
+  diphenic:{eyes:'sleepy',mouth:'flat'},
+  helicene:{eyes:'spiral',mouth:'wobble'},
+  pcp:{eyes:'happy',mouth:'grin'},
+  tartaric:{eyes:'wink',mouth:'smile'},
+  dibromobutane:{eyes:'dot',mouth:'o'},
+  butanediol:{eyes:'happy',mouth:'smile'},
 };
-const ELC={O:'#e2475a',N:'#3b6fe0',S:'#b89400',P:'#e0801c',Br:'#a8483a',Cl:'#2f9e50',F:'#7ea51c',H:'#8a8fa3'};
-const molScale=t=>clamp(36/MOL[t.id].e,.85,2.2);
+// ステッカーの色(c=結合、d=ふち、l=環や丸の中)。N はガチ用の無彩色
+const STK={R:{c:'#ff8a3d',d:'#9a4210',l:'#ffe6d2'},S:{c:'#3f9bf0',d:'#185a9c',l:'#d9ecff'},M:{c:'#a77ef0',d:'#5b35a0',l:'#eee4ff'},N:{c:'#c9c2d6',d:'#4d4560',l:'#f3f0ea'}};
+const ELC={O:'#e0344d',N:'#2e6fe0',S:'#b89400',P:'#e0801c',Br:'#a8483a',Cl:'#2f9e50',F:'#6f9a12',H:'#8a8fa3'};
+// やさしい/ふつう用:デフォルメした原子の玉(色・大きさは元素ごと)
+const BALL={O:{r:7,c:'#ff5a6e',d:'#b3223a'},N:{r:7,c:'#4f7dff',d:'#2344b0'},S:{r:7.5,c:'#ffd23f',d:'#b08a00'},P:{r:7.5,c:'#ffa94d',d:'#b35f00'},
+  Br:{r:8.5,c:'#c0634b',d:'#7a2e1c'},Cl:{r:7.5,c:'#46c26a',d:'#1f7a3a'},F:{r:6.5,c:'#b6e36a',d:'#6b9a1c'},H:{r:4.6,c:'#ffffff',d:'#9a97ad'}};
+const INK='#3a2c4f';
+const molScale=t=>clamp(42/MOL[t.id].e,1.05,2.3);
 const blinkOn=m=>m.warn&&Math.sin(m.blinkPh)>0;
-
 function moodOf(m){
   if(m.state==='pen'||m.state==='demoPen'||m.state==='collect')return'happy';
   if(m.warn)return'panic';
@@ -369,178 +374,163 @@ function moodOf(m){
   if(G.state==='play'||G.state==='boom'){if(G.T>=T_FLIP-10)return'hot';if(G.T<200)return'sleep'}
   return'normal';
 }
-function drawAcc(c,x,y,r,acc){
-  c.lineCap='round';c.lineJoin='round';
-  switch(acc){
-    case 'leaf':c.strokeStyle='#4f9a3a';c.lineWidth=1.6;c.beginPath();c.moveTo(x,y-r);c.lineTo(x,y-r-5);c.stroke();
-      c.fillStyle='#7cc85a';for(const s of[-1,1]){c.beginPath();c.ellipse(x+s*4,y-r-6,4.5,2.4,s*-.5,0,Math.PI*2);c.fill()}break;
-    case 'towel':c.fillStyle='#fff';rr(c,x-r*.95,y-r*.72,r*1.9,r*.32,r*.15);c.fill();c.strokeStyle='#5aa9e6';c.lineWidth=1.2;c.stroke();
-      c.fillStyle='#5aa9e6';c.fillRect(x-r*.9,y-r*.6,r*1.8,r*.08);c.fillStyle='#fff';ell(c,x+r*.95,y-r*.5,r*.2,r*.14);c.fill();break;
-    case 'cap':c.fillStyle='#e8505b';c.beginPath();c.arc(x,y-r*.35,r*.92,Math.PI*1.05,Math.PI*1.95);c.closePath();c.fill();
-      c.fillStyle='#c73a45';rr(c,x-r*.2,y-r*.62,r*1.35,r*.22,r*.1);c.fill();c.fillStyle='#fff';circ(c,x-r*.1,y-r*.95,r*.14);c.fill();break;
-    case 'ribbon':c.fillStyle='#ff7eb6';const bx=x+r*.62,by=y-r*.78;
-      for(const s of[-1,1]){c.beginPath();c.moveTo(bx,by);c.lineTo(bx+s*r*.45,by-r*.28);c.lineTo(bx+s*r*.45,by+r*.28);c.closePath();c.fill()}
-      c.fillStyle='#e0508f';circ(c,bx,by,r*.14);c.fill();break;
-    case 'capsule':c.save();c.translate(x+r*.3,y-r*1.02);c.rotate(-.35);
-      c.fillStyle='#ff6b6b';rr(c,-r*.6,-r*.2,r*.6,r*.4,r*.2);c.fill();c.fillStyle='#fff';rr(c,0,-r*.2,r*.6,r*.4,r*.2);c.fill();
-      c.strokeStyle='#c8506a';c.lineWidth=1;rr(c,-r*.6,-r*.2,r*1.2,r*.4,r*.2);c.stroke();c.restore();break;
-    case 'glasses':c.strokeStyle='#3d3552';c.lineWidth=1.4;for(const s of[-1,1]){circ(c,x+s*r*.38,y-r*.08,r*.27);c.stroke()}
-      c.beginPath();c.moveTo(x-r*.11,y-r*.1);c.lineTo(x+r*.11,y-r*.1);c.stroke();break;
-    case 'goggles':c.fillStyle='#6a6f90';c.fillRect(x-r,y-r*.72,r*2,r*.2);
-      for(const s of[-1,1]){circ(c,x+s*r*.36,y-r*.62,r*.26);c.fillStyle='#bfe8ff';c.fill();c.lineWidth=1.6;c.strokeStyle='#4a4f70';c.stroke()}break;
-    case 'medal':c.strokeStyle='#4f7ee8';c.lineWidth=1.6;c.beginPath();c.moveTo(x+r*.45,y+r*.55);c.lineTo(x+r*.85,y+r*1.05);c.moveTo(x+r*1.2,y+r*.55);c.lineTo(x+r*.85,y+r*1.05);c.stroke();
-      circ(c,x+r*.85,y+r*1.15,r*.28);c.fillStyle='#ffd24d';c.fill();c.strokeStyle='#c99a1a';c.lineWidth=1;c.stroke();break;
-    case 'propeller':c.fillStyle='#ffb13d';c.beginPath();c.arc(x,y-r*.72,r*.42,Math.PI,0);c.fill();
-      c.fillStyle='#3d3552';c.fillRect(x-.7,y-r*1.25,1.4,r*.5);
-      {const a=Math.cos(G.time*14)*r*.55;c.fillStyle='#4fa3ef';ell(c,x-a/2,y-r*1.25,Math.abs(a)/2+.5,1.8);c.fill();c.fillStyle='#ff5a6e';ell(c,x+a/2,y-r*1.25,Math.abs(a)/2+.5,1.8);c.fill()}break;
-    case 'star':c.save();c.translate(x-r*.62,y-r*.82);c.rotate(.3);star(c,0,0,r*.36,'#ffd24d');c.restore();break;
-    case 'crown':c.fillStyle='#ffd24d';c.strokeStyle='#c99a1a';c.lineWidth=1;c.beginPath();
-      const cy=y-r*.82;c.moveTo(x-r*.55,cy+r*.2);c.lineTo(x-r*.6,cy-r*.3);c.lineTo(x-r*.3,cy-r*.05);c.lineTo(x,cy-r*.42);c.lineTo(x+r*.3,cy-r*.05);c.lineTo(x+r*.6,cy-r*.3);c.lineTo(x+r*.55,cy+r*.2);c.closePath();c.fill();c.stroke();
-      c.fillStyle='#ff5a6e';circ(c,x,cy,r*.08);c.fill();break;
-    case 'monocle':c.strokeStyle='#b8860b';c.lineWidth=1.4;circ(c,x+r*.38,y-r*.08,r*.28);c.stroke();
-      c.beginPath();c.moveTo(x+r*.62,y+r*.05);c.quadraticCurveTo(x+r*.9,y+r*.5,x+r*.7,y+r*.8);c.stroke();
-      c.fillStyle='#6b4a2b';for(const s of[-1,1]){c.beginPath();c.ellipse(x+s*r*.2,y+r*.2,r*.22,r*.08,s*-.25,0,Math.PI*2);c.fill()}break;
-  }
-}
-// 骨格式に直接つける目玉(ぎょろ目)。表情は個性+ゲーム状況で決まる
-function drawEyes(c,x,y,e,p,mood,m,col){
-  let eyes=p.eyes||'wide',mouth=p.mouth||'w';
-  if(mood==='happy'){eyes='happy';mouth='smile'}
-  else if(mood==='panic'){eyes='panic';mouth='o'}
-  else if(mood==='held'){mouth='o'}
-  else if(mood==='sleep')eyes='sleepy';
-  if(m.eye<.13&&!['happy','panic','dizzy'].includes(eyes))eyes='closed';
-  const ink='#2d2438',sp=e*1.25,lw=Math.max(1,e*.32);
-  // 目玉は歩く向きを見る(少し遅れて揺れる)
-  const lx=Math.cos(m.hd||0)*e*.38,ly=Math.sin(m.hd||0)*e*.22+Math.sin((m.phase||0)*2)*e*.06;
-  c.lineCap='round';c.lineJoin='round';
-  c.fillStyle=mood==='hot'||p.blush===2?'rgba(255,70,80,.55)':'rgba(255,120,150,.5)';
-  ell(c,x-sp*1.55,y+e*1.35,e*.7,e*.42);c.fill();ell(c,x+sp*1.55,y+e*1.35,e*.7,e*.42);c.fill();
-  for(const s of[-1,1]){
-    const cx=x+s*sp;
-    const sclera=(r=e)=>{circ(c,cx,y,r);c.fillStyle='#fff';c.fill();c.lineWidth=lw;c.strokeStyle=ink;c.stroke()};
-    const pupil=(r=e*.55)=>{circ(c,cx+lx,y+ly,r);c.fillStyle=ink;c.fill();circ(c,cx+lx+r*.35,y+ly-r*.35,r*.3);c.fillStyle='#fff';c.fill()};
-    c.strokeStyle=ink;c.lineWidth=lw;
-    switch(eyes){
-      case 'happy':c.beginPath();c.arc(cx,y+e*.35,e*.8,Math.PI*1.15,Math.PI*1.85);c.lineWidth=lw*1.2;c.stroke();break;
-      case 'closed':c.beginPath();c.moveTo(cx-e*.8,y);c.lineTo(cx+e*.8,y);c.stroke();break;
-      case 'panic':sclera();circ(c,cx+lx*.3,y,e*.25);c.fillStyle=ink;c.fill();break;
-      case 'dizzy':sclera();c.beginPath();for(let k=0;k<12;k++){const a=k*.95+G.time*7,r=e*.07*k;c.lineTo(cx+Math.cos(a)*r,y+Math.sin(a)*r)}c.lineWidth=lw*.8;c.strokeStyle=ink;c.stroke();break;
-      case 'sleepy':sclera();pupil();c.beginPath();c.arc(cx,y,e+lw*.3,Math.PI,0);c.closePath();c.fillStyle=col.main;c.fill();c.lineWidth=lw;c.strokeStyle=ink;c.stroke();break;
-      case 'cool':sclera();pupil();c.beginPath();c.moveTo(cx-e-lw*.3,y-e*.25);c.arc(cx,y,e+lw*.3,Math.PI+.25,-.25);c.closePath();c.fillStyle=col.main;c.fill();c.strokeStyle=ink;c.stroke();break;
-      case 'wink':if(s<0){sclera();pupil()}else{c.beginPath();c.moveTo(cx+e*.7,y-e*.6);c.lineTo(cx-e*.4,y);c.lineTo(cx+e*.7,y+e*.6);c.stroke()}break;
-      case 'determined':sclera();pupil();c.beginPath();c.moveTo(cx-s*e*1.1,y-e*1.6);c.lineTo(cx+s*e*.7,y-e*1.05);c.lineWidth=lw*1.2;c.stroke();break;
-      case 'serious':sclera();pupil(e*.4);c.beginPath();c.moveTo(cx-e*.9,y-e*1.45);c.lineTo(cx+e*.9,y-e*1.45);c.lineWidth=lw*1.2;c.stroke();break;
-      case 'sparkle':sclera(e*1.1);pupil(e*.7);circ(c,cx+lx-e*.2,y+ly+e*.25,e*.14);c.fillStyle='#fff';c.fill();break;
-      case 'dot':sclera(e*.85);pupil(e*.4);break;
-      default:sclera();pupil();
-    }
-  }
-  const my=y+e*1.9;c.fillStyle=ink;c.strokeStyle=ink;c.lineWidth=lw;
-  switch(mouth){
-    case 'o':ell(c,x,my+e*.1,e*.38,e*.48);c.fill();break;
-    case 'smile':c.beginPath();c.arc(x,my-e*.35,e*.7,.25,Math.PI-.25);c.stroke();break;
-    case 'grin':c.beginPath();c.arc(x,my-e*.2,e*.72,0,Math.PI);c.closePath();c.fill();c.fillStyle='#fff';c.fillRect(x-e*.5,my-e*.2,e,e*.25);break;
-    case 'flat':c.beginPath();c.moveTo(x-e*.45,my);c.lineTo(x+e*.45,my);c.stroke();break;
-    default:c.beginPath();c.arc(x-e*.36,my-e*.1,e*.36,.1,Math.PI-.1);c.arc(x+e*.36,my-e*.1,e*.36,.1,Math.PI-.1);c.stroke();
-  }
-  if(mood==='hot'||mood==='panic'){c.fillStyle='#8fd3ff';c.beginPath();const sx=x+sp*2.2,sy=y-e*1.2;c.moveTo(sx,sy-4);c.quadraticCurveTo(sx+4,sy+2,sx,sy+3);c.quadraticCurveTo(sx-4,sy+2,sx,sy-4);c.fill()}
-}
 function badge(c,x,y,s,col){
   c.font=`900 9.5px ${FONT}`;const w=Math.max(15,c.measureText(s).width+8);
-  rr(c,x-w/2,y-7.5,w,15,3);c.fillStyle='#fff';c.fill();c.lineWidth=1.8;c.strokeStyle=col.dark;c.stroke();
-  c.fillStyle=col.dark;c.textAlign='center';c.textBaseline='middle';c.fillText(s,x,y+.5);
+  rr(c,x-w/2,y-7.5,w,15,4);c.fillStyle='#fff';c.fill();c.lineWidth=1.8;c.strokeStyle=col.d;c.stroke();
+  c.fillStyle=col.d;c.textAlign='center';c.textBaseline='middle';c.fillText(s,x,y+.5);
 }
-const bobOf=m=>m.state==='held'?Math.sin(G.time*18)*1.2:-Math.abs(Math.sin(m.moving?m.phase:0))*2.2;
 
-// 3D 座標から骨格式を描く。S 側は x を反転した鏡像。奥の結合は細く薄く、手前は太く、
-// 不斉中心の結合は実際の奥行きから くさび(手前)/破線(奥) を自動で付ける。
-// 分子そのものがキャラ:顔の環は色で塗り、そこに目玉をつける。結合の下に蛍光ペンの色(R/S)を敷く。
-function drawStruct(c,m,o,t,col,easy){
-  const D=MOL[t.id],P=PERSONA[t.id]||{},s=molScale(t);
-  const th=o.theta!=null?o.theta:(m.state==='demo'?.3:Math.sin(G.time*1.1+m.phase)*.32);
-  const mir=m.kind==='S'?-1:1,alt=m.alt?-1:1,ct=Math.cos(th),st=Math.sin(th);
-  const pts=D.a.map(a=>{const x=a[2]*mir,y=a[3]*alt,z=a[4]*alt;return{X:(x*ct+z*st)*s,Y:y*s,Z:(-x*st+z*ct)*s,el:a[0],lab:a[1]}});
-  // H は短くて埋もれやすいので、結合を長めに描く
-  for(let i=0;i<pts.length;i++)if(pts[i].el==='H'){const b=D.b.find(b=>b[0]===i||b[1]===i),q=pts[b[0]===i?b[1]:b[0]],p=pts[i];
-    p.X=q.X+(p.X-q.X)*1.7;p.Y=q.Y+(p.Y-q.Y)*1.7;p.Z=q.Z+(p.Z-q.Z)*1.7}
-  let minY=1e9,maxY=-1e9,maxX=-1e9;for(const p of pts){minY=Math.min(minY,p.Y);maxY=Math.max(maxY,p.Y);maxX=Math.max(maxX,p.X)}
-  const hard=(o.mode||G.mode)==='hard'&&!o.color;
-  const ink=hard?'#3d3552':col.dark,bl=blinkOn(m);
-  const ringC=r=>({x:r.reduce((a,i)=>a+pts[i].X,0)/r.length,y:r.reduce((a,i)=>a+pts[i].Y,0)/r.length,z:r.reduce((a,i)=>a+pts[i].Z,0)/r.length});
-  const faces=(D.f.length?D.f:[{atom:0}]).map(f=>f.ring!=null?{...ringC(D.r[f.ring]),ring:f.ring}:{x:pts[f.atom].X,y:pts[f.atom].Y,z:pts[f.atom].Z,atom:f.atom});
-  const faceRings=new Set(faces.filter(f=>f.ring!=null).map(f=>f.ring));
-  // 足(分子の下端、顔の真下)
-  feet(c,m,[faces[0].x-5,faces[0].x+5],maxY+5,4.5,ink);
-  c.translate(0,bobOf(m));
-  const bonds=D.b.map(b=>({b,z:(pts[b[0]].Z+pts[b[1]].Z)/2})).sort((a,b)=>a.z-b.z);
-  // 蛍光ペンの下塗り(R/S の色。放置警告中は赤く点滅)
-  if(!hard||bl){c.save();c.lineCap='round';c.lineJoin='round';c.strokeStyle=bl?'#ff3b55':col.main;c.globalAlpha*=bl?.55:.38;c.lineWidth=11;
-    c.beginPath();for(const {b} of bonds){c.moveTo(pts[b[0]].X,pts[b[0]].Y);c.lineTo(pts[b[1]].X,pts[b[1]].Y)}c.stroke();
-    for(const p of pts)if(p.lab){circ(c,p.X,p.Y,p.lab.length>1?9:6.5);c.fillStyle=c.strokeStyle;c.fill()}c.restore()}
-  // 環の塗り(顔の環はしっかり、ほかは淡く)
-  const ringOrder=D.r.map((r,k)=>({k,z:ringC(r).z})).sort((a,b)=>a.z-b.z);
-  for(const {k,z} of ringOrder){const r=D.r[k];c.beginPath();for(const i of r)c.lineTo(pts[i].X,pts[i].Y);c.closePath();
-    if(faceRings.has(k)){c.fillStyle=bl?'#fff':(hard?'#f4efe6':col.light);c.fill()}
-    else{c.fillStyle=hard?'#d9d2c4':col.main;const a=z<0?.18:.3;c.globalAlpha*=a;c.fill();c.globalAlpha/=a}}
-  // 結合(奥から)
-  const stc=D.st&&D.st[0]!=null?D.st[0]:-1,mesoC=t.cat==='meso'?D.f.map(f=>f.atom):[];
-  const centers=new Set([stc,...mesoC].filter(i=>i>=0));
-  const ringOf=(i,j)=>D.r.find(r=>r.includes(i)&&r.includes(j));
-  const cut=p=>p.lab?(p.lab.length>2?8:p.lab.length>1?7:5.5):0;
-  for(const {b,z} of bonds){
-    let [i,j,ord]=b,A=pts[i],B=pts[j];
-    let x1=A.X,y1=A.Y,x2=B.X,y2=B.Y;const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
-    const ca=cut(A),cb=cut(B);x1+=ux*ca;y1+=uy*ca;x2-=ux*cb;y2-=uy*cb;
-    const w=clamp(2.3+z*.05,1.1,4),far=z<-8;
-    c.strokeStyle=c.fillStyle=far?(hard?'#a39cb6':col.main):ink;c.lineWidth=w;c.lineCap='round';
-    let sb=null;if(centers.has(i))sb=[x1,y1,x2,y2,B.Z-A.Z];else if(centers.has(j))sb=[x2,y2,x1,y1,A.Z-B.Z];
-    if(sb&&Math.abs(sb[4])>4){
-      const [sx,sy,ex,ey,dz]=sb,nx=-(ey-sy),ny=ex-sx,nl=Math.hypot(nx,ny)||1,px=nx/nl,py=ny/nl;
-      c.strokeStyle=c.fillStyle=ink;
-      if(dz>0){c.beginPath();c.moveTo(sx,sy);c.lineTo(ex+px*3.3,ey+py*3.3);c.lineTo(ex-px*3.3,ey-py*3.3);c.closePath();c.fill()}
-      else{c.lineWidth=1.3;const n=6;for(let k=1;k<=n;k++){const u=k/n,hx=sx+(ex-sx)*u,hy=sy+(ey-sy)*u,hw=3.4*u;c.beginPath();c.moveTo(hx+px*hw,hy+py*hw);c.lineTo(hx-px*hw,hy-py*hw);c.stroke()}}
-      continue;
+// ---- 顔(Lv2)。fr = 顔の半径、skin = 顔の下地の色 ----
+function drawFace(c,x,y,fr,p,mood,look,skin){
+  let eyes=p.eyes,mouth=p.mouth,blush=p.blush,sweat=p.sweat;
+  if(mood==='happy'){eyes='happy';mouth='smile'}
+  else if(mood==='panic'){eyes='panic';mouth='o';sweat=1}
+  else if(mood==='held'){mouth='o'}
+  else if(mood==='sleep'){eyes='sleepy'}
+  else if(mood==='hot'){blush=2;sweat=1}
+  const ex=fr*.4,ey=y-fr*.1,e=fr*.21,lw=Math.max(1.3,fr*.12),t=G.time;
+  c.save();c.lineCap='round';c.lineJoin='round';
+  c.fillStyle=blush===2?'rgba(255,80,90,.55)':'rgba(255,125,160,.55)';
+  ell(c,x-fr*.62,y+fr*.25,fr*.2,fr*.12);c.fill();ell(c,x+fr*.62,y+fr*.25,fr*.2,fr*.12);c.fill();
+  c.strokeStyle=c.fillStyle=INK;c.lineWidth=lw;
+  const lx=look*e*.3;
+  for(const s of[-1,1]){
+    const cx=x+s*ex;
+    const oval=(w,h)=>{c.fillStyle=INK;ell(c,cx+lx,ey,w,h);c.fill();c.fillStyle='#fff';circ(c,cx+lx+w*.35,ey-h*.4,Math.max(.7,w*.38));c.fill();c.fillStyle=INK};
+    switch(eyes){
+      case 'dot':circ(c,cx,ey,e*.7);c.fill();break;
+      case 'wide':oval(e*.8,e*1.1);break;
+      case 'sparkle':oval(e,e*1.25);c.fillStyle='#fff';circ(c,cx+lx-e*.3,ey+e*.4,e*.18);c.fill();c.fillStyle=INK;break;
+      case 'happy':c.beginPath();c.arc(cx,ey+e*.5,e*.95,Math.PI*1.15,Math.PI*1.85);c.stroke();break;
+      case 'tired':c.beginPath();c.arc(cx,ey-e*.3,e*.9,Math.PI*.15,Math.PI*.85);c.stroke();c.strokeStyle='#b9a6d6';c.lineWidth=lw*.7;c.beginPath();c.arc(cx,ey+e*.4,e*.8,Math.PI*.2,Math.PI*.8);c.stroke();c.strokeStyle=INK;c.lineWidth=lw;break;
+      case 'fire':oval(e*.75,e*1.05);c.beginPath();c.moveTo(cx-s*e*2.1,ey-e*2.1);c.lineTo(cx+s*e*.5,ey-e*1.3);c.lineWidth=lw*1.3;c.stroke();c.lineWidth=lw;break;
+      case 'smug':c.beginPath();c.moveTo(cx-e*.9,ey);c.lineTo(cx+e*.9,ey);c.stroke();c.beginPath();c.arc(cx,ey-e*.2,e*.9,Math.PI*1.1,Math.PI*1.9);c.lineWidth=lw*.7;c.stroke();c.lineWidth=lw;break;
+      case 'spiral':c.beginPath();for(let k=0;k<14;k++){const a=k*.9+t*6*s,r=e*.085*k;c.lineTo(cx+Math.cos(a)*r,ey+Math.sin(a)*r)}c.lineWidth=lw*.75;c.stroke();c.lineWidth=lw;break;
+      case 'serious':circ(c,cx,ey,e*.55);c.fill();c.beginPath();c.moveTo(cx-e,ey-e*1.7);c.lineTo(cx+e,ey-e*1.7+s*e*.35);c.stroke();break;
+      case 'sleepy':c.beginPath();c.moveTo(cx-e,ey);c.lineTo(cx+e,ey);c.stroke();c.beginPath();c.arc(cx,ey,e*.8,0,Math.PI);c.fill();break;
+      case 'cool':oval(e*.8,e*1.05);c.fillStyle=skin;c.beginPath();c.moveTo(cx-e*1.2,ey-e*1.4);c.lineTo(cx+e*1.2,ey-e*1.4);c.lineTo(cx+e*1.2,ey-e*.15);c.lineTo(cx-e*1.2,ey-e*.15);c.fill();c.beginPath();c.moveTo(cx-e*1.1,ey-e*.15);c.lineTo(cx+e*1.1,ey-e*.15);c.stroke();c.fillStyle=INK;break;
+      case 'wink':if(s<0)oval(e*.8,e*1.1);else{c.beginPath();c.moveTo(cx+e*.8,ey-e*.8);c.lineTo(cx-e*.5,ey);c.lineTo(cx+e*.8,ey+e*.8);c.stroke()}break;
+      case 'determined':oval(e*.75,e);c.beginPath();c.moveTo(cx-s*e*1.6,ey-e*1.9);c.lineTo(cx+s*e*.6,ey-e*1.3);c.stroke();break;
+      case 'panic':c.beginPath();c.moveTo(cx-s*e,ey-e*.9);c.lineTo(cx+s*e*.4,ey);c.lineTo(cx-s*e,ey+e*.9);c.stroke();break;
+      default:oval(e*.8,e*1.1);
     }
-    if(ord===2){
-      const r=ringOf(i,j);let ox=-uy,oy=ux;
-      if(r){const rc=ringC(r);if((rc.x-(x1+x2)/2)*ox+(rc.y-(y1+y2)/2)*oy<0){ox=-ox;oy=-oy}
-        c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();
-        c.lineWidth=w*.8;c.beginPath();c.moveTo(x1+ox*3.3+ux*2.5,y1+oy*3.3+uy*2.5);c.lineTo(x2+ox*3.3-ux*2.5,y2+oy*3.3-uy*2.5);c.stroke();}
-      else{c.lineWidth=w*.85;for(const q of[-1.7,1.7]){c.beginPath();c.moveTo(x1+ox*q,y1+oy*q);c.lineTo(x2+ox*q,y2+oy*q);c.stroke()}}
-    }else{c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke()}
   }
-  // 不斉中心の目印(*)
-  if(stc>=0&&!faces.some(f=>f.atom===stc)){const p=pts[stc];txt(c,'*',p.X+5,p.Y-5,11,ink,{w:900,stroke:'#fff',sw:2.5})}
-  // 原子ラベル
-  for(const p of pts){if(!p.lab)continue;
-    const a=p.Z<-10?.7:1;c.globalAlpha*=a;
-    txt(c,p.lab,p.X,p.Y,p.el==='H'?8.5:9.5,ELC[p.el]||'#555',{w:900,stroke:'#fff',sw:3.2});
-    c.globalAlpha/=a}
-  // やさしい:優先順位の番号
-  if(easy&&D.st&&t.cat!=='meso'){
-    const ctr=stc>=0?pts[stc]:{X:0,Y:0};
-    D.st[1].forEach((i,k)=>{const p=pts[i];let vx=p.X-ctr.X,vy=p.Y-ctr.Y;const l=Math.hypot(vx,vy)||1,off=cut(p)+7;const nx=p.X+vx/l*off,ny=p.Y+vy/l*off;
-      rr(c,nx-4.5,ny-4.5,9,9,2);c.fillStyle='#3d3552';c.fill();txt(c,String(k+1),nx,ny+.3,8,'#fff',{w:900})});
+  const my=y+fr*.36;c.fillStyle=INK;c.strokeStyle=INK;c.lineWidth=lw;
+  switch(mouth){
+    case 'o':ell(c,x,my,fr*.1,fr*.13);c.fill();break;
+    case 'shout':c.beginPath();c.moveTo(x-fr*.22,my-fr*.07);c.quadraticCurveTo(x,my+fr*.42,x+fr*.22,my-fr*.07);c.closePath();c.fill();c.fillStyle='#ff7f96';ell(c,x,my+fr*.12,fr*.1,fr*.06);c.fill();break;
+    case 'smile':c.beginPath();c.arc(x,my-fr*.1,fr*.18,.25,Math.PI-.25);c.stroke();break;
+    case 'grin':c.beginPath();c.arc(x,my-fr*.05,fr*.2,0,Math.PI);c.closePath();c.fill();c.fillStyle='#fff';c.fillRect(x-fr*.14,my-fr*.05,fr*.28,fr*.07);break;
+    case 'flat':c.beginPath();c.moveTo(x-fr*.14,my);c.lineTo(x+fr*.14,my);c.stroke();break;
+    case 'smirk':c.beginPath();c.moveTo(x-fr*.16,my);c.quadraticCurveTo(x+fr*.04,my+fr*.1,x+fr*.18,my-fr*.1);c.stroke();break;
+    case 'pant':c.beginPath();c.moveTo(x-fr*.15,my-fr*.06);c.quadraticCurveTo(x,my+fr*.3,x+fr*.15,my-fr*.06);c.closePath();c.fill();break;
+    case 'wobble':c.beginPath();for(let k=0;k<=8;k++)c.lineTo(x-fr*.24+k*fr*.06,my+(k%2?-1:1)*fr*.05);c.lineWidth=lw*.8;c.stroke();break;
+    default:c.beginPath();c.arc(x-fr*.09,my-fr*.03,fr*.09,.1,Math.PI-.1);c.arc(x+fr*.09,my-fr*.03,fr*.09,.1,Math.PI-.1);c.stroke();
   }
-  // メソ:分子内の鏡面
-  if(t.cat==='meso'){const mx=(faces[0].x+faces[1].x)/2;c.save();c.setLineDash([3,3]);c.strokeStyle=COL.M.dark;c.lineWidth=1.8;c.beginPath();c.moveTo(mx,minY-6);c.lineTo(mx,maxY+4);c.stroke();c.restore()}
-  // 顔(目玉)。原子につく顔は原子の少し上、環の顔は環の中
-  const mood=o.mood||moodOf(m);
-  faces.map((f,k)=>({f,k})).sort((a,b)=>a.f.z-b.f.z).forEach(({f,k})=>{
-    const meso=t.cat==='meso',e=meso?2.7:f.ring!=null?3.3:3.6,fy=f.ring!=null?f.y-1.5:f.y-(meso?6:2);
-    // メソの双子は鏡面から外側へ少しずらす
-    const fx=meso?f.x+(f.x<(faces[0].x+faces[1].x)/2?-4:4):f.x;
-    drawEyes(c,fx,fy,e,P,mood,{...m,hd:k&&t.cat==='meso'?Math.PI-(m.hd||0):m.hd},col);
-    if(k===0)drawAcc(c,fx,fy+e*.6,e*3,P.acc);
-  });
-  if(easy)badge(c,maxX+10,minY-4,descOf(m),t.cat==='meso'?COL.M:COL[m.kind]);
+  if(sweat){const sx=x+fr*.95,sy=y-fr*.55;c.fillStyle='#8fd3ff';c.strokeStyle='#4aa3d6';c.lineWidth=.8;c.beginPath();c.moveTo(sx,sy-fr*.25);c.quadraticCurveTo(sx+fr*.22,sy+fr*.1,sx,sy+fr*.15);c.quadraticCurveTo(sx-fr*.22,sy+fr*.1,sx,sy-fr*.25);c.fill();c.stroke()}
+  c.restore();
 }
-function feet(c,m,xs,y,r,ink){
-  const walk=m.moving?m.phase:0,dang=m.state==='held'?4:0;
-  c.strokeStyle=ink||'#4b4160';c.fillStyle='#4b4160';c.lineWidth=1.6;c.lineCap='round';
-  xs.forEach((fx,i)=>{const lift=Math.max(0,Math.sin(walk+i*Math.PI))*3,fy=y-lift+dang;
-    c.beginPath();c.moveTo(fx,y-7);c.lineTo(fx,fy);c.stroke();ell(c,fx+(i?1.5:-1.5),fy+1,r,r*.6);c.fill()});
+
+// ---- ステッカー分子 ----
+// 3D 座標(検算済み)を画面に投影して骨格式で描く。S 側は x を反転した鏡像。
+// 芳香環の顔は環の面に貼り、それ以外は中心炭素だけ丸にして顔を入れる。
+// 奥行き Z は揺れる前の値を使い、環・結合・くさび・置換基・顔を奥から順に描く(奥の置換基は手前の環に隠れる)。
+function drawSticker(c,m,o,t,col){
+  const D=MOL[t.id],cat=t.cat,P=PERSONA[t.id],s=molScale(t),mode=o.mode||G.mode,icon=mode!=='hard',easy=mode==='easy';
+  const th=o.theta!=null?o.theta:(m.state==='demo'?.2:Math.sin(G.time*1.1+(m.phase||0))*.3);
+  const mir=m.kind==='S'?-1:1,ct=Math.cos(th),st=Math.sin(th);
+  const pts=D.a.map(a=>{const x=a[2]*mir,y=a[3],z=a[4];return{X:(x*ct+z*st)*s,Y:y*s,Z:z*s,el:a[0],lab:a[1]}});
+  for(let i=0;i<pts.length;i++)if(pts[i].el==='H'){const b=D.b.find(b=>b[0]===i||b[1]===i),q=pts[b[0]===i?b[1]:b[0]],p=pts[i];p.X=q.X+(p.X-q.X)*1.7;p.Y=q.Y+(p.Y-q.Y)*1.7;p.Z=q.Z+(p.Z-q.Z)*1.7}
+  const ringC=r=>({x:r.reduce((a,i)=>a+pts[i].X,0)/r.length,y:r.reduce((a,i)=>a+pts[i].Y,0)/r.length,z:r.reduce((a,i)=>a+pts[i].Z,0)/r.length});
+  const CR=10.5*Math.min(1.25,Math.max(1,s*.6));
+  const faces=D.f.map(f=>{
+    if(f.ring!=null){const r=D.r[f.ring],cc=ringC(r);
+      const A={x:pts[r[0]].X-cc.x,y:pts[r[0]].Y-cc.y,z:pts[r[0]].Z-cc.z},B={x:pts[r[2]].X-cc.x,y:pts[r[2]].Y-cc.y,z:pts[r[2]].Z-cc.z};
+      let n={x:A.y*B.z-A.z*B.y,y:A.z*B.x-A.x*B.z,z:A.x*B.y-A.y*B.x};const nl=Math.hypot(n.x,n.y,n.z);n={x:n.x/nl,y:n.y/nl,z:n.z/nl};if(n.z<0)n={x:-n.x,y:-n.y,z:-n.z};
+      let u={x:1-n.x*n.x,y:-n.x*n.y,z:-n.x*n.z};const ul=Math.hypot(u.x,u.y,u.z);u={x:u.x/ul,y:u.y/ul,z:u.z/ul};
+      let v={x:n.y*u.z-n.z*u.y,y:n.z*u.x-n.x*u.z,z:n.x*u.y-n.y*u.x};if(v.y<0)v={x:-v.x,y:-v.y,z:-v.z};
+      const fix=w=>{const l=Math.hypot(w.x,w.y);return l<.6?{x:w.x/(l||1)*.6,y:w.y/(l||1)*.6}:w};u=fix(u);v=fix(v);
+      const R3=r.reduce((a,i)=>a+Math.hypot(pts[i].X-cc.x,pts[i].Y-cc.y,pts[i].Z-cc.z),0)/r.length;
+      return{x:cc.x,y:cc.y,z:cc.z,fr:R3*.92,ring:f.ring,aff:[u.x,u.y,v.x,v.y]}}
+    const p=pts[f.atom];return{x:p.X,y:p.Y,z:p.Z,fr:CR*.9,atom:f.atom,circle:true}});
+  const faceRingIdx=new Set(faces.filter(f=>f.ring!=null).map(f=>f.ring));
+  const circleAt=new Map(faces.filter(f=>f.circle).map(f=>[f.atom,CR]));
+  const cut=i=>circleAt.get(i)||(pts[i].lab?(icon?(BALL[pts[i].el]||BALL.O).r+1:(pts[i].lab.length>2?9:pts[i].lab.length>1?8:6.5)):0);
+  const bonds=D.b.map(b=>({b,z:(pts[b[0]].Z+pts[b[1]].Z)/2}));
+  const bl=blinkOn(m),mood=o.mood||moodOf(m),look=Math.cos(m.hd||0);
+  c.save();c.lineCap='round';c.lineJoin='round';
+  // 1) シールのふち(放置の点滅中は赤く光る)
+  const all=new Path2D();for(const {b} of bonds){all.moveTo(pts[b[0]].X,pts[b[0]].Y);all.lineTo(pts[b[1]].X,pts[b[1]].Y)}
+  for(const [w,cl] of bl?[[25,'#c21f3a'],[21,'#ff8a9a']]:[[23,'#e6dccb'],[20,'#fff']]){c.strokeStyle=cl;c.lineWidth=w;c.stroke(all);c.fillStyle=cl;
+    for(const r of D.r){c.beginPath();for(const i of r)c.lineTo(pts[i].X,pts[i].Y);c.closePath();c.fill()}
+    for(const p of pts)if(p.lab){circ(c,p.X,p.Y,(icon?(BALL[p.el]||BALL.O).r+5:(p.lab.length>1?11.5:9))+(w-20)/2);c.fill()}
+    for(const f of faces)if(f.circle){circ(c,f.x,f.y,CR+4+(w-20)/2);c.fill()}}
+  // 2) 結合をまとめる(不斉中心のくさび/破線は別扱い)
+  const stc=D.st&&D.st[0]!=null?D.st[0]:-1;const centers=new Set([stc,...faces.filter(f=>f.circle&&cat==='meso').map(f=>f.atom)].filter(i=>i>=0));
+  const segs=[],wedges=[];
+  for(const {b,z} of bonds){let [i,j,ord]=b,A=pts[i],B=pts[j];let x1=A.X,y1=A.Y,x2=B.X,y2=B.Y;const L=Math.hypot(x2-x1,y2-y1)||1,ux=(x2-x1)/L,uy=(y2-y1)/L;
+    const ca=cut(i),cb=cut(j);x1+=ux*ca;y1+=uy*ca;x2-=ux*cb;y2-=uy*cb;
+    let sb=null;if(centers.has(i))sb=[x1,y1,x2,y2,B.Z-A.Z];else if(centers.has(j))sb=[x2,y2,x1,y1,A.Z-B.Z];
+    if(sb&&Math.abs(sb[4])>(cat==='meso'?7:4)){wedges.push([...sb,z]);continue}
+    const w=5;
+    if(ord===2){const r=D.r.find(r=>r.includes(i)&&r.includes(j));let ox=-uy,oy=ux;
+      if(r&&faceRingIdx.has(D.r.indexOf(r)))segs.push([x1,y1,x2,y2,w,z,i,j]);
+      else if(r){const cc=ringC(r);if((cc.x-(x1+x2)/2)*ox+(cc.y-(y1+y2)/2)*oy<0){ox=-ox;oy=-oy}segs.push([x1,y1,x2,y2,w,z,i,j]);segs.push([x1+ox*4.6+ux*3,y1+oy*4.6+uy*3,x2+ox*4.6-ux*3,y2+oy*4.6-uy*3,w*.5,z])}
+      else for(const q of[-2.4,2.4])segs.push([x1+ox*q,y1+oy*q,x2+ox*q,y2+oy*q,w*.62,z])}
+    else segs.push([x1,y1,x2,y2,w,z,i,j])}
+  const line=(q,wd)=>{c.lineWidth=wd;c.beginPath();c.moveTo(q[0],q[1]);c.lineTo(q[2],q[3]);c.stroke()};
+  // 3) 奥から順に描くリスト:環の塗り / 結合の層 / くさび / 原子 / 顔
+  segs.sort((a,b)=>a[5]-b[5]);
+  const items=D.r.map(r=>({z:Math.min(...r.map(i=>pts[i].Z))-1,ring:r}));
+  for(let k=0;k<segs.length;){const band=[segs[k]],z0=segs[k][5];k++;while(k<segs.length&&segs[k][5]-z0<6)band.push(segs[k++]);items.push({z:band.reduce((a,q)=>a+q[5],0)/band.length,band})}
+  for(const w of wedges)items.push({z:w[5],wedge:w});
+  pts.forEach((p,i)=>{if(p.lab)items.push({z:p.Z+.5,atom:i})});
+  faces.forEach((f,k)=>items.push({z:f.z+1,face:f,k}));
+  items.sort((a,b)=>a.z-b.z);
+  const drawnAt=new Map();
+  const ball=(x,y,r,b)=>{circ(c,x,y,r);c.fillStyle=b.c;c.fill();c.lineWidth=1.6;c.strokeStyle=b.d;c.stroke();c.fillStyle='rgba(255,255,255,.75)';ell(c,x-r*.3,y-r*.35,r*.35,r*.22,-.5);c.fill()};
+  c.textAlign='center';c.textBaseline='middle';
+  for(const it of items){
+    if(it.ring){c.beginPath();for(const i of it.ring)c.lineTo(pts[i].X,pts[i].Y);c.closePath();c.fillStyle=col.l;c.fill()}
+    else if(it.band){c.strokeStyle=col.d;for(const q of it.band)line(q,q[4]+2.6);c.strokeStyle=col.c;for(const q of it.band)line(q,q[4]);
+      // 層の境目のつなぎ目:すでに描いた結合とつながる原子のまわりだけ中身の色を塗り直す
+      for(const q of it.band)for(const a of[q[6],q[7]]){if(a==null||!drawnAt.has(a))continue;
+        for(const e of drawnAt.get(a).concat(it.band.filter(e=>e[6]===a||e[7]===a))){const [ax,ay,bx,by]=e[6]===a?[e[0],e[1],e[2],e[3]]:[e[2],e[3],e[0],e[1]];
+          const L=Math.hypot(bx-ax,by-ay)||1,tt=Math.min(1,8/L);c.lineWidth=e[4];c.beginPath();c.moveTo(ax,ay);c.lineTo(ax+(bx-ax)*tt,ay+(by-ay)*tt);c.stroke()}}
+      for(const q of it.band)for(const a of[q[6],q[7]])if(a!=null){if(!drawnAt.has(a))drawnAt.set(a,[]);drawnAt.get(a).push(q)}}
+    else if(it.wedge){const [sx,sy,ex,ey,dz]=it.wedge,nx=-(ey-sy),ny=ex-sx,nl=Math.hypot(nx,ny)||1,px=nx/nl,py=ny/nl;c.fillStyle=c.strokeStyle=col.d;
+      if(dz>0){c.beginPath();c.moveTo(sx+px*1.2,sy+py*1.2);c.lineTo(ex+px*4.2,ey+py*4.2);c.lineTo(ex-px*4.2,ey-py*4.2);c.lineTo(sx-px*1.2,sy-py*1.2);c.closePath();c.fill()}
+      else{c.lineWidth=1.8;for(let k=1;k<=6;k++){const u=k/6,hx=sx+(ex-sx)*u,hy=sy+(ey-sy)*u,hw=4.2*u+.6;c.beginPath();c.moveTo(hx+px*hw,hy+py*hw);c.lineTo(hx-px*hw,hy-py*hw);c.stroke()}}}
+    else if(it.atom!=null){const i=it.atom,p=pts[i],lab=p.lab;
+      // 原子:ガチは官能基を文字、やさしい/ふつうはデフォルメの玉
+      if(!icon){c.font=`${p.el==='H'?10:11.5}px ${POP}`;c.fillStyle=ELC[p.el]||'#555';c.fillText(lab,p.X,p.Y+.5);continue}
+      const nb=D.b.filter(b=>b[0]===i||b[1]===i).map(b=>pts[b[0]===i?b[1]:b[0]]);
+      let dx=0,dy=0;for(const q of nb){dx+=p.X-q.X;dy+=p.Y-q.Y}const dl=Math.hypot(dx,dy)||1;dx/=dl;dy/=dl;if(!nb.length){dx=0;dy=-1}
+      const B=BALL[p.el]||BALL.O,rot=a=>[dx*Math.cos(a)-dy*Math.sin(a),dx*Math.sin(a)+dy*Math.cos(a)];
+      const nH=lab==='PPh₂'||lab==='NO₂'?0:(lab.includes('H₂')?2:(lab.length>1&&lab.includes('H')?1:0));
+      for(const a of(nH===1?[0]:nH===2?[-.6,.6]:[])){const [ux,uy]=rot(a);ball(p.X+ux*(B.r+3),p.Y+uy*(B.r+3),3.4,BALL.H)}
+      if(lab==='NO₂')for(const a of[-.65,.65]){const [ux,uy]=rot(a);ball(p.X+ux*(B.r+4),p.Y+uy*(B.r+4),4.6,BALL.O)}
+      if(lab==='PPh₂')for(const a of[-.7,.7]){const [ux,uy]=rot(a),hx=p.X+ux*(B.r+7),hy=p.Y+uy*(B.r+7);c.beginPath();for(let k=0;k<6;k++){const a2=k*Math.PI/3;c.lineTo(hx+Math.cos(a2)*5,hy+Math.sin(a2)*5)}c.closePath();c.fillStyle='#fff';c.fill();c.lineWidth=2;c.strokeStyle='#8b8fa3';c.stroke()}
+      ball(p.X,p.Y,B.r,B)}
+    else if(it.face){const f=it.face,k=it.k;
+      if(f.circle){circ(c,f.x,f.y,CR);c.fillStyle=col.l;c.fill();c.lineWidth=3;c.strokeStyle=col.d;c.stroke();c.lineWidth=1.6;c.strokeStyle=col.c;circ(c,f.x,f.y,CR-2.4);c.stroke()}
+      const mirrorFace=cat==='meso'&&k===1;
+      if(mirrorFace){c.save();c.translate(f.x,0);c.scale(-1,1);c.translate(-f.x,0)}
+      if(f.aff){c.save();c.transform(f.aff[0],f.aff[1],f.aff[2],f.aff[3],f.x,f.y);drawFace(c,0,0,f.fr,P,mood,look,col.l);c.restore()}
+      else drawFace(c,f.x,f.y+1,f.fr,P,mood,look,col.l);
+      if(mirrorFace)c.restore()}
+  }
+  let minY=1e9,maxX=-1e9;for(const p of pts){minY=Math.min(minY,p.Y);maxX=Math.max(maxX,p.X)}
+  // メソ:分子内の鏡面
+  if(cat==='meso'&&faces.length===2){const mx=(faces[0].x+faces[1].x)/2;let b=-1e9;for(const p of pts)b=Math.max(b,p.Y);c.setLineDash([3,3]);c.strokeStyle=col.d;c.lineWidth=1.6;c.beginPath();c.moveTo(mx,minY-6);c.lineTo(mx,b+6);c.stroke();c.setLineDash([])}
+  // やさしい:優先順位の番号と記号バッジ
+  if(easy&&D.st&&cat!=='meso'){
+    const ctr=stc>=0?pts[stc]:{X:0,Y:0};
+    D.st[1].forEach((i,k)=>{const p=pts[i];const vx=p.X-ctr.X,vy=p.Y-ctr.Y,l=Math.hypot(vx,vy)||1,off=cut(i)+8,nx=p.X+vx/l*off,ny=p.Y+vy/l*off;
+      rr(c,nx-5,ny-5,10,10,3);c.fillStyle=INK;c.fill();c.font=`900 8px ${FONT}`;c.fillStyle='#fff';c.fillText(String(k+1),nx,ny+.5)});
+  }
+  if(easy)badge(c,maxX+8,minY-10,descOf(m),col);
+  c.restore();
 }
 function drawMol(c,m,o={}){
   const t=TYPES[m.type];
@@ -550,16 +540,23 @@ function drawMol(c,m,o={}){
   const held=m.state==='held';
   if(m.boom&&G.boom){const bt=Math.min(G.boom.t,1);sc*=1+bt*.5;c.translate(rand(-1,1)*bt*5,rand(-1,1)*bt*5)}
   const R=MOL[t.id].e*molScale(t);
-  if(!o.noShadow){c.fillStyle='rgba(50,45,90,.14)';ell(c,0,(R+6)*sc,(held?.45:.7)*R*sc,(held?3:5)*sc);c.fill()}
-  c.translate(0,held?-12:0);
-  const sx=m.flip>=0?Math.max(.04,Math.abs(Math.cos(m.flip*Math.PI))):1;
-  c.scale(sc*sx,sc);
-  const mode=o.mode||G.mode,easy=mode==='easy';
-  const col=mode==='hard'&&!o.color?COL.N:COL[t.cat==='meso'?'M':m.kind];
-  c.save();drawStruct(c,m,o,t,col,easy);c.restore();
+  if(!o.noShadow){c.fillStyle='rgba(50,45,90,.13)';ell(c,0,(R+10)*sc,(held?.45:.7)*R*sc,(held?3:5)*sc);c.fill()}
+  // 足はなし。歩くとぴょこぴょこ跳ねて、ぷにっと伸び縮み
+  const moving=m.moving&&m.state!=='demo'&&!inPen;
+  let hop=0;
+  if(held)hop=-12+Math.sin(G.time*18)*1.2;
+  else if(moving)hop=-Math.abs(Math.sin(m.phase||0))*4;
+  else if(inPen&&m.state!=='collect')hop=-Math.pow(Math.max(0,Math.sin(G.time*3+(m.phase||0)*7)),8)*6;
+  c.translate(0,hop*sc);
+  const sx=m.flip>=0?Math.max(.04,Math.abs(Math.cos(m.flip*Math.PI))):1,sq=moving?Math.sin((m.phase||0)*2)*.04:0;
+  c.scale(sc*sx*(1+sq),sc*(1-sq));
+  const mode=o.mode||G.mode;
+  const col=mode==='hard'&&!o.color?STK.N:STK[t.cat==='meso'?'M':m.kind];
+  drawSticker(c,m,o,t,col);
   if(blinkOn(m))warnMark(c,0,-R-16);
   c.restore();
 }
+
 function star(c,x,y,r,col){c.beginPath();for(let i=0;i<8;i++){const a=i*Math.PI/4,rr_=i%2?r*.38:r;c.lineTo(x+Math.cos(a)*rr_,y+Math.sin(a)*rr_)}c.closePath();c.fillStyle=col;c.fill()}
 function warnMark(c,x,y){
   c.fillStyle='#ff3b55';c.beginPath();c.moveTo(x,y+12);c.lineTo(x-5,y+5);c.lineTo(x+5,y+5);c.fill();circ(c,x,y,9);c.fill();
@@ -569,14 +566,14 @@ function drawSprite(cn,kind,type,locked,ex={}){
   const c=cn.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,cn.width,cn.height);
   const s=cn.width/110;c.scale(s,s);
   const m={kind,type,rot:0,x:ex.x||55,y:ex.y||cn.height/s/2+3,hd:0,phase:0,moving:false,state:'demo',alpha:1,flip:-1,eye:3,pop:1,warn:!!ex.warn,blinkPh:Math.PI/2};
-  drawMol(c,m,{sc:ex.sc||1,mode:ex.mode||'easy',color:true,noShadow:ex.noShadow});
+  drawMol(c,m,{sc:ex.sc||.8,mode:ex.mode||'easy',color:true,noShadow:ex.noShadow});
   if(locked){c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation='source-atop';c.fillStyle='#d3cbe2';c.fillRect(0,0,cn.width,cn.height);c.globalCompositeOperation='source-over'}
 }
 
 // ================= 背景 =================
 const penCol=p=>COL[p.kind];
 function drawPen(c,p){
-  const col=penCol(p),bw=p.kind==='M'?9:11,rad=6;
+  const col=penCol(p),bw=p.kind==='M'?9:11,rad=10;
   rr(c,p.x,p.y,p.w,p.h,rad);c.fillStyle=col.light;c.fill();
   c.save();rr(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,3);c.clip();
   c.globalAlpha=.35;for(let yy=p.y;yy<p.y+p.h;yy+=22)for(let xx=p.x+((yy/22)%2?11:0);xx<p.x+p.w;xx+=22){circ(c,xx,yy,2);c.fillStyle=col.main;c.fill()}
@@ -585,7 +582,7 @@ function drawPen(c,p){
   else{txt(c,p.kind,p.x+p.w/2,p.y+p.h/2-30,110,col.dark,{pop:true,w:400});txt(c,p.kind==='R'?'P':'M',p.x+p.w/2,p.y+p.h/2+80,56,col.dark,{pop:true,w:400})}
   c.restore();
   c.save();c.beginPath();rrp(c,p.x,p.y,p.w,p.h,rad);rrp(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,3);c.clip('evenodd');
-  c.fillStyle='#fff';c.fillRect(p.x,p.y,p.w,p.h);c.fillStyle=col.main;
+  c.fillStyle='#fff';c.fillRect(p.x,p.y,p.w,p.h);c.fillStyle=col.main;c.globalAlpha=.5;
   for(let k=-p.h;k<p.w+p.h;k+=22){c.beginPath();c.moveTo(p.x+k,p.y);c.lineTo(p.x+k+11,p.y);c.lineTo(p.x+k+11+p.h,p.y+p.h);c.lineTo(p.x+k+p.h,p.y+p.h);c.fill()}
   c.restore();
   c.lineWidth=2.5;c.strokeStyle=col.dark;rr(c,p.x,p.y,p.w,p.h,rad);c.stroke();rr(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,3);c.stroke();
@@ -944,7 +941,7 @@ function renderDex(){
     return`<div class="dcard${n?'':' lk'}${i===dexSel?' sel':''}" data-i="${i}"><canvas width="150" height="118"></canvas><div class="dn">${n?t.name:'???'}</div><span class="chip c-${t.cat}">${CATN[t.cat]}</span></div>`}).join('');
   grid.querySelectorAll('.dcard').forEach(el=>{
     const i=+el.dataset.i,t=TYPES[i];
-    drawSprite(el.querySelector('canvas'),t.cat==='meso'?'M':'R',i,!dexData[t.id],{sc:.95});
+    drawSprite(el.querySelector('canvas'),t.cat==='meso'?'M':'R',i,!dexData[t.id],{sc:.72});
     el.onclick=()=>{dexSel=i;sfx('page');renderDex()};
   });
   $('dexCount').textContent=`${dexCount()} / ${TYPES.length}`;
@@ -957,10 +954,10 @@ function renderDex(){
   const cn=$('ddc'),c=cn.getContext('2d');
   c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,340,140);
   const mk=(kind,x)=>({kind,type:dexSel,rot:0,x,y:62,hd:0,phase:0,moving:false,state:'demo',alpha:1,flip:-1,eye:3,pop:1,warn:false});
-  if(t.cat==='meso'){drawMol(c,mk('M',170),{sc:1.3,mode:'easy',color:true});txt(c,'分子内の鏡面(点線)',170,128,12,COL.M.dark,{w:900})}
+  if(t.cat==='meso'){drawMol(c,mk('M',170),{sc:1.05,mode:'easy',color:true});txt(c,'分子内の鏡面(点線)',170,128,12,COL.M.dark,{w:900})}
   else{
     c.save();c.setLineDash([5,5]);c.strokeStyle='#b9bfe0';c.lineWidth=2;c.beginPath();c.moveTo(170,8);c.lineTo(170,118);c.stroke();c.restore();
-    drawMol(c,mk('S',80),{sc:1.3,mode:'easy',color:true});drawMol(c,mk('R',260),{sc:1.3,mode:'easy',color:true});
+    drawMol(c,mk('S',80),{sc:1.0,mode:'easy',color:true});drawMol(c,mk('R',260),{sc:1.0,mode:'easy',color:true});
     txt(c,`${DESC[t.cat][1]}(左の箱)`,80,128,12,COL.S.dark,{w:900});txt(c,`${DESC[t.cat][0]}(右の箱)`,260,128,12,COL.R.dark,{w:900});
     txt(c,'鏡',170,130,11,'#9aa5c4',{w:900});
   }
@@ -1367,6 +1364,7 @@ $('bShare').onclick=()=>{
 
 // ================= 起動 =================
 initDemo();refreshTitle();renderSprites();
+if(location.hash==='#debug')window.__k={drawMol,TYPES,G,MOL}; // 見た目調整用
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{for(const k in wcache)delete wcache[k];bgCache=null;renderSprites()});
 requestAnimationFrame(loop);
 })();
