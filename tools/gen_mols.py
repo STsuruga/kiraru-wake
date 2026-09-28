@@ -23,9 +23,9 @@ MOLS = {
  'sulfoxide':dict(cat='center', smi='C[S@@](=O)c1c[c:9]c(C)cc1'),
  'pamp':     dict(cat='center', smi='C[P@](c1cc[c:9]cc1)c1ccccc1OC'),
  'allene':   dict(cat='axial',  smi='[CH3:3][CH:1]=[C:9]=[CH:2][CH3:4]'),
- 'binol':    dict(cat='axial',  smi='O[c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4](O)ccc2ccccc12', phi=18),
- 'binap':    dict(cat='axial',  smi='[PH2][c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4]([PH2])ccc2ccccc12', phi=18),
- 'diphenic': dict(cat='axial',  smi='OC(=O)c1c[c:9]c[c:3]([N+](=O)[O-])[c:1]1-[c:2]1[c:4]([N+](=O)[O-])cccc1C(=O)O', phi=18),
+ 'binol':    dict(cat='axial',  smi='O[c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4](O)ccc2ccccc12', phi=34),
+ 'binap':    dict(cat='axial',  smi='[PH2][c:3]1ccc2cc[c:9]cc2[c:1]1-[c:2]1[c:4]([PH2])ccc2ccccc12', phi=34),
+ 'diphenic': dict(cat='axial',  smi='OC(=O)c1c[c:9]c[c:3]([N+](=O)[O-])[c:1]1-[c:2]1[c:4]([N+](=O)[O-])cccc1C(=O)O', phi=38, tilt=48),
  'helicene': dict(cat='helix',  smi=None, rot=[([1, 0, 0], 12)]),
  'pcp':      dict(cat='planar', smi='Br[c:6]1[cH:7][c:9]2cc[c:5]1[CH2:10]Cc1ccc(cc1)CC2'),
  'tartaric': dict(cat='meso',   smi='O=C(O)[C@@H:9](O)[C@@H:8](O)C(=O)O', syn=('O','O')),
@@ -273,7 +273,57 @@ def pcp():
     return m
 
 
+def best_view(m, P, cen, R, spec, h, face_ring):
+    """中心性の分子:画面上で原子(とくにヘテロ原子の玉)が一番重なりにくい向きを探す。
+    顔の環は正面向き、不斉中心の H は奥で少し見える、を条件にする。回転だけなのでキラリティーは変わらない。"""
+    c0 = spec['_center']
+    keep = [a.GetIdx() for a in m.GetAtoms() if a.GetSymbol() != 'H' or (h and a.GetIdx() == h[0])]
+    dm = Chem.GetDistanceMatrix(m)
+    rad = {i: (.45 if m.GetAtomWithIdx(i).GetSymbol() == 'H' else .45 if m.GetAtomWithIdx(i).GetSymbol() == 'C' else .8) for i in keep}
+    pairs = [(i, j) for a_, i in enumerate(keep) for j in keep[a_ + 1:] if dm[i][j] >= 2]
+    best, bs = R, -1e9
+    for az in range(0, 360, 15):
+        for tx in (-36, -24, -12, 0, 12, 24, 36):
+            for ty in (-36, -24, -12, 0, 12, 24, 36):
+                Rc = rot([0, 1, 0], ty) @ rot([1, 0, 0], tx) @ rot([0, 0, 1], az) @ R
+                Q = (Rc @ (P - cen).T).T
+                if h:
+                    v = Q[h[0]] - Q[c0]; n = np.linalg.norm(v)
+                    if v[2] > -.2 * n or math.hypot(v[0], v[1]) / n < .5: continue
+                if face_ring:
+                    rp = Q[face_ring]; nrm = np.cross(rp[0] - rp.mean(0), rp[2] - rp.mean(0))
+                    if abs(nrm[2]) / np.linalg.norm(nrm) < .62: continue  # 顔の環は多少傾いてもよい(顔は環の面に貼るので読める)
+                cl = sorted(math.hypot(*(Q[i][:2] - Q[j][:2])) - rad[i] - rad[j] for i, j in pairs)
+                xs = [Q[i][0] for i in keep]; ys = [Q[i][1] for i in keep]
+                # 重なりにくさ + 横に広がった形(画面で見やすい)を優先
+                sc = cl[0] * 3 + sum(cl[:6]) / 2 + .25 * (max(xs) - min(xs)) - .1 * (max(ys) - min(ys)) - (abs(tx) + abs(ty)) * .002
+                if sc > bs: bs, best = sc, Rc
+    return best
+
+
+def flat_center(spec):
+    """中心性の分子は教科書風の平面構造式にする(デフォルメ)。
+    不斉中心から出るくさび(手前)/破線(奥)を z = ±0.9 Å の擬似 3D にして、キラリティーの検算はこの座標で行う。"""
+    m0 = Chem.MolFromSmiles(spec['smi'])
+    ci = [a.GetIdx() for a in m0.GetAtoms() if a.GetChiralTag() != Chem.ChiralType.CHI_UNSPECIFIED][0]
+    mh = Chem.AddHs(m0, onlyOnAtoms=(ci,))
+    AllChem.Compute2DCoords(mh)
+    Chem.WedgeMolBonds(mh, mh.GetConformer())
+    conf = mh.GetConformer()
+    z = [0.0] * mh.GetNumAtoms()
+    for b in mh.GetBonds():
+        d = b.GetBondDir()
+        if d in (Chem.BondDir.BEGINWEDGE, Chem.BondDir.BEGINDASH):
+            z[b.GetEndAtomIdx()] = .9 if d == Chem.BondDir.BEGINWEDGE else -.9
+    for i in range(mh.GetNumAtoms()):
+        p = conf.GetAtomPosition(i); conf.SetAtomPosition(i, (p.x, p.y, z[i]))
+    spec['flat'] = True
+    return mh
+
+
 def build(key, spec):
+    if spec['cat'] == 'center':
+        return build_mol(key, spec, flat_center(spec))
     if key == 'helicene':
         return build_mol(key, spec, helicene())
     if key == 'pcp':
@@ -331,6 +381,11 @@ def build_mol(key, spec, m):
         R = rot([0, 1, 0], 180) @ R  # 環の面内で半回転して Br を手前の縁へ
         R = rot([1, 0, 0], spec.get('tilt', 48)) @ R
         R = rot([0, 1, 0], spec.get('yaw', 0)) @ R  # 少し斜めから見て Br が外に出るように
+    elif spec.get('flat'):
+        X = P[:, :2] - P[:, :2].mean(axis=0)
+        w, v = np.linalg.eigh(X.T @ X)
+        a = math.atan2(v[1, 1], v[0, 1])  # 長い方向を横に
+        R = rot([0, 0, 1], -math.degrees(a))
     elif cat == 'meso':
         c2, c3 = mapidx(m, 9), mapidx(m, 8)
         xdir = P[c3] - P[c2]
@@ -370,6 +425,7 @@ def build_mol(key, spec, m):
                 if h and (R @ (P[h[0]] - P[spec['_center']]))[2] > 0:
                     R = rot([1, 0, 0], 180) @ R  # 環は正面のまま、H を奥へ
                 R = rot([0, 1, 0], -12) @ rot([1, 0, 0], 14) @ R
+            R = best_view(m, P, cen, R, spec, h, fr[0] if fr else None)
         for axn, deg in spec.get('rot', []):
             R = rot(axn, deg) @ R
     assert abs(np.linalg.det(R) - 1) < 1e-6
@@ -395,7 +451,7 @@ def build_mol(key, spec, m):
         sym = a.GetSymbol()
         lab = ''
         if sym not in ('C',):
-            nh = sum(1 for n in a.GetNeighbors() if n.GetSymbol() == 'H' and n.GetIdx() not in keepH)
+            nh = a.GetTotalNumHs(includeNeighbors=True) - sum(1 for n in a.GetNeighbors() if n.GetIdx() in keepH)
             lab = sym + ('H' if nh else '') + (str(nh).translate(SUB) if nh > 1 else '')
             if key != 'diphenic':
                 if a.GetFormalCharge() > 0: lab += '⁺'
