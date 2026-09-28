@@ -259,9 +259,10 @@ function txt(c,s,x,y,size,col,opt={}){
 // ================= キャンバス =================
 const wrap=$('wrap'),cv=$('c'),ctx=cv.getContext('2d');
 let SC=1,DPR=1,bgCache=null;
+const PROMO=location.hash==='#promo';
 function resize(){
-  SC=Math.max(.1,Math.min(innerWidth/W,innerHeight/H)*.98);
-  DPR=Math.min(window.devicePixelRatio||1,2);
+  SC=PROMO?1296/W:Math.max(.1,Math.min(innerWidth/W,innerHeight/H)*.98);
+  DPR=PROMO?1:Math.min(window.devicePixelRatio||1,2);
   const cw=Math.floor(W*SC),ch=Math.floor(H*SC);
   wrap.style.width=cw+'px';wrap.style.height=ch+'px';
   wrap.style.fontSize=Math.max(16*SC,9)+'px';
@@ -1271,6 +1272,7 @@ function render(){
 // ================= ループ =================
 let last=performance.now();
 function loop(now){
+  if(G.promoManual){last=now;requestAnimationFrame(loop);return} // 紹介動画の書き出し中はコマ送りで進める
   const dt=Math.min(.05,(now-last)/1000);last=now;G.time+=dt;
   try{
     if(G.state==='play')updatePlay(dt);
@@ -1353,7 +1355,7 @@ addEventListener('keydown',e=>{
     else if(e.key==='m'||e.key==='M')toggleMute();
   }else if(G.state==='paused'&&(e.key==='p'||e.key==='P'||e.key==='Escape'))resumeGame();
 });
-document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseGame()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&!PROMO)pauseGame()});
 $('story').addEventListener('click',e=>{if(e.target.id==='bSkip')return;audioInit();storyAdvance()});
 $('bSkip').onclick=()=>{sfx('page');endStory()};
 document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>{G.mode=b.dataset.mode;store.set('kiraru_mode',G.mode);refreshTitle();sfx('page')});
@@ -1373,8 +1375,83 @@ $('bShare').onclick=()=>{
   open('https://twitter.com/intent/tweet?text='+encodeURIComponent(s)+'&url='+encodeURIComponent(location.href.split('?')[0]),'_blank','noopener');
 };
 
+// ================= 紹介動画(URL に #promo を付けたときだけ) =================
+// 実際のゲーム画面を自動デモで動かし、1コマ(1/30秒)ずつ進めて WebCodecs で MP4 に書き出す(約10秒)。
+// リアルタイム録画ではないので、画面が隠れていてもコマ落ちしない。
+function drawLogo(c,x,y,size){
+  c.save();c.font=`${size}px ${POP}`;c.textBaseline='middle';c.lineJoin='round';
+  const a='きらる',b='わけ',wa=c.measureText(a).width,wb=c.measureText(b).width,gap=size*.35,x0=x-(wa+gap+wb)/2;
+  for(const [s,px,col] of [[a,x0,'#4fa3ef'],[b,x0+wa+gap,'#ff9a4d']]){c.textAlign='left';c.lineWidth=size*.22;c.strokeStyle='#fff';c.strokeText(s,px,y);c.fillStyle=col;c.fillText(s,px,y)}
+  c.setLineDash([size*.1,size*.08]);c.strokeStyle='#b9bfe0';c.lineWidth=size*.07;c.beginPath();c.moveTo(x0+wa+gap/2,y-size*.45);c.lineTo(x0+wa+gap/2,y+size*.45);c.stroke();
+  c.restore();
+}
+// cam = [倍率, 切り出し左上 x, y(出力ピクセル)]。字幕とカードは全画面基準、カーソルだけズームに合わせる
+function drawPromo(c,cam){
+  const P=G.promo,t=P.time;
+  c.save();c.setTransform(SC,0,0,SC,0,0);
+  if(P.cap){const a=clamp((t-P.capT)/.25,0,1);c.globalAlpha=a;c.font=`30px ${POP}`;const w=c.measureText(P.cap).width+60;
+    rr(c,W/2-w/2,H-96+(1-a)*14,w,58,29);c.fillStyle='#fff';c.fill();c.lineWidth=4;c.strokeStyle=INK;c.stroke();
+    txt(c,P.cap,W/2,H-66+(1-a)*14,30,INK,{pop:true,w:400});c.globalAlpha=1}
+  if(P.cur){const z=cam[0],x=(P.cur.x*SC-cam[1])*z/SC,y=(P.cur.y*SC-cam[2])*z/SC,down=P.cur.down,r=down?11:15;
+    c.fillStyle='rgba(255,255,255,.6)';circ(c,x,y,r+6);c.fill();circ(c,x,y,r);c.lineWidth=4;c.strokeStyle=INK;c.stroke();
+    if(down){c.globalAlpha=.35;circ(c,x,y,r+14);c.lineWidth=3;c.stroke();c.globalAlpha=1}}
+  const card=(a,lines)=>{c.globalAlpha=a;c.fillStyle='rgba(251,250,244,.9)';c.fillRect(0,0,W,H);drawLogo(c,W/2,H/2-60,120);
+    lines.forEach(([s,y,sz,col])=>txt(c,s,W/2,H/2+y,sz,col,{pop:true,w:400,stroke:'#fff',sw:6}));c.globalAlpha=1};
+  if(t<1.8)card(t<1.35?1:1-(t-1.35)/.45,[['キラル分子しわけゲーム',50,30,INK]]);
+  if(P.end!=null)card(clamp((t-P.end)/.4,0,1),[['BINOL もヘリセンも 18種の分子キャラ',48,26,INK],['stsuruga.github.io/kiraru-wake',104,28,'#7d55c4']]);
+  c.restore();
+}
+async function runPromo(){
+  const {Muxer,ArrayBufferTarget}=await import('https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.mjs');
+  G.mode='normal';startGame();G.texts=[];G.nextSpawn=1e9;G.t=40;G.gate2=true;G.promoManual=true;
+  const place=(id,kind,x,y,st)=>{const m=makeMol(kind,x,y,ALLCATS,idxOf(id));m.pop=1;m.state=st||'field';m.life=0;
+    if(st==='pen'){m.pen=PENS.find(p=>p.kind===kind);G.box[kind]++;G.cnt[kind]++}G.mols.push(m);return m};
+  [['chbrclf',70,250],['sulfoxide',150,330],['pcp',80,420]].forEach(([id,x,y])=>place(id,'S',x,y,'pen'));
+  [['glyceraldehyde',800,250],['allene',880,330],['diphenic',820,420]].forEach(([id,x,y])=>place(id,'R',x,y,'pen'));
+  const A=place('binol','S',330,180),B=place('helicene','R',640,190),C=place('lactic','R',300,460),D=place('alanine','S',660,470),M=place('tartaric','M',540,420);
+  place('ibuprofen','R',470,520);
+  const P=G.promo={time:0,cur:{x:W/2,y:H+40,down:false},cap:null,capT:0,end:null};
+  // [分子, 目的地x, y, 開始時刻]:カーソルが寄る 0.38 秒 → つまんで運ぶ 0.56 秒 → はなす
+  const drags=[[A,118,300,1.85],[B,842,300,2.9],[C,842,380,3.95],[D,118,390,5.0],[M,480,337,6.1]].map(a=>({m:a[0],tx:a[1],ty:a[2],t0:a[3]}));
+  const script=t=>{
+    if(t>=1.75&&!P.c1){P.c1=1;P.cap='S体は左、R体は右へ しわけ!';P.capT=t}
+    if(t>=6.05&&!P.c2){P.c2=1;P.cap='メソ体はまん中 → 温度ルーレット!';P.capT=t}
+    for(const d of drags){
+      if(t<d.t0||d.done)continue;
+      const u1=(t-d.t0)/.38;
+      if(u1<1){if(!d.from)d.from={x:P.cur.x,y:P.cur.y};const e=ease(u1);P.cur.x=lerp(d.from.x,d.m.x,e);P.cur.y=lerp(d.from.y,d.m.y,e);continue}
+      if(!d.grab){d.grab={x:d.m.x,y:d.m.y};P.cur.down=true;G.held=d.m;d.m.state='held';d.m.idle=0;G.pointer={...d.grab}}
+      const u2=(t-d.t0-.38)/.56;
+      if(u2<1){const e=ease(u2);G.pointer={x:lerp(d.grab.x,d.tx,e),y:lerp(d.grab.y,d.ty,e)-Math.sin(u2*Math.PI)*36};P.cur.x=G.pointer.x;P.cur.y=G.pointer.y;continue}
+      G.pointer={x:d.tx,y:d.ty};dropMol(d.m);P.cur.down=false;d.done=true;
+      if(d.m.kind==='M'&&G.roulette)G.roulette.res='cool';
+    }
+    if(t>=8.4&&P.end==null){P.end=t;P.cap=null;P.cur=null}
+  };
+  const FPS=30,N=Math.round(10.4*FPS),Wv=cv.width,Hv=cv.height;
+  const out=document.createElement('canvas');out.width=Wv;out.height=Hv;const oc=out.getContext('2d');
+  // プレイ中だけ少しズームしてキャラを大きく見せる
+  const zoomAt=t=>t<1.8?1:t<2.4?lerp(1,1.24,ease((t-1.8)/.6)):t<8.3?1.24:t<8.8?lerp(1.24,1,ease((t-8.3)/.5)):1;
+  const target=new ArrayBufferTarget(),mux=new Muxer({target,video:{codec:'avc',width:Wv,height:Hv},fastStart:'in-memory'});
+  const enc=new VideoEncoder({output:(ch,meta)=>mux.addVideoChunk(ch,meta),error:e=>{document.title='PROMO_FAIL '+e}});
+  enc.configure({codec:'avc1.4d0028',width:Wv,height:Hv,bitrate:8e6,framerate:FPS});
+  for(let f=0;f<N;f++){
+    const t=f/FPS;P.time=t;script(t);
+    const dt=1/FPS;G.time+=dt;if(G.state==='play')updatePlay(dt);updateFx(dt);render();
+    const z=zoomAt(t),sw=Wv/z,sh=Hv/z,sx=clamp(480*SC-sw/2,0,Wv-sw),sy=clamp(345*SC-sh/2,0,Hv-sh);
+    oc.drawImage(cv,sx,sy,sw,sh,0,0,Wv,Hv);drawPromo(oc,[z,sx,sy]);
+    const vf=new VideoFrame(out,{timestamp:Math.round(f*1e6/FPS),duration:Math.round(1e6/FPS)});
+    enc.encode(vf,{keyFrame:f%60===0});vf.close();
+    if(enc.encodeQueueSize>8)await new Promise(r=>setTimeout(r,0));
+  }
+  await enc.flush();mux.finalize();
+  const blob=new Blob([target.buffer],{type:'video/mp4'});
+  try{await fetch('http://localhost:8766/upload',{method:'POST',body:blob});document.title='PROMO_DONE '+blob.size}catch(e){document.title='PROMO_FAIL '+e}
+}
+
 // ================= 起動 =================
 initDemo();refreshTitle();renderSprites();
+if(PROMO)Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),new Promise(r=>setTimeout(r,2000))]).then(()=>setTimeout(runPromo,300));
 if(location.hash==='#debug')window.__k={drawMol,TYPES,G,MOL}; // 見た目調整用
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{for(const k in wcache)delete wcache[k];bgCache=null;renderSprites()});
 requestAnimationFrame(loop);
