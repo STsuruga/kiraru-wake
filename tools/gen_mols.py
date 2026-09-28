@@ -360,6 +360,16 @@ def build_mol(key, spec, m):
                     if v[2] < 0 and v[1] < 0 and math.hypot(v[0], v[1]) / n >= .62:
                         best = Rt; break
                 if best is not None: R = best
+            fa = mapidx(m, 9)
+            fr = [list(r) for r in m.GetRingInfo().AtomRings() if fa in r and len(r) == 6]
+            if fr:  # 顔の環がある分子は、その環を正面に向ける(少しだけ斜めにして立体感を残す)
+                rp = (R @ (P[fr[0]] - cen).T).T
+                nrm = np.cross(rp[0] - rp.mean(axis=0), rp[2] - rp.mean(axis=0)); nrm /= np.linalg.norm(nrm)
+                xd = np.array([1.0, 0, 0]) - nrm[0] * nrm
+                R = frame(xd, np.cross(nrm, xd)) @ R
+                if h and (R @ (P[h[0]] - P[spec['_center']]))[2] > 0:
+                    R = rot([1, 0, 0], 180) @ R  # 環は正面のまま、H を奥へ
+                R = rot([0, 1, 0], -12) @ rot([1, 0, 0], 14) @ R
         for axn, deg in spec.get('rot', []):
             R = rot(axn, deg) @ R
     assert abs(np.linalg.det(R) - 1) < 1e-6
