@@ -222,8 +222,8 @@ const SUBC={'Br':'#a8483a','Cl':'#2f9e50','F':'#86ad1f','OH':'#e2475a','O':'#e24
 const WAVES=[{cat:'axial',msg:'軸性キラリティー 登場!'},{cat:'helix',msg:'らせんキラリティー 登場!'},{cat:'planar',msg:'面性キラリティー 登場!'}];
 // モードごとの進行。spawn/warn は [開始値, 最終値, 何秒かけて変化するか]
 const MODECFG={
-  easy:{waves:[40,80,120],gate2:90,spawn:[2.6,1.3,220],warn:[17,12,220],speed:.85},
-  normal:{waves:[25,50,75],gate2:60,spawn:[2.0,.8,160],warn:[14,9.5,160],speed:1},
+  easy:{waves:[40,80,120],gate2:90,spawn:[2.6,1.3,220],warn:[17,12,220],speed:.85,burst:3},
+  normal:{waves:[25,50,75],gate2:60,spawn:[2.0,.8,160],warn:[14,9.5,160],speed:1,burst:5},
   hard:{ta:true,limit:120,field:5,penalty:5},
 };
 const PENS=[
@@ -437,7 +437,8 @@ function drawFace(c,x,y,fr,p,mood,look,skin){
 // 奥行き Z は揺れる前の値を使い、環・結合・くさび・置換基・顔を奥から順に描く(奥の置換基は手前の環に隠れる)。
 function drawSticker(c,m,o,t,col){
   const D=MOL[t.id],cat=t.cat,P=PERSONA[t.id],s=molScale(t),mode=o.mode||G.mode,icon=mode!=='hard',easy=mode==='easy';
-  const th=o.theta!=null?o.theta:(m.state==='demo'?.2:Math.sin(G.time*1.1+(m.phase||0))*.3);
+  const calmPen=m.state==='pen'||m.state==='demoPen'||m.state==='collect';
+  const th=o.theta!=null?o.theta:(m.state==='demo'?.2:calmPen?Math.sin(G.time*.5+(m.phase||0))*.08:Math.sin(G.time*1.1+(m.phase||0))*.3);
   const mir=m.kind==='S'?-1:1,ct=Math.cos(th),st=Math.sin(th);
   const pts=D.a.map(a=>{const x=a[2]*mir,y=a[3],z=a[4];return{X:(x*ct+z*st)*s,Y:y*s,Z:z*s,el:a[0],lab:a[1]}});
   for(let i=0;i<pts.length;i++)if(pts[i].el==='H'){const b=D.b.find(b=>b[0]===i||b[1]===i),q=pts[b[0]===i?b[1]:b[0]],p=pts[i];p.X=q.X+(p.X-q.X)*1.7;p.Y=q.Y+(p.Y-q.Y)*1.7;p.Z=q.Z+(p.Z-q.Z)*1.7}
@@ -546,7 +547,6 @@ function drawMol(c,m,o={}){
   let hop=0;
   if(held)hop=-12+Math.sin(G.time*18)*1.2;
   else if(moving)hop=-Math.abs(Math.sin(m.phase||0))*4;
-  else if(inPen&&m.state!=='collect')hop=-Math.pow(Math.max(0,Math.sin(G.time*3+(m.phase||0)*7)),8)*6;
   c.translate(0,hop*sc);
   const sx=m.flip>=0?Math.max(.04,Math.abs(Math.cos(m.flip*Math.PI))):1,sq=moving?Math.sin((m.phase||0)*2)*.04:0;
   c.scale(sc*sx*(1+sq),sc*(1-sq));
@@ -710,10 +710,11 @@ function pushOut(m,p,rad,reflect){
   else if(s==='t'){m.y=y0;if(reflect)m.hd=-m.hd}
   else if(s==='b'){m.y=y1;if(reflect)m.hd=-m.hd}
 }
-function wander(m,dt,spd,box,obst,jit){
+function wander(m,dt,spd,box,obst,jit,calm){
   m.turn-=dt;
   if(m.turn<=0){
     if(jit){m.hd+=rand(-2.4,2.4);m.turn=rand(.2,.6);m.idle=0}
+    else if(calm){m.hd+=rand(-1.2,1.2);m.turn=rand(2,4);m.idle=Math.random()<.6?rand(1.5,4):0}
     else{m.hd+=rand(-1.8,1.8);m.turn=rand(.7,2.4);m.idle=Math.random()<.16?rand(.3,1):0}
   }
   if(m.idle>0){m.idle-=dt;m.moving=false}
@@ -729,8 +730,8 @@ function penBox(p){return p.kind==='M'?{x0:p.x+10,y0:p.y+10,x1:p.x+p.w-10,y1:p.y
 function separate(arr){
   for(let i=0;i<arr.length;i++){const a=arr[i];if(a.state!=='field'&&a.state!=='pen'&&a.state!=='demoPen')continue;
     for(let j=i+1;j<arr.length;j++){const b=arr[j];if(b.state!==a.state||b.pen!==a.pen)continue;
-      const dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy,mn=(radOf(a)+radOf(b))*(a.state==='field'?.9:.5);
-      if(d2<mn*mn&&d2>.01){const d=Math.sqrt(d2),push=(mn-d)*.25,nx=dx/d,ny=dy/d;a.x-=nx*push;a.y-=ny*push;b.x+=nx*push;b.y+=ny*push}}}
+      const inField=a.state==='field',dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy,mn=(radOf(a)+radOf(b))*(inField?.9:.45);
+      if(d2<mn*mn&&d2>.01){const d=Math.sqrt(d2),push=(mn-d)*(inField?.25:.04),nx=dx/d,ny=dy/d;a.x-=nx*push;a.y-=ny*push;b.x+=nx*push;b.y+=ny*push}}}
 }
 function eyeTick(m,dt){m.eye-=dt;if(m.eye<=0)m.eye=rand(2,5)}
 const score=excl=>G.collected+(excl==='R'?0:G.box.R)+(excl==='S'?0:G.box.S);
@@ -741,11 +742,13 @@ function resetGame(){
 }
 const cfg=()=>MODECFG[G.mode];
 const allowedCats=()=>cfg().ta?ALLCATS:['center',...WAVES.filter((w,i)=>G.t>=cfg().waves[i]).map(w=>w.cat)];
-function spawn(){
+// g=出口、k/n=まとめて出るときの何匹目か(横に並べて、少し扇状に散らす)
+function spawn(g,k=0,n=1){
   const kind=(G.t>8&&Math.random()<MESO_RATE)?'M':(Math.random()<.5?'R':'S');
-  const g=G.gate2&&Math.random()<.5?1:0;
-  const m=makeMol(kind,GATE_X+rand(-16,16),g?H-6:HUD_H+4,allowedCats());
-  m.state='enter';m.hd=(g?-1:1)*Math.PI/2+rand(-.4,.4);m.enter=.5;
+  if(g==null)g=G.gate2&&Math.random()<.5?1:0;
+  const off=k-(n-1)/2;
+  const m=makeMol(kind,GATE_X+off*(n>3?26:30)+rand(-6,6),g?H-6:HUD_H+4,allowedCats());
+  m.state='enter';m.hd=(g?-1:1)*Math.PI/2+off*(n>3?.38:.5)+rand(-.15,.15);m.enter=.5+Math.abs(off)*.12;
   G.mols.push(m);G.gateFlash[g]=.35;sfx('spawn');
 }
 function randomFlip(){
@@ -782,7 +785,13 @@ function updatePlay(dt){
   G.nextSpawn-=dt;
   if(C.ta){ // タイムアタック:フィールドの分子数を一定に保つ
     if(G.nextSpawn<=0&&G.mols.filter(m=>m.state==='field'||m.state==='enter'||m.state==='held').length<C.field){spawn();G.nextSpawn=.35}
-  }else if(G.nextSpawn<=0){spawn();if(diff>.4&&Math.random()<diff*.3)setTimeout(()=>{if(G.state==='play')spawn()},250);G.nextSpawn=lerp(C.spawn[0],C.spawn[1],diff)*rand(.8,1.2)}
+  }else if(G.nextSpawn<=0){
+    const g=G.gate2&&Math.random()<.5?1:0;
+    // 時間が経つほど、同じ出口から一度に出る数の上限が増える(やさしい最大3、ふつう最大5)
+    const maxNow=1+Math.round(diff*(C.burst-1)),n=1+irand(maxNow);
+    for(let k=0;k<n;k++)spawn(g,k,n);
+    G.nextSpawn=lerp(C.spawn[0],C.spawn[1],diff)*rand(.8,1.2)*(1+.45*(n-1));
+  }
   if(G.T>=T_FLIP){const k=ARR_A*Math.exp(-EA_R/G.T);if(Math.random()<1-Math.exp(-k*dt))randomFlip()}
   if(G.roulette){const r=G.roulette;r.t+=dt;const k=Math.floor(r.t*14);if(r.t<.75&&k!==r.last){r.last=k;sfx('roll')}if(r.t>=.95){applyTemp(r.res);G.roulette=null}}
   for(const k of['R','S'])if(G.pending[k]>=0){G.pending[k]-=dt;if(G.pending[k]<0)collect(k)}
@@ -810,7 +819,7 @@ function updatePlay(dt){
         m.x+=(G.pointer.x-m.x)*Math.min(1,dt*28);m.y+=(G.pointer.y-m.y)*Math.min(1,dt*28);
         if(m.warn)m.blinkPh+=dt*12;break;
       case 'pen':
-        m.penAge+=dt;wander(m,dt,14,penBox(m.pen),false);break;
+        m.penAge+=dt;wander(m,dt,6,penBox(m.pen),false,false,true);break;
       case 'collect':{
         m.ct+=dt;if(m.ct<0)break;const u=clamp(m.ct/.7,0,1);
         m.x=lerp(m.sx,130,ease(u));m.y=lerp(m.sy,34,ease(u))-Math.sin(u*Math.PI)*90;m.csc=1-u*.6;
@@ -927,7 +936,7 @@ function updateDemo(dt,march){
   if(march){G.demoSpawn-=dt;if(G.demoSpawn<=0&&G.demo.filter(m=>m.state==='field').length<18){const m=makeMol(Math.random()<.1?'M':Math.random()<.5?'R':'S',GATE_X+rand(-14,14),HUD_H+30);m.hd=Math.PI/2+rand(-.6,.6);G.demo.push(m);G.demoSpawn=.45;G.gateFlash[0]=.3}}
   for(const m of G.demo){
     eyeTick(m,dt);m.pop=Math.min(1,m.pop+dt*4);m.phase+=dt*(m.state==='demoPen'?6:9);
-    if(m.state==='demoPen')wander(m,dt,14,penBox(m.pen),false);else wander(m,dt,m.kind==='M'?70:40,FIELD,true,m.kind==='M');
+    if(m.state==='demoPen')wander(m,dt,6,penBox(m.pen),false,false,true);else wander(m,dt,m.kind==='M'?70:40,FIELD,true,m.kind==='M');
   }
   separate(G.demo);
 }
