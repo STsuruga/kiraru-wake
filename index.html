@@ -118,7 +118,7 @@ button.big{font-family:"Mochiy Pop One",sans-serif;font-weight:400;font-size:1.3
       <div class="hrow"><canvas data-spr="S" width="176" height="144"></canvas><div><b class="cs">S・M</b> → <b>左</b>の青い箱へドラッグ!</div></div>
       <div class="hrow"><canvas data-spr="R" width="176" height="144"></canvas><div><b class="cr">R・P</b> → <b>右</b>のオレンジの箱へ!</div></div>
       <div class="hrow"><canvas data-spr="M" width="176" height="144"></canvas><div><b class="cm">メソ体</b>は中央の小さい箱へ → その場で<b>温度が変わる</b>!すばしっこくて、放っておくと消える。</div></div>
-      <div class="hrow"><canvas data-spr="W" width="176" height="144"></canvas><div><b class="cw">赤いリングで点滅</b>=放置しすぎ!早く仕分けないとアウト。箱をまちがえてもアウト。</div></div>
+      <div class="hrow"><canvas data-spr="W" width="176" height="144"></canvas><div><b class="cw">赤く光って点滅</b>=放置しすぎ!早く仕分けないとアウト。箱をまちがえてもアウト。</div></div>
     </div>
     <div class="kinds">
       <div><canvas data-spr="center" width="176" height="144"></canvas>中心性 R / S</div>
@@ -128,7 +128,7 @@ button.big{font-family:"Mochiy Pop One",sans-serif;font-weight:400;font-size:1.3
     </div>
     <div class="box2">🎰 <b>メソ体を入れると</b>… ❄<b>冷却</b>(60%)なら分子がゆっくりに。🔥<b>加熱</b>(40%)なら分子が速くなり、<b>360 K</b> を超えるとランダムな分子のキラリティーが<b>反転</b>(熱いほど速い:アレニウス式)。ピンチの冷却に賭けるか、無視するかはキミ次第!</div>
     <div class="box2 b">📦 箱が <b>25分子</b>になると回収されて集計(回収済み)に加算。間違った分子を入れたら、その箱の中身は<b>光学純度低下</b>で集計から除外!<br>🔍 見分け方:いちばん低い優先順位(H など)を奥にして ①→②→③ が<b class="cr">右回り=R</b>・<b class="cs">左回り=S</b>。らせんは<b class="cr">右巻き=P</b>・<b class="cs">左巻き=M</b>。</div>
-    <div class="small center" style="margin-top:.35em">操作:ドラッグ&ドロップ / P:一時停止 / M:消音 ・ 詳しい見分け方は 📖分子図鑑 へ</div>
+    <div class="small center" style="margin-top:.35em">🧪 <b>ガチ</b>モードは色なし・120秒タイムアタック(点滅なし/ミスは−5秒)。くさび=手前、破線=奥。<br>操作:ドラッグ&ドロップ / P:一時停止 / M:消音 ・ 詳しい見分け方は 📖分子図鑑 へ</div>
     <div class="center"><button id="bHowBack">もどる</button><button class="big" id="bHowGo">スタート!</button></div>
   </div></div>
 
@@ -215,9 +215,17 @@ const TYPES=[
   {id:'butanediol',cat:'meso',name:'meso-2,3-ブタンジオール',subs:['CH₃','OH'],
    desc:'cis-2-ブテンを OsO₄ でシン-ジヒドロキシ化するとできるメソ体。'},
 ];
+// 3D 座標(RDKit で生成・キラリティー検算済み)。右の箱側(R/Ra/Rp/P)の座標で、左側は x を反転して描く
+const MOL={"chbrclf":{"a":[["F","F",2.1,11.8,4.2],["C","",0.5,0.9,-0.9],["Cl","Cl",11.9,-9.1,3.7],["Br","Br",-15.2,-5.5,3.6],["H","H",0.6,1.8,-10.7]],"b":[[0,1,1],[1,2,1],[1,3,1],[1,4,1]],"r":[],"f":[{"atom":1}],"st":[1,[3,2,0,4]],"e":16.2},"lactic":{"a":[["C","",9.1,-7.7,3.8],["C","",3.5,1.7,-4.4],["O","OH",10.3,12.6,-3.2],["C","",-9.7,3.6,-1.2],["O","O",-13.9,12.7,3.4],["O","OH",-16.8,-5.8,-3.8],["H","H",4.1,-1.0,-13.8]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,2],[3,5,1],[1,6,1]],"r":[],"f":[{"atom":1}],"st":[1,[2,3,0,6]],"e":18.8},"alanine":{"a":[["C","",7.3,-8.5,4.9],["C","",2.0,0.3,-4.2],["N","NH₂",9.0,11.6,-4.4],["C","",-11.1,2.9,-1.0],["O","O",-14.8,11.2,5.2],["O","OH",-18.8,-5.4,-5.3],["H","H",2.3,-3.5,-13.3]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,2],[3,5,1],[1,6,1]],"r":[],"f":[{"atom":1}],"st":[1,[2,3,0,6]],"e":19.6},"glyceraldehyde":{"a":[["O","O",-20.6,-3.8,5.4],["C","",-11.8,-5.9,-1.0],["C","",-2.2,3.5,-3.4],["O","OH",-2.6,12.9,5.4],["C","",10.3,-2.2,-3.3],["O","OH",13.3,-6.1,8.6],["H","H",-4.0,7.4,-12.3]],"b":[[0,1,2],[1,2,1],[2,3,1],[2,4,1],[4,5,1],[2,6,1]],"r":[],"f":[{"atom":2}],"st":[2,[3,1,4,6]],"e":20.9},"butanol":{"a":[["C","",-17.7,2.0,-1.5],["C","",-6.0,-4.2,2.0],["C","",5.1,2.1,-3.4],["C","",16.6,-4.5,-0.2],["O","OH",5.9,14.1,0.9],["H","H",4.2,2.5,-13.2]],"b":[[0,1,1],[1,2,1],[2,3,1],[2,4,1],[2,5,1]],"r":[],"f":[{"atom":2}],"st":[2,[4,1,3,5]],"e":17.8},"ibuprofen":{"a":[["C","",19.4,16.0,-3.7],["C","",25.3,6.5,4.4],["C","",32.6,-2.4,-3.1],["C","",16.2,0.3,12.9],["C","",6.4,-7.0,6.9],["C","",8.0,-19.3,4.6],["C","",-1.0,-26.0,-0.9],["C","",-11.8,-20.5,-4.1],["C","",-13.7,-8.2,-2.0],["C","",-4.5,-1.6,3.7],["C","",-25.5,-2.4,-5.5],["C","",-23.8,8.0,-14.4],["C","",-32.9,1.2,5.4],["O","O",-39.7,-5.4,11.0],["O","OH",-31.2,12.6,9.1],["H","H",-31.1,-9.1,-10.3]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[4,5,1],[5,6,2],[6,7,1],[7,8,2],[8,9,1],[8,10,1],[10,11,1],[10,12,1],[12,13,2],[12,14,1],[9,4,2],[10,15,1]],"r":[[4,9,8,7,6,5]],"f":[{"ring":0}],"st":[10,[12,8,11,15]],"e":40.1},"thalidomide":{"a":[["O","O",-46.6,-3.6,4.1],["C","",-35.9,-1.4,2.1],["C","",-30.8,-1.0,-10.5],["C","",-17.5,-4.3,-10.6],["C","",-10.7,4.1,-2.2],["N","N",2.2,2.0,-1.8],["C","",10.4,11.2,-1.4],["O","O",8.7,22.0,-2.4],["C","",22.2,5.7,0.5],["C","",33.5,10.8,1.3],["C","",43.2,3.0,3.2],["C","",41.4,-9.5,4.2],["C","",29.9,-14.4,3.4],["C","",20.4,-6.6,1.5],["C","",7.5,-8.9,0.3],["O","O",3.0,-18.8,1.3],["C","",-15.9,3.2,10.6],["O","O",-9.9,4.7,19.8],["N","NH",-28.1,1.3,11.3],["H","H",-12.2,13.4,-5.1]],"b":[[0,1,2],[1,2,1],[2,3,1],[3,4,1],[4,5,1],[5,6,1],[6,7,2],[6,8,1],[8,9,2],[9,10,1],[10,11,2],[11,12,1],[12,13,2],[13,14,1],[14,15,2],[4,16,1],[16,17,2],[16,18,1],[18,1,1],[14,5,1],[13,8,1],[4,19,1]],"r":[[1,18,16,4,3,2],[6,5,14,13,8],[9,10,11,12,13,8]],"f":[{"ring":2}],"st":[4,[5,16,3,19]],"e":46.7},"sulfoxide":{"a":[["C","",-27.3,-6.8,-8.0],["S","S",-24.1,0.8,6.1],["O","O",-28.7,13.5,5.0],["C","",-7.9,1.8,4.2],["C","",-2.4,12.6,0.9],["C","",10.0,13.1,-0.5],["C","",17.2,3.0,1.5],["C","",30.5,3.7,-0.3],["C","",11.6,-7.9,4.8],["C","",-0.8,-8.4,6.2]],"b":[[0,1,1],[1,2,2],[1,3,1],[3,4,2],[4,5,1],[5,6,2],[6,7,1],[6,8,1],[8,9,2],[9,3,1]],"r":[[3,9,8,6,5,4]],"f":[{"ring":0}],"st":[1,[2,3,0]],"e":31.7},"pamp":{"a":[["C","",-2.6,21.3,-2.2],["P","P",-4.9,9.4,9.0],["C","",-19.1,3.0,3.5],["C","",-28.8,2.2,11.5],["C","",-39.8,-2.5,7.7],["C","",-41.3,-6.5,-4.1],["C","",-31.7,-5.7,-12.1],["C","",-20.7,-1.0,-8.4],["C","",6.2,-2.3,4.8],["C","",2.9,-14.5,6.4],["C","",10.7,-23.9,3.6],["C","",22.1,-21.4,-0.7],["C","",25.8,-9.4,-2.1],["C","",18.0,0.1,0.8],["O","O",21.4,12.0,-0.0],["C","",33.8,14.6,-1.8]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[1,8,1],[8,9,2],[9,10,1],[10,11,2],[11,12,1],[12,13,2],[13,14,1],[14,15,1],[7,2,1],[13,8,1]],"r":[[3,4,5,6,7,2],[9,10,11,12,13,8]],"f":[{"ring":0}],"st":[1,[8,2,0]],"e":41.8},"allene":{"a":[["C","",-18.7,-8.3,3.1],["C","",-9.4,0.0,8.3],["C","",1.6,0.0,3.9],["C","",12.5,0.0,-0.6],["C","",15.7,8.3,-10.8],["H","H",-11.7,6.0,15.7],["H","H",19.3,-6.0,3.2]],"b":[[0,1,1],[1,2,2],[2,3,2],[3,4,1],[1,5,1],[3,6,1]],"r":[],"f":[{"atom":2}],"st":[null,[0,5,4,6]],"e":20.5},"binol":{"a":[["O","OH",15.3,-13.7,-16.3],["C","",7.8,-16.8,-7.0],["C","",8.1,-28.5,-2.6],["C","",0.5,-31.7,6.9],["C","",-7.4,-23.4,12.0],["C","",-14.9,-26.8,21.6],["C","",-22.8,-18.6,26.9],["C","",-23.3,-6.9,22.6],["C","",-15.9,-3.3,13.2],["C","",-7.8,-11.4,7.6],["C","",-0.0,-8.1,-2.1],["C","",-0.0,4.3,-7.1],["C","",-8.0,7.3,-16.6],["O","OH",-15.6,-1.4,-21.0],["C","",-8.2,18.8,-21.6],["C","",-0.6,27.6,-17.1],["C","",7.4,25.1,-7.7],["C","",15.1,34.2,-3.3],["C","",23.1,31.9,6.1],["C","",23.6,20.6,11.2],["C","",16.1,11.4,6.9],["C","",7.8,13.4,-2.6]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[7,8,1],[8,9,2],[9,10,1],[10,11,1],[11,12,2],[12,13,1],[12,14,1],[14,15,2],[15,16,1],[16,17,2],[17,18,1],[18,19,2],[19,20,1],[20,21,2],[10,1,2],[21,11,1],[9,4,1],[21,16,1]],"r":[[1,10,9,4,3,2],[5,6,7,8,9,4],[12,14,15,16,21,11],[17,18,19,20,21,16]],"f":[{"ring":1},{"ring":3}],"st":[null,[1,9,12,21]],"e":39.4},"binap":{"a":[["P","PPh₂",19.1,-14.1,-18.2],["C","",8.4,-16.7,-5.9],["C","",8.2,-28.3,-1.0],["C","",0.5,-31.2,8.5],["C","",-7.2,-22.5,13.4],["C","",-14.9,-25.6,22.9],["C","",-22.6,-17.2,28.0],["C","",-22.8,-5.5,23.6],["C","",-15.2,-2.3,14.1],["C","",-7.2,-10.7,8.7],["C","",0.7,-7.7,-1.1],["C","",0.7,4.8,-6.2],["C","",-7.1,7.9,-15.8],["P","PPh₂",-17.6,-2.7,-23.0],["C","",-7.0,19.6,-20.4],["C","",0.7,28.3,-15.5],["C","",8.4,25.5,-6.0],["C","",16.0,34.4,-1.3],["C","",23.8,31.9,8.2],["C","",24.1,20.4,13.1],["C","",16.6,11.5,8.5],["C","",8.5,13.7,-1.2]],"b":[[0,1,1],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,6,1],[6,7,2],[7,8,1],[8,9,2],[9,10,1],[10,11,1],[11,12,2],[12,13,1],[12,14,1],[14,15,2],[15,16,1],[16,17,2],[17,18,1],[18,19,2],[19,20,1],[20,21,2],[10,1,2],[21,11,1],[9,4,1],[21,16,1]],"r":[[1,10,9,4,3,2],[5,6,7,8,9,4],[12,14,15,16,21,11],[17,18,19,20,21,16]],"f":[{"ring":1},{"ring":3}],"st":[null,[1,9,12,21]],"e":39.8},"diphenic":{"a":[["O","OH",-21.0,-6.2,26.6],["C","",-16.1,-2.2,16.3],["O","O",-18.7,7.7,12.4],["C","",-7.6,-11.0,10.8],["C","",-7.5,-22.9,15.3],["C","",0.2,-31.6,10.5],["C","",7.9,-28.6,1.2],["C","",7.9,-16.8,-3.4],["N","NO₂",16.3,-14.3,-13.2],["C","",0.2,-7.7,1.2],["C","",0.2,4.7,-3.8],["C","",-6.5,7.7,-14.2],["N","NO₂",-13.8,-1.3,-20.5],["C","",-6.6,19.4,-19.2],["C","",-0.0,28.5,-13.7],["C","",6.6,25.9,-3.4],["C","",6.8,14.2,1.6],["C","",14.4,13.1,12.7],["O","O",18.1,21.6,18.6],["O","OH",17.3,1.8,15.8]],"b":[[0,1,1],[1,2,2],[1,3,1],[3,4,2],[4,5,1],[5,6,2],[6,7,1],[7,8,1],[7,9,2],[9,10,1],[10,11,1],[11,12,1],[11,13,2],[13,14,1],[14,15,2],[15,16,1],[16,17,1],[17,18,2],[17,19,1],[9,3,1],[16,10,2]],"r":[[3,9,7,6,5,4],[11,13,14,15,16,10]],"f":[{"ring":0}],"st":[null,[7,3,11,16]],"e":31.6},"helicene":{"a":[["C","",24.4,-20.7,-12.1],["C","",23.9,-9.8,-5.5],["C","",13.7,-7.2,1.4],["C","",5.2,-17.4,4.1],["C","",5.2,-27.3,-3.6],["C","",14.8,-29.0,-11.7],["C","",33.0,9.3,0.7],["C","",22.2,12.9,6.3],["C","",12.0,5.6,5.5],["C","",33.6,-1.6,-5.8],["C","",10.8,27.4,18.5],["C","",-0.0,21.0,16.4],["C","",-0.0,11.1,8.7],["C","",21.6,23.7,12.9],["C","",-21.6,18.3,19.9],["C","",-22.2,9.3,11.0],["C","",-12.0,6.6,4.1],["C","",-10.8,24.5,22.1],["C","",-33.6,-6.0,-0.2],["C","",-23.9,-7.7,-8.2],["C","",-13.7,-0.4,-7.3],["C","",-33.0,2.9,8.9],["C","",-14.8,-18.3,-25.3],["C","",-5.2,-10.1,-25.6],["C","",-5.2,-0.2,-17.8],["C","",-24.4,-16.7,-17.1]],"b":[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[0,5,1],[6,7,1],[7,8,2],[2,8,1],[1,9,1],[6,9,2],[10,11,1],[11,12,2],[8,12,1],[7,13,1],[10,13,2],[14,15,1],[15,16,2],[12,16,1],[11,17,1],[14,17,2],[18,19,1],[19,20,1],[16,20,1],[15,21,1],[18,21,2],[22,23,2],[23,24,1],[20,24,2],[19,25,2],[22,25,1]],"r":[[0,5,4,3,2,1],[6,9,1,2,8,7],[10,13,7,8,12,11],[14,17,11,12,16,15],[18,21,15,16,20,19],[22,25,19,20,24,23]],"f":[{"ring":5}],"e":34.3},"pcp":{"a":[["C","",12.2,-3.5,-12.0],["C","",6.0,6.7,-16.0],["C","",-6.5,6.7,-16.0],["C","",-12.8,-3.5,-12.0],["C","",-6.5,-14.3,-10.8],["C","",6.0,-14.3,-10.8],["C","",12.2,2.6,12.3],["C","",6.0,13.4,11.0],["C","",-6.5,13.4,11.0],["C","",-12.8,2.6,12.3],["C","",-6.5,-7.6,16.3],["C","",6.0,-7.6,16.3],["C","",24.5,-2.1,-6.7],["C","",24.5,1.2,6.9],["C","",-25.0,-2.1,-6.7],["C","",-25.0,1.2,6.9],["Br","Br",14.5,21.1,-19.6]],"b":[[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[5,0,2],[6,7,1],[7,8,2],[8,9,1],[9,10,2],[10,11,1],[11,6,2],[0,12,1],[12,13,1],[13,6,1],[3,14,1],[14,15,1],[15,9,1],[1,16,1]],"r":[[1,2,3,4,5,0],[7,8,9,10,11,6],[12,13,6,7,8,9,15,14,3,2,1,0],[1,2,3,14,15,9,10,11,6,13,12,0],[4,5,0,12,13,6,7,8,9,15,14,3],[4,5,0,12,13,6,11,10,9,15,14,3]],"f":[{"ring":0}],"e":25.6},"tartaric":{"a":[["O","O",-20.0,-3.7,17.2],["C","",-12.1,2.4,12.4],["O","OH",-7.9,12.4,17.8],["C","",-6.9,0.0,-0.0],["O","OH",-11.2,-11.0,-5.1],["C","",6.9,0.0,-0.0],["O","OH",11.0,-11.1,-5.2],["C","",11.8,1.4,12.7],["O","O",17.3,-6.1,18.5],["O","OH",9.9,12.4,17.5],["H","H",-10.2,7.2,-5.9],["H","H",10.6,7.2,-5.6]],"b":[[0,1,2],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[5,6,1],[5,7,1],[7,8,2],[7,9,1],[3,10,1],[5,11,1]],"r":[],"f":[{"atom":3},{"atom":5}],"st":[3,[]],"e":20.3},"dibromobutane":{"a":[["C","",-12.6,0.8,12.5],["C","",-6.9,0.0,0.0],["Br","Br",-12.9,-15.2,-7.1],["C","",6.9,0.0,-0.0],["Br","Br",12.9,-15.2,-7.1],["C","",12.6,0.8,12.5],["H","H",-10.5,7.1,-5.8],["H","H",10.5,7.1,-5.8]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[1,6,1],[3,7,1]],"r":[],"f":[{"atom":1},{"atom":3}],"st":[1,[]],"e":19.9},"butanediol":{"a":[["C","",-12.2,1.3,12.6],["C","",-6.9,0.0,0.0],["O","OH",-11.5,-10.9,-5.1],["C","",6.9,0.0,-0.0],["O","OH",11.1,-11.1,-5.2],["C","",12.5,1.4,12.5],["H","H",-10.1,7.4,-5.7],["H","H",10.2,7.2,-5.9]],"b":[[0,1,1],[1,2,1],[1,3,1],[3,4,1],[3,5,1],[1,6,1],[3,7,1]],"r":[],"f":[{"atom":1},{"atom":3}],"st":[1,[]],"e":15.8}};
 const SUBC={'Br':'#a8483a','Cl':'#2f9e50','F':'#86ad1f','OH':'#e2475a','O':'#e2475a','NH₂':'#3b6fe0','N':'#3b6fe0','NO₂':'#3b6fe0','COOH':'#cf4a3c','C=O':'#cf4a3c',
   'CH₃':'#7d8596','CH₂':'#7d8596','H':'#9aa0b0','CHO':'#e7801c','CH₂OH':'#cf5696','C₂H₅':'#5d6475','Ar':'#6d6aa0','Tol':'#6d6aa0','Ph':'#6d7a8f','An':'#b0648a','PPh₂':'#e0942a','環':'#8a7fb0'};
-const WAVES=[{t:15,cat:'axial',msg:'軸性キラリティー 登場!'},{t:30,cat:'helix',msg:'らせんキラリティー 登場!'},{t:45,cat:'planar',msg:'面性キラリティー 登場!'}];
+const WAVES=[{cat:'axial',msg:'軸性キラリティー 登場!'},{cat:'helix',msg:'らせんキラリティー 登場!'},{cat:'planar',msg:'面性キラリティー 登場!'}];
+// モードごとの進行。spawn/warn は [開始値, 最終値, 何秒かけて変化するか]
+const MODECFG={
+  easy:{waves:[40,80,120],gate2:90,spawn:[2.6,1.3,220],warn:[17,12,220],speed:.85},
+  normal:{waves:[25,50,75],gate2:60,spawn:[2.0,.8,160],warn:[14,9.5,160],speed:1},
+  hard:{ta:true,limit:120,field:5,penalty:5},
+};
 const PENS=[
   {kind:'S',x:20,y:176,w:196,h:290},
   {kind:'R',x:744,y:176,w:196,h:290},
@@ -227,7 +235,7 @@ const FIELD={x0:8,y0:HUD_H+4,x1:W-8,y1:H-6};
 const MODES={
   easy:{name:'やさしい',desc:'色 + 記号マーク + 優先順位つき。はじめての人に。'},
   normal:{name:'ふつう',desc:'色と構造で見分けよう。'},
-  hard:{name:'ガチ',desc:'色なし!構造(CIP順位)だけで判定。化学徒向け。'},
+  hard:{name:'ガチ',desc:'色なし・構造だけで判定!120秒タイムアタック(ミスは−5秒)。化学徒向け。'},
 };
 // ================= ユーティリティ =================
 const $=id=>document.getElementById(id);
@@ -322,42 +330,38 @@ function pickType(kind,cats){
 }
 function makeMol(kind,x,y,cats=ALLCATS,type){
   const ty=type!=null?type:pickType(kind,cats),cat=TYPES[ty].cat;
-  return{kind,type:ty,rot:irand(cat==='axial'?4:cat==='planar'?2:3),x,y,hd:rand(0,Math.PI*2),turn:rand(.6,2),idle:0,phase:rand(0,6),
+  return{kind,type:ty,alt:cat==='meso'?0:irand(2),x,y,hd:rand(0,Math.PI*2),turn:rand(.6,2),idle:0,phase:rand(0,6),
     life:0,state:'field',pen:null,flip:-1,eye:rand(1,4),pop:0,alpha:1,moving:true,warn:false,blinkPh:0,penAge:0};
 }
 function descOf(m){const t=TYPES[m.type];return t.cat==='meso'?'meso':DESC[t.cat][m.kind==='R'?0:1]}
 
 // ================= 分子の描画 =================
 const wcache={};
-function subW(c,l){if(!(l in wcache)){c.font=`700 10px ${FONT}`;wcache[l]=c.measureText(l).width}return wcache[l]}
-function drawSub(c,x,y,label,num){
-  const w=Math.max(17,subW(c,label)+9),h=15,col=SUBC[label]||'#666';
-  c.fillStyle='#fff';rr(c,x-w/2,y-h/2,w,h,7.5);c.fill();c.lineWidth=2;c.strokeStyle=col;c.stroke();
-  c.font=`700 10px ${FONT}`;c.textAlign='center';c.textBaseline='middle';c.fillStyle=col;c.fillText(label,x,y+.5);
-  if(num){circ(c,x+w/2-1,y-h/2-1,5.6);c.fillStyle='#3d3552';c.fill();c.font=`900 8px ${FONT}`;c.fillStyle='#fff';c.fillText(num,x+w/2-1,y-h/2-.5)}
-}
-function drawFace(c,x,y,r,mood,lx,closed){
-  const ex=r*.38,ey=y-r*.08;
-  c.fillStyle=mood==='hot'?'rgba(255,60,60,.55)':'rgba(255,120,150,.45)';
-  ell(c,x-r*.6,y+r*.28,r*.2,r*.13);c.fill();ell(c,x+r*.6,y+r*.28,r*.2,r*.13);c.fill();
-  c.fillStyle=c.strokeStyle='#2d2438';c.lineWidth=1.7;c.lineCap='round';
-  if(mood==='happy'){
-    for(const s of[-1,1]){c.beginPath();c.arc(x+s*ex+lx,ey+2,r*.15,Math.PI*1.1,Math.PI*1.9);c.stroke()}
-  }else if(mood==='panic'){
-    for(const s of[-1,1]){const cx=x+s*ex;c.beginPath();c.moveTo(cx-s*3.5,ey-3);c.lineTo(cx+s*1.5,ey);c.lineTo(cx-s*3.5,ey+3);c.stroke()}
-  }else if(mood==='sleep'||closed){
-    for(const s of[-1,1]){c.beginPath();c.moveTo(x+s*ex-3+lx,ey+1);c.lineTo(x+s*ex+3+lx,ey+1);c.stroke()}
-  }else{
-    for(const s of[-1,1]){ell(c,x+s*ex+lx,ey,r*.13,r*.19);c.fill()}
-    c.fillStyle='#fff';for(const s of[-1,1]){circ(c,x+s*ex+lx+1,ey-2,r*.055);c.fill()}
-    c.fillStyle='#2d2438';
-  }
-  const my=y+r*.34;
-  if(mood==='panic'||mood==='held'){ell(c,x,my+1,2.4,3);c.fill()}
-  else if(mood==='happy'){c.beginPath();c.arc(x,my-1,3.4,0,Math.PI);c.closePath();c.fillStyle='#e4566e';c.fill()}
-  else{c.beginPath();c.arc(x-2.3,my,2.3,.1,Math.PI-.1);c.arc(x+2.3,my,2.3,.1,Math.PI-.1);c.stroke()}
-  if(mood==='hot'||mood==='panic'){c.fillStyle='#8fd3ff';c.beginPath();const sx=x+r*.85,sy=y-r*.55;c.moveTo(sx,sy-4);c.quadraticCurveTo(sx+4,sy+2,sx,sy+3);c.quadraticCurveTo(sx-4,sy+2,sx,sy-4);c.fill()}
-}
+// ---- 分子キャラの個性(目・口・小物) ----
+const PERSONA={
+  chbrclf:{eyes:'wide',mouth:'o',acc:'leaf'},
+  lactic:{eyes:'sleepy',mouth:'w',acc:'towel'},
+  alanine:{eyes:'determined',mouth:'grin',acc:'cap'},
+  glyceraldehyde:{eyes:'sparkle',mouth:'smile',acc:'ribbon'},
+  butanol:{eyes:'cool',mouth:'grin',acc:'none',blush:2},
+  ibuprofen:{eyes:'dot',mouth:'smile',acc:'capsule'},
+  thalidomide:{eyes:'serious',mouth:'flat',acc:'glasses'},
+  sulfoxide:{eyes:'wide',mouth:'o',acc:'goggles'},
+  pamp:{eyes:'determined',mouth:'grin',acc:'medal'},
+  allene:{eyes:'dot',mouth:'w',acc:'propeller'},
+  binol:{eyes:'wink',mouth:'smile',acc:'star'},
+  binap:{eyes:'cool',mouth:'smile',acc:'crown'},
+  diphenic:{eyes:'dot',mouth:'flat',acc:'monocle'},
+  helicene:{eyes:'dizzy',mouth:'o',acc:'none'},
+  pcp:{eyes:'happy',mouth:'grin',acc:'none'},
+  tartaric:{eyes:'sparkle',mouth:'w',acc:'none'},
+  dibromobutane:{eyes:'dot',mouth:'o',acc:'none'},
+  butanediol:{eyes:'happy',mouth:'smile',acc:'none'},
+};
+const ELC={O:'#e2475a',N:'#3b6fe0',S:'#b89400',P:'#e0801c',Br:'#a8483a',Cl:'#2f9e50',F:'#7ea51c',H:'#8a8fa3'};
+const molScale=t=>clamp(36/MOL[t.id].e,.85,2.2);
+const blinkOn=m=>m.warn&&Math.sin(m.blinkPh)>0;
+
 function moodOf(m){
   if(m.state==='pen'||m.state==='demoPen'||m.state==='collect')return'happy';
   if(m.warn)return'panic';
@@ -365,127 +369,196 @@ function moodOf(m){
   if(G.state==='play'||G.state==='boom'){if(G.T>=T_FLIP-10)return'hot';if(G.T<200)return'sleep'}
   return'normal';
 }
-const blinkOn=m=>m.warn&&Math.sin(m.blinkPh)>0;
-const bobOf=m=>m.state==='held'?Math.sin(G.time*18)*1.2:-Math.abs(Math.sin(m.moving?m.phase:0))*2.4;
-function hexPath(c,x,y,r,rot){c.beginPath();for(let i=0;i<6;i++){const a=rot+i*Math.PI/3;c.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}c.closePath()}
-function body(c,x,y,r,col,m,o,hex){
-  const bl=blinkOn(m);
-  const g=c.createRadialGradient(x-r*.3,y-r*.4,1,x,y,r*1.05);
-  g.addColorStop(0,bl?'#ffffff':col.light);g.addColorStop(1,bl?col.light:col.main);
-  if(hex)hexPath(c,x,y,r,0);else circ(c,x,y,r);
-  c.fillStyle=g;c.fill();c.lineWidth=2;c.strokeStyle=col.dark;c.stroke();
-  drawFace(c,x,y+1,r*(hex?.92:1),o.mood||moodOf(m),Math.cos(m.hd||0)*r*.08,m.eye<.13);
+function drawAcc(c,x,y,r,acc){
+  c.lineCap='round';c.lineJoin='round';
+  switch(acc){
+    case 'leaf':c.strokeStyle='#4f9a3a';c.lineWidth=1.6;c.beginPath();c.moveTo(x,y-r);c.lineTo(x,y-r-5);c.stroke();
+      c.fillStyle='#7cc85a';for(const s of[-1,1]){c.beginPath();c.ellipse(x+s*4,y-r-6,4.5,2.4,s*-.5,0,Math.PI*2);c.fill()}break;
+    case 'towel':c.fillStyle='#fff';rr(c,x-r*.95,y-r*.72,r*1.9,r*.32,r*.15);c.fill();c.strokeStyle='#5aa9e6';c.lineWidth=1.2;c.stroke();
+      c.fillStyle='#5aa9e6';c.fillRect(x-r*.9,y-r*.6,r*1.8,r*.08);c.fillStyle='#fff';ell(c,x+r*.95,y-r*.5,r*.2,r*.14);c.fill();break;
+    case 'cap':c.fillStyle='#e8505b';c.beginPath();c.arc(x,y-r*.35,r*.92,Math.PI*1.05,Math.PI*1.95);c.closePath();c.fill();
+      c.fillStyle='#c73a45';rr(c,x-r*.2,y-r*.62,r*1.35,r*.22,r*.1);c.fill();c.fillStyle='#fff';circ(c,x-r*.1,y-r*.95,r*.14);c.fill();break;
+    case 'ribbon':c.fillStyle='#ff7eb6';const bx=x+r*.62,by=y-r*.78;
+      for(const s of[-1,1]){c.beginPath();c.moveTo(bx,by);c.lineTo(bx+s*r*.45,by-r*.28);c.lineTo(bx+s*r*.45,by+r*.28);c.closePath();c.fill()}
+      c.fillStyle='#e0508f';circ(c,bx,by,r*.14);c.fill();break;
+    case 'capsule':c.save();c.translate(x+r*.3,y-r*1.02);c.rotate(-.35);
+      c.fillStyle='#ff6b6b';rr(c,-r*.6,-r*.2,r*.6,r*.4,r*.2);c.fill();c.fillStyle='#fff';rr(c,0,-r*.2,r*.6,r*.4,r*.2);c.fill();
+      c.strokeStyle='#c8506a';c.lineWidth=1;rr(c,-r*.6,-r*.2,r*1.2,r*.4,r*.2);c.stroke();c.restore();break;
+    case 'glasses':c.strokeStyle='#3d3552';c.lineWidth=1.4;for(const s of[-1,1]){circ(c,x+s*r*.38,y-r*.08,r*.27);c.stroke()}
+      c.beginPath();c.moveTo(x-r*.11,y-r*.1);c.lineTo(x+r*.11,y-r*.1);c.stroke();break;
+    case 'goggles':c.fillStyle='#6a6f90';c.fillRect(x-r,y-r*.72,r*2,r*.2);
+      for(const s of[-1,1]){circ(c,x+s*r*.36,y-r*.62,r*.26);c.fillStyle='#bfe8ff';c.fill();c.lineWidth=1.6;c.strokeStyle='#4a4f70';c.stroke()}break;
+    case 'medal':c.strokeStyle='#4f7ee8';c.lineWidth=1.6;c.beginPath();c.moveTo(x+r*.45,y+r*.55);c.lineTo(x+r*.85,y+r*1.05);c.moveTo(x+r*1.2,y+r*.55);c.lineTo(x+r*.85,y+r*1.05);c.stroke();
+      circ(c,x+r*.85,y+r*1.15,r*.28);c.fillStyle='#ffd24d';c.fill();c.strokeStyle='#c99a1a';c.lineWidth=1;c.stroke();break;
+    case 'propeller':c.fillStyle='#ffb13d';c.beginPath();c.arc(x,y-r*.72,r*.42,Math.PI,0);c.fill();
+      c.fillStyle='#3d3552';c.fillRect(x-.7,y-r*1.25,1.4,r*.5);
+      {const a=Math.cos(G.time*14)*r*.55;c.fillStyle='#4fa3ef';ell(c,x-a/2,y-r*1.25,Math.abs(a)/2+.5,1.8);c.fill();c.fillStyle='#ff5a6e';ell(c,x+a/2,y-r*1.25,Math.abs(a)/2+.5,1.8);c.fill()}break;
+    case 'star':c.save();c.translate(x-r*.62,y-r*.82);c.rotate(.3);star(c,0,0,r*.36,'#ffd24d');c.restore();break;
+    case 'crown':c.fillStyle='#ffd24d';c.strokeStyle='#c99a1a';c.lineWidth=1;c.beginPath();
+      const cy=y-r*.82;c.moveTo(x-r*.55,cy+r*.2);c.lineTo(x-r*.6,cy-r*.3);c.lineTo(x-r*.3,cy-r*.05);c.lineTo(x,cy-r*.42);c.lineTo(x+r*.3,cy-r*.05);c.lineTo(x+r*.6,cy-r*.3);c.lineTo(x+r*.55,cy+r*.2);c.closePath();c.fill();c.stroke();
+      c.fillStyle='#ff5a6e';circ(c,x,cy,r*.08);c.fill();break;
+    case 'monocle':c.strokeStyle='#b8860b';c.lineWidth=1.4;circ(c,x+r*.38,y-r*.08,r*.28);c.stroke();
+      c.beginPath();c.moveTo(x+r*.62,y+r*.05);c.quadraticCurveTo(x+r*.9,y+r*.5,x+r*.7,y+r*.8);c.stroke();
+      c.fillStyle='#6b4a2b';for(const s of[-1,1]){c.beginPath();c.ellipse(x+s*r*.2,y+r*.2,r*.22,r*.08,s*-.25,0,Math.PI*2);c.fill()}break;
+  }
 }
-function feet(c,m,xs,y,r){
-  const walk=m.moving?m.phase:0,dang=m.state==='held'?4:0;
-  c.fillStyle='#4b4160';
-  xs.forEach((fx,i)=>{const lift=Math.max(0,Math.sin(walk+i*Math.PI))*3;ell(c,fx,y-lift+dang,r,r*.7);c.fill()});
+// 骨格式に直接つける目玉(ぎょろ目)。表情は個性+ゲーム状況で決まる
+function drawEyes(c,x,y,e,p,mood,m,col){
+  let eyes=p.eyes||'wide',mouth=p.mouth||'w';
+  if(mood==='happy'){eyes='happy';mouth='smile'}
+  else if(mood==='panic'){eyes='panic';mouth='o'}
+  else if(mood==='held'){mouth='o'}
+  else if(mood==='sleep')eyes='sleepy';
+  if(m.eye<.13&&!['happy','panic','dizzy'].includes(eyes))eyes='closed';
+  const ink='#2d2438',sp=e*1.25,lw=Math.max(1,e*.32);
+  // 目玉は歩く向きを見る(少し遅れて揺れる)
+  const lx=Math.cos(m.hd||0)*e*.38,ly=Math.sin(m.hd||0)*e*.22+Math.sin((m.phase||0)*2)*e*.06;
+  c.lineCap='round';c.lineJoin='round';
+  c.fillStyle=mood==='hot'||p.blush===2?'rgba(255,70,80,.55)':'rgba(255,120,150,.5)';
+  ell(c,x-sp*1.55,y+e*1.35,e*.7,e*.42);c.fill();ell(c,x+sp*1.55,y+e*1.35,e*.7,e*.42);c.fill();
+  for(const s of[-1,1]){
+    const cx=x+s*sp;
+    const sclera=(r=e)=>{circ(c,cx,y,r);c.fillStyle='#fff';c.fill();c.lineWidth=lw;c.strokeStyle=ink;c.stroke()};
+    const pupil=(r=e*.55)=>{circ(c,cx+lx,y+ly,r);c.fillStyle=ink;c.fill();circ(c,cx+lx+r*.35,y+ly-r*.35,r*.3);c.fillStyle='#fff';c.fill()};
+    c.strokeStyle=ink;c.lineWidth=lw;
+    switch(eyes){
+      case 'happy':c.beginPath();c.arc(cx,y+e*.35,e*.8,Math.PI*1.15,Math.PI*1.85);c.lineWidth=lw*1.2;c.stroke();break;
+      case 'closed':c.beginPath();c.moveTo(cx-e*.8,y);c.lineTo(cx+e*.8,y);c.stroke();break;
+      case 'panic':sclera();circ(c,cx+lx*.3,y,e*.25);c.fillStyle=ink;c.fill();break;
+      case 'dizzy':sclera();c.beginPath();for(let k=0;k<12;k++){const a=k*.95+G.time*7,r=e*.07*k;c.lineTo(cx+Math.cos(a)*r,y+Math.sin(a)*r)}c.lineWidth=lw*.8;c.strokeStyle=ink;c.stroke();break;
+      case 'sleepy':sclera();pupil();c.beginPath();c.arc(cx,y,e+lw*.3,Math.PI,0);c.closePath();c.fillStyle=col.main;c.fill();c.lineWidth=lw;c.strokeStyle=ink;c.stroke();break;
+      case 'cool':sclera();pupil();c.beginPath();c.moveTo(cx-e-lw*.3,y-e*.25);c.arc(cx,y,e+lw*.3,Math.PI+.25,-.25);c.closePath();c.fillStyle=col.main;c.fill();c.strokeStyle=ink;c.stroke();break;
+      case 'wink':if(s<0){sclera();pupil()}else{c.beginPath();c.moveTo(cx+e*.7,y-e*.6);c.lineTo(cx-e*.4,y);c.lineTo(cx+e*.7,y+e*.6);c.stroke()}break;
+      case 'determined':sclera();pupil();c.beginPath();c.moveTo(cx-s*e*1.1,y-e*1.6);c.lineTo(cx+s*e*.7,y-e*1.05);c.lineWidth=lw*1.2;c.stroke();break;
+      case 'serious':sclera();pupil(e*.4);c.beginPath();c.moveTo(cx-e*.9,y-e*1.45);c.lineTo(cx+e*.9,y-e*1.45);c.lineWidth=lw*1.2;c.stroke();break;
+      case 'sparkle':sclera(e*1.1);pupil(e*.7);circ(c,cx+lx-e*.2,y+ly+e*.25,e*.14);c.fillStyle='#fff';c.fill();break;
+      case 'dot':sclera(e*.85);pupil(e*.4);break;
+      default:sclera();pupil();
+    }
+  }
+  const my=y+e*1.9;c.fillStyle=ink;c.strokeStyle=ink;c.lineWidth=lw;
+  switch(mouth){
+    case 'o':ell(c,x,my+e*.1,e*.38,e*.48);c.fill();break;
+    case 'smile':c.beginPath();c.arc(x,my-e*.35,e*.7,.25,Math.PI-.25);c.stroke();break;
+    case 'grin':c.beginPath();c.arc(x,my-e*.2,e*.72,0,Math.PI);c.closePath();c.fill();c.fillStyle='#fff';c.fillRect(x-e*.5,my-e*.2,e,e*.25);break;
+    case 'flat':c.beginPath();c.moveTo(x-e*.45,my);c.lineTo(x+e*.45,my);c.stroke();break;
+    default:c.beginPath();c.arc(x-e*.36,my-e*.1,e*.36,.1,Math.PI-.1);c.arc(x+e*.36,my-e*.1,e*.36,.1,Math.PI-.1);c.stroke();
+  }
+  if(mood==='hot'||mood==='panic'){c.fillStyle='#8fd3ff';c.beginPath();const sx=x+sp*2.2,sy=y-e*1.2;c.moveTo(sx,sy-4);c.quadraticCurveTo(sx+4,sy+2,sx,sy+3);c.quadraticCurveTo(sx-4,sy+2,sx,sy-4);c.fill()}
 }
 function badge(c,x,y,s,col){
   c.font=`900 9.5px ${FONT}`;const w=Math.max(15,c.measureText(s).width+8);
-  rr(c,x-w/2,y-7.5,w,15,7.5);c.fillStyle='#fff';c.fill();c.lineWidth=1.8;c.strokeStyle=col.dark;c.stroke();
+  rr(c,x-w/2,y-7.5,w,15,3);c.fillStyle='#fff';c.fill();c.lineWidth=1.8;c.strokeStyle=col.dark;c.stroke();
   c.fillStyle=col.dark;c.textAlign='center';c.textBaseline='middle';c.fillText(s,x,y+.5);
 }
+const bobOf=m=>m.state==='held'?Math.sin(G.time*18)*1.2:-Math.abs(Math.sin(m.moving?m.phase:0))*2.2;
+
+// 3D 座標から骨格式を描く。S 側は x を反転した鏡像。奥の結合は細く薄く、手前は太く、
+// 不斉中心の結合は実際の奥行きから くさび(手前)/破線(奥) を自動で付ける。
+// 分子そのものがキャラ:顔の環は色で塗り、そこに目玉をつける。結合の下に蛍光ペンの色(R/S)を敷く。
+function drawStruct(c,m,o,t,col,easy){
+  const D=MOL[t.id],P=PERSONA[t.id]||{},s=molScale(t);
+  const th=o.theta!=null?o.theta:(m.state==='demo'?.3:Math.sin(G.time*1.1+m.phase)*.32);
+  const mir=m.kind==='S'?-1:1,alt=m.alt?-1:1,ct=Math.cos(th),st=Math.sin(th);
+  const pts=D.a.map(a=>{const x=a[2]*mir,y=a[3]*alt,z=a[4]*alt;return{X:(x*ct+z*st)*s,Y:y*s,Z:(-x*st+z*ct)*s,el:a[0],lab:a[1]}});
+  // H は短くて埋もれやすいので、結合を長めに描く
+  for(let i=0;i<pts.length;i++)if(pts[i].el==='H'){const b=D.b.find(b=>b[0]===i||b[1]===i),q=pts[b[0]===i?b[1]:b[0]],p=pts[i];
+    p.X=q.X+(p.X-q.X)*1.7;p.Y=q.Y+(p.Y-q.Y)*1.7;p.Z=q.Z+(p.Z-q.Z)*1.7}
+  let minY=1e9,maxY=-1e9,maxX=-1e9;for(const p of pts){minY=Math.min(minY,p.Y);maxY=Math.max(maxY,p.Y);maxX=Math.max(maxX,p.X)}
+  const hard=(o.mode||G.mode)==='hard'&&!o.color;
+  const ink=hard?'#3d3552':col.dark,bl=blinkOn(m);
+  const ringC=r=>({x:r.reduce((a,i)=>a+pts[i].X,0)/r.length,y:r.reduce((a,i)=>a+pts[i].Y,0)/r.length,z:r.reduce((a,i)=>a+pts[i].Z,0)/r.length});
+  const faces=(D.f.length?D.f:[{atom:0}]).map(f=>f.ring!=null?{...ringC(D.r[f.ring]),ring:f.ring}:{x:pts[f.atom].X,y:pts[f.atom].Y,z:pts[f.atom].Z,atom:f.atom});
+  const faceRings=new Set(faces.filter(f=>f.ring!=null).map(f=>f.ring));
+  // 足(分子の下端、顔の真下)
+  feet(c,m,[faces[0].x-5,faces[0].x+5],maxY+5,4.5,ink);
+  c.translate(0,bobOf(m));
+  const bonds=D.b.map(b=>({b,z:(pts[b[0]].Z+pts[b[1]].Z)/2})).sort((a,b)=>a.z-b.z);
+  // 蛍光ペンの下塗り(R/S の色。放置警告中は赤く点滅)
+  if(!hard||bl){c.save();c.lineCap='round';c.lineJoin='round';c.strokeStyle=bl?'#ff3b55':col.main;c.globalAlpha*=bl?.55:.38;c.lineWidth=11;
+    c.beginPath();for(const {b} of bonds){c.moveTo(pts[b[0]].X,pts[b[0]].Y);c.lineTo(pts[b[1]].X,pts[b[1]].Y)}c.stroke();
+    for(const p of pts)if(p.lab){circ(c,p.X,p.Y,p.lab.length>1?9:6.5);c.fillStyle=c.strokeStyle;c.fill()}c.restore()}
+  // 環の塗り(顔の環はしっかり、ほかは淡く)
+  const ringOrder=D.r.map((r,k)=>({k,z:ringC(r).z})).sort((a,b)=>a.z-b.z);
+  for(const {k,z} of ringOrder){const r=D.r[k];c.beginPath();for(const i of r)c.lineTo(pts[i].X,pts[i].Y);c.closePath();
+    if(faceRings.has(k)){c.fillStyle=bl?'#fff':(hard?'#f4efe6':col.light);c.fill()}
+    else{c.fillStyle=hard?'#d9d2c4':col.main;const a=z<0?.18:.3;c.globalAlpha*=a;c.fill();c.globalAlpha/=a}}
+  // 結合(奥から)
+  const stc=D.st&&D.st[0]!=null?D.st[0]:-1,mesoC=t.cat==='meso'?D.f.map(f=>f.atom):[];
+  const centers=new Set([stc,...mesoC].filter(i=>i>=0));
+  const ringOf=(i,j)=>D.r.find(r=>r.includes(i)&&r.includes(j));
+  const cut=p=>p.lab?(p.lab.length>2?8:p.lab.length>1?7:5.5):0;
+  for(const {b,z} of bonds){
+    let [i,j,ord]=b,A=pts[i],B=pts[j];
+    let x1=A.X,y1=A.Y,x2=B.X,y2=B.Y;const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
+    const ca=cut(A),cb=cut(B);x1+=ux*ca;y1+=uy*ca;x2-=ux*cb;y2-=uy*cb;
+    const w=clamp(2.3+z*.05,1.1,4),far=z<-8;
+    c.strokeStyle=c.fillStyle=far?(hard?'#a39cb6':col.main):ink;c.lineWidth=w;c.lineCap='round';
+    let sb=null;if(centers.has(i))sb=[x1,y1,x2,y2,B.Z-A.Z];else if(centers.has(j))sb=[x2,y2,x1,y1,A.Z-B.Z];
+    if(sb&&Math.abs(sb[4])>4){
+      const [sx,sy,ex,ey,dz]=sb,nx=-(ey-sy),ny=ex-sx,nl=Math.hypot(nx,ny)||1,px=nx/nl,py=ny/nl;
+      c.strokeStyle=c.fillStyle=ink;
+      if(dz>0){c.beginPath();c.moveTo(sx,sy);c.lineTo(ex+px*3.3,ey+py*3.3);c.lineTo(ex-px*3.3,ey-py*3.3);c.closePath();c.fill()}
+      else{c.lineWidth=1.3;const n=6;for(let k=1;k<=n;k++){const u=k/n,hx=sx+(ex-sx)*u,hy=sy+(ey-sy)*u,hw=3.4*u;c.beginPath();c.moveTo(hx+px*hw,hy+py*hw);c.lineTo(hx-px*hw,hy-py*hw);c.stroke()}}
+      continue;
+    }
+    if(ord===2){
+      const r=ringOf(i,j);let ox=-uy,oy=ux;
+      if(r){const rc=ringC(r);if((rc.x-(x1+x2)/2)*ox+(rc.y-(y1+y2)/2)*oy<0){ox=-ox;oy=-oy}
+        c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();
+        c.lineWidth=w*.8;c.beginPath();c.moveTo(x1+ox*3.3+ux*2.5,y1+oy*3.3+uy*2.5);c.lineTo(x2+ox*3.3-ux*2.5,y2+oy*3.3-uy*2.5);c.stroke();}
+      else{c.lineWidth=w*.85;for(const q of[-1.7,1.7]){c.beginPath();c.moveTo(x1+ox*q,y1+oy*q);c.lineTo(x2+ox*q,y2+oy*q);c.stroke()}}
+    }else{c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke()}
+  }
+  // 不斉中心の目印(*)
+  if(stc>=0&&!faces.some(f=>f.atom===stc)){const p=pts[stc];txt(c,'*',p.X+5,p.Y-5,11,ink,{w:900,stroke:'#fff',sw:2.5})}
+  // 原子ラベル
+  for(const p of pts){if(!p.lab)continue;
+    const a=p.Z<-10?.7:1;c.globalAlpha*=a;
+    txt(c,p.lab,p.X,p.Y,p.el==='H'?8.5:9.5,ELC[p.el]||'#555',{w:900,stroke:'#fff',sw:3.2});
+    c.globalAlpha/=a}
+  // やさしい:優先順位の番号
+  if(easy&&D.st&&t.cat!=='meso'){
+    const ctr=stc>=0?pts[stc]:{X:0,Y:0};
+    D.st[1].forEach((i,k)=>{const p=pts[i];let vx=p.X-ctr.X,vy=p.Y-ctr.Y;const l=Math.hypot(vx,vy)||1,off=cut(p)+7;const nx=p.X+vx/l*off,ny=p.Y+vy/l*off;
+      rr(c,nx-4.5,ny-4.5,9,9,2);c.fillStyle='#3d3552';c.fill();txt(c,String(k+1),nx,ny+.3,8,'#fff',{w:900})});
+  }
+  // メソ:分子内の鏡面
+  if(t.cat==='meso'){const mx=(faces[0].x+faces[1].x)/2;c.save();c.setLineDash([3,3]);c.strokeStyle=COL.M.dark;c.lineWidth=1.8;c.beginPath();c.moveTo(mx,minY-6);c.lineTo(mx,maxY+4);c.stroke();c.restore()}
+  // 顔(目玉)。原子につく顔は原子の少し上、環の顔は環の中
+  const mood=o.mood||moodOf(m);
+  faces.map((f,k)=>({f,k})).sort((a,b)=>a.f.z-b.f.z).forEach(({f,k})=>{
+    const meso=t.cat==='meso',e=meso?2.7:f.ring!=null?3.3:3.6,fy=f.ring!=null?f.y-1.5:f.y-(meso?6:2);
+    // メソの双子は鏡面から外側へ少しずらす
+    const fx=meso?f.x+(f.x<(faces[0].x+faces[1].x)/2?-4:4):f.x;
+    drawEyes(c,fx,fy,e,P,mood,{...m,hd:k&&t.cat==='meso'?Math.PI-(m.hd||0):m.hd},col);
+    if(k===0)drawAcc(c,fx,fy+e*.6,e*3,P.acc);
+  });
+  if(easy)badge(c,maxX+10,minY-4,descOf(m),t.cat==='meso'?COL.M:COL[m.kind]);
+}
+function feet(c,m,xs,y,r,ink){
+  const walk=m.moving?m.phase:0,dang=m.state==='held'?4:0;
+  c.strokeStyle=ink||'#4b4160';c.fillStyle='#4b4160';c.lineWidth=1.6;c.lineCap='round';
+  xs.forEach((fx,i)=>{const lift=Math.max(0,Math.sin(walk+i*Math.PI))*3,fy=y-lift+dang;
+    c.beginPath();c.moveTo(fx,y-7);c.lineTo(fx,fy);c.stroke();ell(c,fx+(i?1.5:-1.5),fy+1,r,r*.6);c.fill()});
+}
 function drawMol(c,m,o={}){
+  const t=TYPES[m.type];
   const inPen=m.state==='pen'||m.state==='collect'||m.state==='demoPen'||(m.state==='vanish'&&m.pen&&m.pen.kind!=='M');
   let sc=(o.sc||1)*(inPen?PEN_SC:1)*(.4+.6*Math.min(1,m.pop))*(m.state==='collect'?(m.csc||1):1);
   c.save();c.translate(m.x,m.y);c.globalAlpha*=m.alpha;
   const held=m.state==='held';
   if(m.boom&&G.boom){const bt=Math.min(G.boom.t,1);sc*=1+bt*.5;c.translate(rand(-1,1)*bt*5,rand(-1,1)*bt*5)}
-  const t=TYPES[m.type];
-  if(!o.noShadow){c.fillStyle='rgba(50,45,90,.16)';ell(c,0,20*sc,(held?15:22)*sc*(t.cat==='meso'?1.6:1),(held?4:6)*sc);c.fill()}
+  const R=MOL[t.id].e*molScale(t);
+  if(!o.noShadow){c.fillStyle='rgba(50,45,90,.14)';ell(c,0,(R+6)*sc,(held?.45:.7)*R*sc,(held?3:5)*sc);c.fill()}
   c.translate(0,held?-12:0);
   const sx=m.flip>=0?Math.max(.04,Math.abs(Math.cos(m.flip*Math.PI))):1;
   c.scale(sc*sx,sc);
   const mode=o.mode||G.mode,easy=mode==='easy';
   const col=mode==='hard'&&!o.color?COL.N:COL[t.cat==='meso'?'M':m.kind];
-  // 放置警告:色はそのまま、赤いリングが点滅
-  if(m.warn){const on=blinkOn(m);c.save();c.globalAlpha*=on?.95:.3;circ(c,0,0,42);c.lineWidth=on?4:2.5;c.strokeStyle='#ff3b55';c.setLineDash(on?[]:[6,5]);c.stroke();
-    if(on){c.globalAlpha*=.18;c.fillStyle='#ff3b55';c.fill()}c.restore()}
-  c.save();
-  switch(t.cat){
-    case 'meso':drawMeso(c,m,o,t,col,easy);break;
-    case 'axial':drawAxial(c,m,o,t,col,easy);break;
-    case 'helix':drawHelix(c,m,o,t,col,easy);break;
-    case 'planar':drawPlanar(c,m,o,t,col,easy);break;
-    default:drawCenter(c,m,o,t,col,easy);
-  }
+  c.save();drawStruct(c,m,o,t,col,easy);c.restore();
+  if(blinkOn(m))warnMark(c,0,-R-16);
   c.restore();
-  if(blinkOn(m))warnMark(c,0,-52);
-  c.restore();
-}
-// 中心性:H(または孤立電子対)を奥にした上面図。R は ①→②→③ が時計回り、S はその鏡像
-function drawCenter(c,m,o,t,col,easy){
-  const r=16,D=30;
-  feet(c,m,[-7,7],r-1,6);c.translate(0,bobOf(m));
-  const base=-Math.PI/2+m.rot*2*Math.PI/3,pos=[];
-  for(let i=0;i<3;i++){let a=base+i*2*Math.PI/3;if(m.kind==='S')a=Math.PI-a;pos.push([Math.cos(a)*D,Math.sin(a)*D*.9])}
-  c.strokeStyle='#5d5170';c.lineWidth=3.2;c.lineCap='round';
-  for(const p of pos){c.beginPath();c.moveTo(0,0);c.lineTo(p[0],p[1]);c.stroke()}
-  body(c,0,0,r,col,m,o);
-  if(t.center){circ(c,-12,-12,6.5);c.fillStyle=t.center==='S'?'#ffe45c':'#ffb870';c.fill();c.lineWidth=1.5;c.strokeStyle='#8a6d1c';c.stroke();txt(c,t.center,-12,-11.5,8.5,'#5a4510',{w:900})}
-  for(let i=0;i<3;i++)drawSub(c,pos[i][0],pos[i][1],t.subs[i],easy?i+1:0);
-  if(easy)badge(c,13,-13,descOf(m),COL[m.kind]);
-}
-// 軸性:軸に沿って見たニューマン投影。手前(太い棒)が①②、奥(点線)が③④。Sa は ①左 ②右 ③上(反時計回り)
-function drawAxial(c,m,o,t,col,easy){
-  const r=14,D=31;
-  feet(c,m,[-9,9],r+1,5.5);c.translate(0,bobOf(m));
-  const base=m.rot*Math.PI/2;
-  let A=[Math.PI,0,-Math.PI/2,Math.PI/2];
-  if(m.kind==='R')A=A.map(a=>Math.PI-a);
-  const P=A.map(a=>[Math.cos(a+base)*D,Math.sin(a+base)*D]);
-  c.lineCap='round';
-  c.save();c.globalAlpha*=.5;c.strokeStyle=col.dark;c.lineWidth=5;c.setLineDash([4,4]);c.beginPath();c.moveTo(P[2][0],P[2][1]);c.lineTo(P[3][0],P[3][1]);c.stroke();c.restore();
-  c.save();c.globalAlpha*=.72;drawSub(c,P[2][0],P[2][1],t.rear[0],easy?3:0);drawSub(c,P[3][0],P[3][1],t.rear[1],easy?4:0);c.restore();
-  c.strokeStyle=col.dark;c.lineWidth=7;c.beginPath();c.moveTo(P[0][0],P[0][1]);c.lineTo(P[1][0],P[1][1]);c.stroke();
-  c.strokeStyle=col.main;c.lineWidth=3;c.stroke();
-  body(c,0,0,r,col,m,o);
-  drawSub(c,P[0][0],P[0][1],t.front[0],easy?1:0);drawSub(c,P[1][0],P[1][1],t.front[1],easy?2:0);
-  if(easy)badge(c,18,-18,descOf(m),COL[m.kind]);
-}
-// らせん:手前の環から奥へ、P は時計回りに遠ざかる(右巻き)。M はその鏡像
-function drawHelix(c,m,o,t,col,easy){
-  feet(c,m,[-7,7],19,5.5);c.translate(0,bobOf(m));
-  const n=6,hr=10,step=64*Math.PI/180,a0=-Math.PI/2+m.rot*2*Math.PI/3,dir=m.kind==='R'?1:-1,bl=blinkOn(m);
-  for(let i=n-1;i>=0;i--){
-    const a=a0+dir*i*step,R0=22-i*.4,x=Math.cos(a)*R0,y=Math.sin(a)*R0,d=i/(n-1);
-    hexPath(c,x,y,hr*(1-d*.16),a);
-    c.fillStyle=i===0?(bl?'#fff':col.light):col.main;c.fill();
-    if(d>0){c.fillStyle=`rgba(40,30,70,${d*.32})`;c.fill()}
-    c.lineWidth=1.8;c.strokeStyle=col.dark;c.stroke();
-  }
-  body(c,0,0,10.5,col,m,o);
-  if(easy)badge(c,0,-38,descOf(m),COL[m.kind]);
-}
-// 面性:[2.2]パラシクロファン。上の環(顔)の右上に Br → Rp(パイロット原子から見て時計回り)
-function drawPlanar(c,m,o,t,col,easy){
-  const r=16,off=10;
-  feet(c,m,[-8,8],r+off,5.5);c.translate(0,bobOf(m)-4);
-  const rot=m.rot?Math.PI:0;
-  const V=(i,dy=0)=>{const a=rot+i*Math.PI/3;return[Math.cos(a)*r,Math.sin(a)*r+dy]};
-  hexPath(c,0,off,r,rot);c.fillStyle=col.main;c.fill();c.fillStyle='rgba(40,30,70,.25)';c.fill();c.lineWidth=2;c.strokeStyle=col.dark;c.stroke();
-  c.strokeStyle=col.dark;c.lineWidth=3;c.lineCap='round';c.lineJoin='round';
-  for(const i of[0,3]){const [x1,y1]=V(i),sx=Math.sign(x1)||1;c.beginPath();c.moveTo(x1,y1);c.lineTo(x1+sx*7,y1+2);c.lineTo(x1+sx*7,y1+off-2);c.lineTo(x1,y1+off);c.stroke()}
-  const vi=m.kind==='R'?5:4,[vx,vy]=V(vi),ang=rot+vi*Math.PI/3,px=Math.cos(ang)*(r+14),py=Math.sin(ang)*(r+14);
-  c.strokeStyle='#5d5170';c.lineWidth=3;c.beginPath();c.moveTo(vx,vy);c.lineTo(px,py);c.stroke();
-  body(c,0,0,r,col,m,o,true);
-  drawSub(c,px,py,t.sub,0);
-  if(easy)badge(c,-Math.sign(px)*22,-22,descOf(m),COL[m.kind]);
-}
-function drawMeso(c,m,o,t,col,easy){
-  const r=13,off=13;
-  feet(c,m,[-off-4,-off+5,off-5,off+4],r-1,4.6);
-  c.translate(0,bobOf(m));
-  c.strokeStyle='#5d5170';c.lineWidth=3;c.lineCap='round';
-  c.beginPath();c.moveTo(-off,0);c.lineTo(off,0);c.stroke();
-  const P=[[25,-24,t.subs[0]],[35,10,t.subs[1]]];
-  for(const s of[-1,1])for(const p of P){c.beginPath();c.moveTo(s*off,0);c.lineTo(s*p[0],p[1]);c.stroke()}
-  c.save();c.setLineDash([3,3]);c.strokeStyle='rgba(255,255,255,.95)';c.lineWidth=2.2;c.beginPath();c.moveTo(0,-30);c.lineTo(0,24);c.stroke();c.restore();
-  for(const s of[-1,1])body(c,s*off,0,r,col,{...m,hd:s>0?0:Math.PI},o);
-  for(const s of[-1,1])for(const p of P)drawSub(c,s*p[0],p[1],p[2],0);
-  const tw=G.time*3+m.phase;c.save();c.translate(0,-38);c.rotate(tw*.5);c.scale(.8+.2*Math.sin(tw),.8+.2*Math.sin(tw));star(c,0,0,6,'#ffd84d');c.restore();
-  if(easy){c.font=`900 9px ${FONT}`;c.textAlign='center';c.textBaseline='middle';c.fillStyle=COL.M.dark;c.fillText('meso',0,31)}
 }
 function star(c,x,y,r,col){c.beginPath();for(let i=0;i<8;i++){const a=i*Math.PI/4,rr_=i%2?r*.38:r;c.lineTo(x+Math.cos(a)*rr_,y+Math.sin(a)*rr_)}c.closePath();c.fillStyle=col;c.fill()}
 function warnMark(c,x,y){
@@ -503,19 +576,19 @@ function drawSprite(cn,kind,type,locked,ex={}){
 // ================= 背景 =================
 const penCol=p=>COL[p.kind];
 function drawPen(c,p){
-  const col=penCol(p),bw=p.kind==='M'?9:11,rad=p.kind==='M'?14:18;
+  const col=penCol(p),bw=p.kind==='M'?9:11,rad=6;
   rr(c,p.x,p.y,p.w,p.h,rad);c.fillStyle=col.light;c.fill();
-  c.save();rr(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,8);c.clip();
+  c.save();rr(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,3);c.clip();
   c.globalAlpha=.35;for(let yy=p.y;yy<p.y+p.h;yy+=22)for(let xx=p.x+((yy/22)%2?11:0);xx<p.x+p.w;xx+=22){circ(c,xx,yy,2);c.fillStyle=col.main;c.fill()}
   c.globalAlpha=.2;
   if(p.kind==='M')txt(c,'meso',p.x+p.w/2,p.y+p.h/2,34,col.dark,{pop:true,w:400});
   else{txt(c,p.kind,p.x+p.w/2,p.y+p.h/2-30,110,col.dark,{pop:true,w:400});txt(c,p.kind==='R'?'P':'M',p.x+p.w/2,p.y+p.h/2+80,56,col.dark,{pop:true,w:400})}
   c.restore();
-  c.save();c.beginPath();rrp(c,p.x,p.y,p.w,p.h,rad);rrp(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,8);c.clip('evenodd');
+  c.save();c.beginPath();rrp(c,p.x,p.y,p.w,p.h,rad);rrp(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,3);c.clip('evenodd');
   c.fillStyle='#fff';c.fillRect(p.x,p.y,p.w,p.h);c.fillStyle=col.main;
   for(let k=-p.h;k<p.w+p.h;k+=22){c.beginPath();c.moveTo(p.x+k,p.y);c.lineTo(p.x+k+11,p.y);c.lineTo(p.x+k+11+p.h,p.y+p.h);c.lineTo(p.x+k+p.h,p.y+p.h);c.fill()}
   c.restore();
-  c.lineWidth=2.5;c.strokeStyle=col.dark;rr(c,p.x,p.y,p.w,p.h,rad);c.stroke();rr(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,8);c.stroke();
+  c.lineWidth=2.5;c.strokeStyle=col.dark;rr(c,p.x,p.y,p.w,p.h,rad);c.stroke();rr(c,p.x+bw,p.y+bw,p.w-bw*2,p.h-bw*2,3);c.stroke();
 }
 function drawGate(c,top){
   const y=top?HUD_H-10:H-30;
@@ -529,9 +602,11 @@ function drawGate(c,top){
 function buildBg(){
   const b=document.createElement('canvas');b.width=cv.width;b.height=cv.height;
   const c=b.getContext('2d');c.setTransform(SC*DPR,0,0,SC*DPR,0,0);
-  c.fillStyle='#e7ebf5';c.fillRect(0,0,W,H);
-  const ts=40;
-  for(let y=0;y<H;y+=ts)for(let x=0;x<W;x+=ts){rr(c,x+2,y+2,ts-4,ts-4,7);c.fillStyle=((x+y)/ts)%2?'#eef1f8':'#e3e8f3';c.fill()}
+  // 実験ノートの方眼紙
+  c.fillStyle='#fbfaf4';c.fillRect(0,0,W,H);
+  for(let x=0;x<=W;x+=16){c.fillStyle=x%80?'rgba(120,160,210,.16)':'rgba(120,160,210,.34)';c.fillRect(x,0,1,H)}
+  for(let y=0;y<=H;y+=16){c.fillStyle=y%80?'rgba(120,160,210,.16)':'rgba(120,160,210,.34)';c.fillRect(0,y,W,1)}
+  c.fillStyle='rgba(235,110,110,.35)';c.fillRect(0,HUD_H+2,W,1.5);
   // 中央の鏡面ライン(上下ゲートを結ぶ)
   c.save();c.setLineDash([10,12]);c.strokeStyle='rgba(160,168,210,.6)';c.lineWidth=2.5;c.beginPath();c.moveTo(GATE_X,HUD_H+40);c.lineTo(GATE_X,H-40);c.stroke();c.restore();
   txt(c,'鏡',GATE_X+14,470,14,'rgba(150,158,200,.7)',{w:900});
@@ -550,7 +625,7 @@ function drawField(c){
   if(!G.gate2){ // 下ゲートは閉鎖中
     c.fillStyle='#9ea3bb';rr(c,GATE_X-40,H-20,80,20,6);c.fill();
     c.strokeStyle='#8187a3';c.lineWidth=2;for(let k=0;k<3;k++){c.beginPath();c.moveTo(GATE_X-36,H-15+k*5);c.lineTo(GATE_X+36,H-15+k*5);c.stroke()}
-    if(G.state==='play')txt(c,`🔒 ${Math.max(0,Math.ceil(GATE2_T-G.t))}`,GATE_X,H-10,11,'#fff',{w:900});
+    if(G.state==='play'&&!cfg().ta)txt(c,`🔒 ${Math.max(0,Math.ceil(cfg().gate2-G.t))}`,GATE_X,H-10,11,'#fff',{w:900});
   }
   const easy=G.mode==='easy';
   for(const p of PENS){
@@ -623,7 +698,7 @@ function drawFx(c){
 function penAt(x,y){return PENS.find(p=>x>p.x-4&&x<p.x+p.w+4&&y>p.y-4&&y<p.y+p.h+4)}
 // メソ箱は当たり判定なし(分子は上を素通りできる)
 const SOLID=PENS.filter(p=>p.kind!=='M');
-const radOf=m=>TYPES[m.type].cat==='meso'?30:24;
+const radOf=m=>{const t=TYPES[m.type];return clamp(MOL[t.id].e*molScale(t)*.8,20,42)};
 function pushOut(m,p,rad,reflect){
   const x0=p.x-rad,x1=p.x+p.w+rad,y0=p.y-rad,y1=p.y+p.h+rad;
   if(!(m.x>x0&&m.x<x1&&m.y>y0&&m.y<y1))return;
@@ -657,7 +732,7 @@ function penBox(p){return p.kind==='M'?{x0:p.x+10,y0:p.y+10,x1:p.x+p.w-10,y1:p.y
 function separate(arr){
   for(let i=0;i<arr.length;i++){const a=arr[i];if(a.state!=='field'&&a.state!=='pen'&&a.state!=='demoPen')continue;
     for(let j=i+1;j<arr.length;j++){const b=arr[j];if(b.state!==a.state||b.pen!==a.pen)continue;
-      const dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy,mn=a.state==='field'?((a.kind==='M'||b.kind==='M')?54:44):30;
+      const dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy,mn=(radOf(a)+radOf(b))*(a.state==='field'?.9:.5);
       if(d2<mn*mn&&d2>.01){const d=Math.sqrt(d2),push=(mn-d)*.25,nx=dx/d,ny=dy/d;a.x-=nx*push;a.y-=ny*push;b.x+=nx*push;b.y+=ny*push}}}
 }
 function eyeTick(m,dt){m.eye-=dt;if(m.eye<=0)m.eye=rand(2,5)}
@@ -665,9 +740,10 @@ const score=excl=>G.collected+(excl==='R'?0:G.box.R)+(excl==='S'?0:G.box.S);
 
 function resetGame(){
   Object.assign(G,{mols:[],parts:[],texts:[],t:0,collected:0,box:{R:0,S:0},pending:{R:-1,S:-1},cnt:{R:0,S:0,M:0},flips:0,T:T_ROOM,
-    nextSpawn:.6,held:null,boom:null,shake:0,gate2:false,gateFlash:[0,0],roulette:null,hudPulse:0,newDex:[]});
+    nextSpawn:.6,held:null,boom:null,shake:0,gate2:false,miss:0,gateFlash:[0,0],roulette:null,hudPulse:0,newDex:[]});
 }
-const allowedCats=()=>['center',...WAVES.filter(w=>G.t>=w.t).map(w=>w.cat)];
+const cfg=()=>MODECFG[G.mode];
+const allowedCats=()=>cfg().ta?ALLCATS:['center',...WAVES.filter((w,i)=>G.t>=cfg().waves[i]).map(w=>w.cat)];
 function spawn(){
   const kind=(G.t>8&&Math.random()<MESO_RATE)?'M':(Math.random()<.5?'R':'S');
   const g=G.gate2&&Math.random()<.5?1:0;
@@ -700,16 +776,20 @@ function collect(k){
 }
 function updatePlay(dt){
   const pt=G.t;G.t+=dt;
-  const diff=clamp(G.t/160,0,1);
-  for(const w of WAVES)if(pt<w.t&&G.t>=w.t){addText(W/2,H/2-110,'NEW! '+w.msg,COL.M.dark,26,2);sfx('gate')}
-  if(!G.gate2&&G.t>=GATE2_T){G.gate2=true;G.gateFlash[1]=1;addText(W/2,H-80,'下のゲートが開いた!','#e2471c',26,2);sfx('gate');burst(GATE_X,H-20,'#ffd84d',20,200,'star')}
+  const C=cfg();
+  if(C.ta&&G.t>=C.limit){timeUp();return}
+  const diff=C.ta?0:clamp(G.t/C.spawn[2],0,1);
+  if(!C.ta)WAVES.forEach((w,i)=>{if(pt<C.waves[i]&&G.t>=C.waves[i]){addText(W/2,H/2-110,'NEW! '+w.msg,COL.M.dark,26,2);sfx('gate')}});
+  if(!C.ta&&!G.gate2&&G.t>=C.gate2){G.gate2=true;G.gateFlash[1]=1;addText(W/2,H-80,'下のゲートが開いた!','#e2471c',26,2);sfx('gate');burst(GATE_X,H-20,'#ffd84d',20,200,'star')}
   G.T+=(T_ROOM-G.T)*(1-Math.exp(-dt*.035));
   G.nextSpawn-=dt;
-  if(G.nextSpawn<=0){spawn();if(diff>.4&&Math.random()<diff*.3)setTimeout(()=>{if(G.state==='play')spawn()},250);G.nextSpawn=lerp(2.0,.8,diff)*rand(.8,1.2)}
+  if(C.ta){ // タイムアタック:フィールドの分子数を一定に保つ
+    if(G.nextSpawn<=0&&G.mols.filter(m=>m.state==='field'||m.state==='enter'||m.state==='held').length<C.field){spawn();G.nextSpawn=.35}
+  }else if(G.nextSpawn<=0){spawn();if(diff>.4&&Math.random()<diff*.3)setTimeout(()=>{if(G.state==='play')spawn()},250);G.nextSpawn=lerp(C.spawn[0],C.spawn[1],diff)*rand(.8,1.2)}
   if(G.T>=T_FLIP){const k=ARR_A*Math.exp(-EA_R/G.T);if(Math.random()<1-Math.exp(-k*dt))randomFlip()}
   if(G.roulette){const r=G.roulette;r.t+=dt;const k=Math.floor(r.t*14);if(r.t<.75&&k!==r.last){r.last=k;sfx('roll')}if(r.t>=.95){applyTemp(r.res);G.roulette=null}}
   for(const k of['R','S'])if(G.pending[k]>=0){G.pending[k]-=dt;if(G.pending[k]<0)collect(k)}
-  const tf=Math.pow(G.T/T_ROOM,1.2),spd=44*lerp(1,1.5,diff)*tf,warnAt=lerp(14,9.5,diff);
+  const tf=Math.pow(G.T/T_ROOM,1.2),spd=44*(C.ta?.9:lerp(1,1.5,diff)*C.speed)*tf,warnAt=C.ta?Infinity:lerp(C.warn[0],C.warn[1],clamp(G.t/C.warn[2],0,1));
   for(const m of G.mols){
     eyeTick(m,dt);
     const meso=m.kind==='M';
@@ -761,6 +841,11 @@ function dropMol(m){
   if(!p){m.state='field';m.x=G.pointer.x;m.y=G.pointer.y;for(let k=0;k<3;k++)for(const q of SOLID)pushOut(m,q,radOf(m),false);sfx('drop');return}
   const b=penBox(p);
   m.x=clamp(G.pointer.x,b.x0+b.pad,b.x1-b.pad);m.y=clamp(G.pointer.y,b.y0+b.pad,b.y1-b.pad);
+  if(p.kind!==m.kind&&cfg().ta){
+    G.t+=cfg().penalty;G.miss++;G.shake=6;sfx('warn');
+    addText(G.pointer.x,G.pointer.y-30,`✗ ${descOf(m)} −${cfg().penalty}秒`,'#c21f3a',18,1.2);
+    m.state='field';m.x=G.pointer.x;m.y=G.pointer.y;for(let k=0;k<3;k++)for(const q of SOLID)pushOut(m,q,radOf(m)+10,false);return;
+  }
   if(p.kind!==m.kind){
     m.state='pen';m.pen=p;
     gameOver(m.kind==='M'?'mesoIn':'wrong',m,p.kind);return;
@@ -775,6 +860,11 @@ function dropMol(m){
     if(G.box[m.kind]>=BOX_MAX&&G.pending[m.kind]<0)G.pending[m.kind]=.5;
     addText(m.x,m.y-30,'+1',COL[m.kind].dark,20);burst(m.x,m.y,COL[m.kind].main,12,150,'star');sfx('ok');
   }
+}
+function timeUp(){
+  G.state='boom';G.boom={m:null,t:1.2,reason:'timeup',kind:null,desc:'',excl:null,exploded:true};
+  if(G.held){G.held.state='field';G.held=null}
+  addText(W/2,H/2,'タイムアップ!','#e2471c',44,1.5);sfx('alarm');
 }
 function gameOver(reason,m,excl){
   if(G.state!=='play')return;
@@ -800,8 +890,8 @@ function drawHud(c){
   rr(c,98,10,86,40,12);c.fillStyle=G.hudPulse>0?'#fff4c6':'#f3effa';c.fill();
   txt(c,'回収済み',141,20,10,'#8a80a8',{w:900});
   txt(c,String(G.collected),141,38,17*ps,COL.M.dark,{pop:true,w:400});
-  const mm=Math.floor(G.t/60),ss=Math.floor(G.t%60);
-  txt(c,`⏱ ${mm}:${String(ss).padStart(2,'0')}`,226,22,13,'#8a80a8',{w:900});
+  const ta=cfg().ta,sec=ta?Math.ceil(Math.max(0,cfg().limit-G.t)):Math.floor(G.t),mm=Math.floor(sec/60),ss=sec%60;
+  txt(c,`${ta?'残り':'⏱'} ${mm}:${String(ss).padStart(2,'0')}`,226,22,ta?15:13,ta&&sec<=10?'#e2471c':'#8a80a8',{w:900});
   txt(c,MODES[G.mode].name,226,40,12,'#b0a8c8',{w:900});
   const x0=278,x1=770,by=38,T=G.T,tx=v=>x0+(v-T_MIN)/(T_MAX-T_MIN)*(x1-x0);
   rr(c,x0,by-6,x1-x0,12,6);c.fillStyle='#ece8f4';c.fill();
@@ -1206,11 +1296,12 @@ const sideName=k=>k==='R'?'右(R・P)':'左(S・M)';
 function showOver(){
   G.state='over';
   const b=G.boom,final=score(b.excl);
-  const T={wrong:'箱をまちがえた!',mesoIn:'メソ体が混入!',neglect:'放置しすぎ!'}[b.reason];
+  const T={wrong:'箱をまちがえた!',mesoIn:'メソ体が混入!',neglect:'放置しすぎ!',timeup:'タイムアップ!'}[b.reason];
   let d={
     wrong:`${b.desc}体を${sideName(b.excl)}の箱に入れてしまった!`,
     mesoIn:`メソ体(分子内に鏡面があってキラルじゃない)を\n${sideName(b.excl)}の箱に入れてしまった!`,
     neglect:'点滅している分子は放置のサイン。早めに仕分けよう!',
+    timeup:`${cfg().limit}秒で ${final} 分子を仕分けた!(ミス ${G.miss} 回)`,
   }[b.reason];
   if(b.excl&&G.box[b.excl]>0)d+=`\n→ ${sideName(b.excl)}の箱の ${G.box[b.excl]} 分子は光学純度低下で集計から除外…`;
   $('oTitle').textContent=T;$('oDesc').textContent=d;$('oScore').textContent=final;
@@ -1218,7 +1309,7 @@ function showOver(){
   if(final>best){store.set(key,String(final));$('oBest').textContent='🎉 ベスト更新!('+MODES[G.mode].name+')'}
   else $('oBest').textContent=`ベスト ${best}(${MODES[G.mode].name})`;
   const mm=Math.floor(G.t/60),ss=Math.floor(G.t%60);
-  $('oStats').innerHTML=`<span>回収済み ${G.collected}</span><span class="${b.excl==='R'?'ex':'cr'}">右の箱 ${G.box.R}</span><span class="${b.excl==='S'?'ex':'cs'}">左の箱 ${G.box.S}</span><span class="cm">メソ ${G.cnt.M}</span><span>反転 ${G.flips}回</span><span>⏱ ${mm}:${String(ss).padStart(2,'0')}</span>`;
+  $('oStats').innerHTML=`<span>回収済み ${G.collected}</span><span class="${b.excl==='R'?'ex':'cr'}">右の箱 ${G.box.R}</span><span class="${b.excl==='S'?'ex':'cs'}">左の箱 ${G.box.S}</span><span class="cm">メソ ${G.cnt.M}</span><span>反転 ${G.flips}回</span>${cfg().ta?`<span class="cw">ミス ${G.miss}回</span>`:''}<span>⏱ ${mm}:${String(ss).padStart(2,'0')}</span>`;
   $('oNew').textContent=G.newDex.length?'📖 図鑑に新登録:'+G.newDex.join('、'):'';
   showScreen('over');
 }
