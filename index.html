@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>きらるわけ</title>
 <meta name="description" content="キラル分子をR体とS体に仕分けるブラウザゲーム。パスツールのピンセットをキミの手に。">
 <meta property="og:title" content="きらるわけ">
@@ -14,14 +14,14 @@
 <style>
 :root{--r:#ff9a4d;--rd:#d9661c;--s:#4fa3ef;--sd:#2a6fb8;--m:#b48cf0;--md:#7d55c4;--w:#ff5a6e;--ink:#3d3552;--paper:#fffdf8}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden;font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,#eef1fb,#c6cde6)}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+body{position:fixed;inset:0;touch-action:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,#eef1fb,#c6cde6)}
 #wrap{position:relative;overflow:hidden;border-radius:14px;box-shadow:0 10px 40px rgba(40,40,90,.25);background:#e9edf6}
 canvas{display:block;touch-action:none}
 .screen{position:absolute;inset:0;display:none;align-items:center;justify-content:center}
 .screen.on{display:flex}
-.card{background:rgba(255,253,248,.95);border-radius:1.6em;padding:1.3em 2em;box-shadow:0 .4em 1.6em rgba(60,50,100,.22);border:.2em solid #fff;text-align:center;max-height:95%;overflow:auto}
-button{font-family:inherit;font-weight:700;font-size:1em;color:var(--ink);background:#fff;border:.13em solid #d9d3ea;border-bottom-width:.28em;border-radius:99em;padding:.45em 1.1em;cursor:pointer;margin:.25em;transition:transform .08s}
+.card{touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:rgba(255,253,248,.95);border-radius:1.6em;padding:1.3em 2em;box-shadow:0 .4em 1.6em rgba(60,50,100,.22);border:.2em solid #fff;text-align:center;max-height:95%;overflow:auto}
+button{touch-action:manipulation;font-family:inherit;font-weight:700;font-size:1em;color:var(--ink);background:#fff;border:.13em solid #d9d3ea;border-bottom-width:.28em;border-radius:99em;padding:.45em 1.1em;cursor:pointer;margin:.25em;transition:transform .08s}
 button:hover{transform:translateY(-1px)}
 button:active{transform:translateY(2px);border-bottom-width:.13em}
 button.big{font-family:"Mochiy Pop One",sans-serif;font-weight:400;font-size:1.35em;color:#fff;background:linear-gradient(90deg,var(--s),var(--m) 50%,var(--r));border-color:#fff;border-bottom-color:#8e79c4;padding:.4em 1.6em;letter-spacing:.05em}
@@ -39,10 +39,9 @@ button.big{font-family:"Mochiy Pop One",sans-serif;font-weight:400;font-size:1.3
 .mdesc{font-size:.85em;color:#7a7094;margin:.4em 0 .6em;min-height:1.3em}
 .best{font-size:.9em;color:#7a7094;margin-top:.4em}
 .rot{display:none;font-size:.85em;color:var(--w);font-weight:900;margin-top:.3em}
-@media (orientation:portrait) and (pointer:coarse){.rot{display:block}}
 /* story */
 #story{align-items:flex-end;cursor:pointer}
-.tbox{position:absolute;left:2.5%;right:2.5%;bottom:3%;height:25%;background:rgba(255,253,248,.96);border-radius:1.2em;padding:.9em 1.4em;border:.2em solid #fff;box-shadow:0 .3em 1.2em rgba(60,50,100,.25)}
+.tbox{position:absolute;left:2.5%;right:2.5%;bottom:3%;min-height:25%;max-height:60%;background:rgba(255,253,248,.96);border-radius:1.2em;padding:.9em 1.4em;border:.2em solid #fff;box-shadow:0 .3em 1.2em rgba(60,50,100,.25)}
 .tbox .who{position:absolute;top:-1.1em;left:1.2em;background:linear-gradient(90deg,var(--s),var(--m));color:#fff;font-weight:900;padding:.2em .9em;border-radius:99em;font-size:.95em}
 .tbox .pg{position:absolute;top:.6em;right:1.2em;color:#b0a8c8;font-size:.8em;font-weight:700}
 #stext{font-size:1.3em;line-height:1.65;font-weight:700;margin-top:.3em}
@@ -104,7 +103,6 @@ button.big{font-family:"Mochiy Pop One",sans-serif;font-weight:400;font-size:1.3
     <div><button class="big" id="bStart">スタート!</button></div>
     <div><button id="bStory">📜 オープニング</button><button id="bHow">❓ あそびかた</button><button id="bDex">📖 分子図鑑</button></div>
     <div class="best">ベスト(<span id="bestMode"></span>): <b id="bestV">0</b> 分子 ・ 図鑑 <b id="dexV">0</b></div>
-    <div class="rot">📱 スマホは横向きがおすすめ!</div>
   </div></div>
 
   <div id="story" class="screen">
@@ -260,11 +258,14 @@ function txt(c,s,x,y,size,col,opt={}){
 const wrap=$('wrap'),cv=$('c'),ctx=cv.getContext('2d');
 let SC=1,DPR=1,bgCache=null;
 const PROMO=location.hash==='#promo';
+let ROT=false; // 縦持ちのスマホでは 90° 回して横長いっぱいに表示する
 function resize(){
-  SC=PROMO?1296/W:Math.max(.1,Math.min(innerWidth/W,innerHeight/H)*.98);
+  ROT=!PROMO&&innerHeight>innerWidth&&matchMedia('(pointer:coarse)').matches;
+  const vw=ROT?innerHeight:innerWidth,vh=ROT?innerWidth:innerHeight;
+  SC=PROMO?1296/W:Math.max(.1,Math.min(vw/W,vh/H)*.98);
   DPR=PROMO?1:Math.min(window.devicePixelRatio||1,2);
   const cw=Math.floor(W*SC),ch=Math.floor(H*SC);
-  wrap.style.width=cw+'px';wrap.style.height=ch+'px';
+  wrap.style.width=cw+'px';wrap.style.height=ch+'px';wrap.style.flex='none';wrap.style.transform=ROT?'rotate(90deg)':'';
   wrap.style.fontSize=Math.max(16*SC,9)+'px';
   cv.width=Math.round(cw*DPR);cv.height=Math.round(ch*DPR);
   cv.style.width=cw+'px';cv.style.height=ch+'px';
@@ -1332,7 +1333,10 @@ function renderSprites(){
 }
 
 // ================= 入力 =================
-function evPos(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
+// 画面を回しているときは、指の位置もゲーム座標に回し戻す
+function evPos(e){const r=cv.getBoundingClientRect();
+  if(ROT)return{x:(e.clientY-r.top)/r.height*W,y:(r.right-e.clientX)/r.width*H};
+  return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
 const canPick=m=>m.state==='field'||m.state==='enter';
 cv.addEventListener('pointerdown',e=>{
   audioInit();const p=evPos(e);G.pointer=p;
@@ -1355,6 +1359,8 @@ addEventListener('keydown',e=>{
     else if(e.key==='m'||e.key==='M')toggleMute();
   }else if(G.state==='paused'&&(e.key==='p'||e.key==='P'||e.key==='Escape'))resumeGame();
 });
+document.addEventListener('touchmove',e=>{const cd=e.target.closest&&e.target.closest('.card');if(!cd||cd.scrollHeight<=cd.clientHeight)e.preventDefault()},{passive:false});
+addEventListener('orientationchange',()=>setTimeout(resize,200));
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&!PROMO)pauseGame()});
 $('story').addEventListener('click',e=>{if(e.target.id==='bSkip')return;audioInit();storyAdvance()});
 $('bSkip').onclick=()=>{sfx('page');endStory()};
